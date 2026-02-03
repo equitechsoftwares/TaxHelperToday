@@ -1,0 +1,340 @@
+@page
+@model TaxHelperToday.Pages.Admin.DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@section Styles {
+    <!-- Additional styles if needed -->
+}
+
+<!-- Content Header -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <!-- First Row -->
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>@Model.TotalBlogs</h3>
+                        <p>Blog Posts</p>
+                        <small>@Model.PublishedBlogs Published | @Model.DraftBlogs Draft</small>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                    <a href="/Admin/Content/Blogs" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-4 col-md-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>@Model.TotalServices</h3>
+                        <p>Services</p>
+                        <small>@Model.ActiveServices Active | @Model.InactiveServices Inactive</small>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <a href="/Admin/Content/Services" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-4 col-md-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>@Model.PendingEnquiries</h3>
+                        <p>Pending Enquiries</p>
+                        <small>@Model.TotalEnquiries Total</small>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <a href="/Admin/Contact/Enquiries" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        
+        <!-- Second Row -->
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h3>@Model.NewMiniEnquiries</h3>
+                        <p>New Mini Enquiries</p>
+                        <small>@Model.TotalMiniEnquiries Total</small>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <a href="/Admin/Contact/MiniEnquiries" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-4 col-md-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>@Model.TotalFaqs</h3>
+                        <p>FAQs</p>
+                        <small>@Model.ActiveFaqs Active</small>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <a href="/Admin/Content/FAQs" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-4 col-md-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-secondary">
+                    <div class="inner">
+                        <h3>@Model.TotalPages</h3>
+                        <p>Pages</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <a href="/Admin/Content/Pages" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- This Month Statistics -->
+        <div class="row">
+            <div class="col-lg-4 col-6">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-calendar-alt"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Enquiries This Month</span>
+                        <span class="info-box-number">@Model.EnquiriesThisMonth</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-6">
+                <div class="info-box">
+                    <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-comment-dots"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Mini Enquiries This Month</span>
+                        <span class="info-box-number">@Model.MiniEnquiriesThisMonth</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-6">
+                <div class="info-box">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-blog"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Blog Posts This Month</span>
+                        <span class="info-box-number">@Model.BlogsThisMonth</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Enquiry Status Breakdown -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-pie mr-1"></i>
+                            Enquiry Status Breakdown
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-warning">
+                                        <i class="fas fa-clock"></i> @Model.PendingEnquiries
+                                    </span>
+                                    <h5 class="description-header">Pending</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-info">
+                                        <i class="fas fa-spinner"></i> @Model.InProgressEnquiries
+                                    </span>
+                                    <h5 class="description-header">In Progress</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-success">
+                                        <i class="fas fa-check-circle"></i> @Model.ResolvedEnquiries
+                                    </span>
+                                    <h5 class="description-header">Resolved</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="description-block">
+                                    <span class="description-percentage text-primary">
+                                        <i class="fas fa-list"></i> @Model.TotalEnquiries
+                                    </span>
+                                    <h5 class="description-header">Total Enquiries</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Main row -->
+        <div class="row">
+            <section class="col-lg-4 connectedSortable">
+                <!-- Recent Blog Posts -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-blog mr-1"></i>
+                            Recent Blog Posts
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        @if (Model.RecentBlogs.Any())
+                        {
+                            <ul class="todo-list" data-widget="todo-list">
+                                @foreach (var blog in Model.RecentBlogs)
+                                {
+                                    <li>
+                                        <span class="text">@blog.Title</span>
+                                        <small class="badge badge-info"><i class="far fa-clock"></i> @blog.CreatedAt.ToString("MMM dd, yyyy")</small>
+                                        <div class="tools">
+                                            <a href="/Admin/Content/Blogs/Edit/@blog.Id"><i class="fas fa-edit"></i></a>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p class="text-muted">No blog posts yet.</p>
+                        }
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </section>
+
+            <section class="col-lg-4 connectedSortable">
+                <!-- Recent Enquiries -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-envelope mr-1"></i>
+                            Recent Enquiries
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        @if (Model.RecentEnquiries.Any())
+                        {
+                            <ul class="todo-list" data-widget="todo-list">
+                                @foreach (var enquiry in Model.RecentEnquiries)
+                                {
+                                    <li>
+                                        <span class="text">@enquiry.Name - @enquiry.Subject</span>
+                                        <small class="badge badge-warning">@enquiry.Status</small>
+                                        <div class="tools">
+                                            <a href="/Admin/Contact/Enquiries/Details/@enquiry.Id"><i class="fas fa-eye"></i></a>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p class="text-muted">No enquiries yet.</p>
+                        }
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </section>
+
+            <section class="col-lg-4 connectedSortable">
+                <!-- Recent Mini Enquiries -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-comments mr-1"></i>
+                            Recent Mini Enquiries
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        @if (Model.RecentMiniEnquiries.Any())
+                        {
+                            <ul class="todo-list" data-widget="todo-list">
+                                @foreach (var miniEnquiry in Model.RecentMiniEnquiries)
+                                {
+                                    <li>
+                                        <span class="text">@miniEnquiry.Name (@miniEnquiry.UserType)</span>
+                                        <small class="badge @(miniEnquiry.Status == "New" ? "badge-primary" : miniEnquiry.Status == "Contacted" ? "badge-info" : miniEnquiry.Status == "Converted" ? "badge-success" : "badge-secondary")">@miniEnquiry.Status</small>
+                                        <div class="tools">
+                                            <a href="/Admin/Contact/MiniEnquiries/Details/@miniEnquiry.Id"><i class="fas fa-eye"></i></a>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p class="text-muted">No mini enquiries yet.</p>
+                        }
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </section>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->

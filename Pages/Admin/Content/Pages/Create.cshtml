@@ -1,0 +1,977 @@
+@page
+@model TaxHelperToday.Pages.Admin.Content.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create Page";
+}
+
+@section Styles {
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        #statsEditor, #checklistEditor, #missionCardsEditor, #categoriesEditor, #valuesEditor, #teamMembersEditor {
+            background-color: #f8f9fa;
+        }
+        .stat-item, .checklist-item, .mission-card-item, .category-item, .value-item, .team-member-item {
+            background-color: white;
+        }
+        .stat-item .card-body, .mission-card-item .card-body, .category-item .card-body, .value-item .card-body, .team-member-item .card-body {
+            padding: 1rem;
+        }
+        .checklist-item .card-body {
+            padding: 0.5rem;
+        }
+        .stat-item label, .mission-card-item label, .category-item label, .value-item label, .team-member-item label {
+            font-weight: 500;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+        .stat-item input, .mission-card-item input, .category-item input, .value-item input, .team-member-item input, .team-member-item textarea {
+            font-size: 0.9rem;
+        }
+        .checklist-item input {
+            font-size: 0.9rem;
+        }
+    </style>
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Create Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Content/Pages">Pages</a></li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">New Page</h3>
+                    </div>
+                    <form method="post">
+                        <div class="card-body">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label asp-for="CreatePage.Slug">Slug <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" asp-for="CreatePage.Slug" placeholder="e.g., about-us" required>
+                                <span asp-validation-for="CreatePage.Slug" class="text-danger"></span>
+                                <small class="form-text text-muted">URL-friendly identifier (lowercase, hyphens only)</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CreatePage.Title">Title <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" asp-for="CreatePage.Title" placeholder="Enter page title" required>
+                                <span asp-validation-for="CreatePage.Title" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CreatePage.Eyebrow">Eyebrow</label>
+                                <input type="text" class="form-control" asp-for="CreatePage.Eyebrow" placeholder="e.g., Privacy Policy">
+                                <span asp-validation-for="CreatePage.Eyebrow" class="text-danger"></span>
+                                <small class="form-text text-muted">Small text displayed above the hero title</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CreatePage.HeroTitle">Hero Title</label>
+                                <input type="text" class="form-control" asp-for="CreatePage.HeroTitle" placeholder="Main hero heading">
+                                <span asp-validation-for="CreatePage.HeroTitle" class="text-danger"></span>
+                                <small class="form-text text-muted">Large heading displayed in the hero section</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CreatePage.HeroText">Hero Text</label>
+                                <textarea class="form-control" asp-for="CreatePage.HeroText" rows="3" placeholder="Hero section description"></textarea>
+                                <span asp-validation-for="CreatePage.HeroText" class="text-danger"></span>
+                                <small class="form-text text-muted">Description text displayed below the hero title</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CreatePage.Content">Content <span class="text-danger">*</span></label>
+                                <div id="pageContent" style="min-height: 400px;">
+                                    @Html.Raw(Model.CreatePage?.Content ?? "")
+                                </div>
+                                <textarea asp-for="CreatePage.Content" style="display: none;"></textarea>
+                                <span asp-validation-for="CreatePage.Content" class="text-danger"></span>
+                                <small class="form-text text-muted">Use the rich text editor to format your content</small>
+                            </div>
+
+                            @* About Page Specific Fields - Show when slug is "about" *@
+                            <div id="aboutPageFields" style="display: none;">
+                                <hr class="my-4">
+                                <h4 class="mb-3">About Page Specific Content</h4>
+                                
+                                @* Stats Section *@
+                                <div class="form-group">
+                                    <label>Statistics</label>
+                                    <div id="statsEditor" class="border rounded p-3 bg-light">
+                                        <div id="statsItemsContainer">
+                                            <!-- Stat items will be dynamically added here -->
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-success mt-3" id="addStatBtn">
+                                            <i class="fas fa-plus"></i> Add Stat Item
+                                        </button>
+                                    </div>
+                                    <textarea asp-for="CreatePage.StatsJson" id="statsJsonHidden" style="display: none;"></textarea>
+                                    <span asp-validation-for="CreatePage.StatsJson" class="text-danger"></span>
+                                    <small class="form-text text-muted">Add, edit, or remove statistics that will be displayed on the About page</small>
+                                </div>
+
+                                @* Our Story Section *@
+                                <div class="form-group">
+                                    <label asp-for="CreatePage.OurStoryContent">Our Story Content</label>
+                                    <div id="ourStoryContent" style="min-height: 200px;"></div>
+                                    <textarea asp-for="CreatePage.OurStoryContent" style="display: none;"></textarea>
+                                    <span asp-validation-for="CreatePage.OurStoryContent" class="text-danger"></span>
+                                    <small class="form-text text-muted">Content for the "Our Story" section</small>
+                                </div>
+
+                                @* How We Work Section *@
+                                <div class="form-group">
+                                    <label asp-for="CreatePage.HowWeWorkContent">How We Work Content</label>
+                                    <div id="howWeWorkContent" style="min-height: 200px;"></div>
+                                    <textarea asp-for="CreatePage.HowWeWorkContent" style="display: none;"></textarea>
+                                    <span asp-validation-for="CreatePage.HowWeWorkContent" class="text-danger"></span>
+                                    <small class="form-text text-muted">Content for the "How We Work" section (optional, checklist items below are required)</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>How We Work Checklist</label>
+                                    <div id="checklistEditor" class="border rounded p-3 bg-light">
+                                        <div id="checklistItemsContainer">
+                                            <!-- Checklist items will be dynamically added here -->
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-success mt-3" id="addChecklistItemBtn">
+                                            <i class="fas fa-plus"></i> Add Checklist Item
+                                        </button>
+                                    </div>
+                                    <textarea asp-for="CreatePage.HowWeWorkChecklistJson" id="checklistJsonHidden" style="display: none;"></textarea>
+                                    <span asp-validation-for="CreatePage.HowWeWorkChecklistJson" class="text-danger"></span>
+                                    <small class="form-text text-muted">Add checklist items that describe how you work</small>
+                                </div>
+
+                                @* Mission Section *@
+                                <div class="form-group">
+                                    <label asp-for="CreatePage.MissionEyebrow">Mission Section Eyebrow</label>
+                                    <input asp-for="CreatePage.MissionEyebrow" class="form-control" placeholder="Our Mission" />
+                                    <span asp-validation-for="CreatePage.MissionEyebrow" class="text-danger"></span>
+                                    <small class="form-text text-muted">Small text above the mission title (e.g., "Our Mission")</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="CreatePage.MissionTitle">Mission Section Title</label>
+                                    <input asp-for="CreatePage.MissionTitle" class="form-control" placeholder="Making tax compliance simple, transparent, and stress-free" />
+                                    <span asp-validation-for="CreatePage.MissionTitle" class="text-danger"></span>
+                                    <small class="form-text text-muted">Main heading for the mission section</small>
+                                </div>
+
+                                @* Mission Cards Section *@
+                                <div class="form-group">
+                                    <label>Mission Cards</label>
+                                    <div id="missionCardsEditor" class="border rounded p-3 bg-light">
+                                        <div id="missionCardsContainer">
+                                            <!-- Mission cards will be dynamically added here -->
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-success mt-3" id="addMissionCardBtn">
+                                            <i class="fas fa-plus"></i> Add Mission Card
+                                        </button>
+                                    </div>
+                                    <textarea asp-for="CreatePage.MissionCardsJson" id="missionCardsJsonHidden" style="display: none;"></textarea>
+                                    <span asp-validation-for="CreatePage.MissionCardsJson" class="text-danger"></span>
+                                    <small class="form-text text-muted">Add mission cards with icon, title, and description</small>
+                                </div>
+
+                                @* Who We Serve Section *@
+                                <div class="form-group">
+                                    <label asp-for="CreatePage.WhoWeServeContent">Who We Serve Content</label>
+                                    <div id="whoWeServeContent" style="min-height: 200px;"></div>
+                                    <textarea asp-for="CreatePage.WhoWeServeContent" style="display: none;"></textarea>
+                                    <span asp-validation-for="CreatePage.WhoWeServeContent" class="text-danger"></span>
+                                    <small class="form-text text-muted">Content for the "Who We Serve" section</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Who We Serve Categories</label>
+                                    <div id="categoriesEditor" class="border rounded p-3 bg-light">
+                                        <div id="categoriesContainer">
+                                            <!-- Categories will be dynamically added here -->
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-success mt-3" id="addCategoryBtn">
+                                            <i class="fas fa-plus"></i> Add Category
+                                        </button>
+                                    </div>
+                                    <textarea asp-for="CreatePage.WhoWeServeCategoriesJson" id="categoriesJsonHidden" style="display: none;"></textarea>
+                                    <span asp-validation-for="CreatePage.WhoWeServeCategoriesJson" class="text-danger"></span>
+                                    <small class="form-text text-muted">Add categories with icon and label</small>
+                                </div>
+
+                                @* Values Section *@
+                                <div class="form-group">
+                                    <label>What we stand for</label>
+                                    <div id="valuesEditor" class="border rounded p-3 bg-light">
+                                        <div id="valuesContainer">
+                                            <!-- Values will be dynamically added here -->
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-success mt-3" id="addValueBtn">
+                                            <i class="fas fa-plus"></i> Add Item
+                                        </button>
+                                    </div>
+                                    <textarea asp-for="CreatePage.ValuesJson" id="valuesJsonHidden" style="display: none;"></textarea>
+                                    <span asp-validation-for="CreatePage.ValuesJson" class="text-danger"></span>
+                                    <small class="form-text text-muted">Add items with icon, title, and subtitle</small>
+                                </div>
+
+                                @* Team Members Section *@
+                                <div class="form-group">
+                                    <label>Team Members</label>
+                                    <div id="teamMembersEditor" class="border rounded p-3 bg-light">
+                                        <div id="teamMembersContainer">
+                                            <!-- Team members will be dynamically added here -->
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-success mt-3" id="addTeamMemberBtn">
+                                            <i class="fas fa-plus"></i> Add Team Member
+                                        </button>
+                                    </div>
+                                    <textarea asp-for="CreatePage.TeamMembersJson" id="teamMembersJsonHidden" style="display: none;"></textarea>
+                                    <span asp-validation-for="CreatePage.TeamMembersJson" class="text-danger"></span>
+                                    <small class="form-text text-muted">Add team members with name, role, bio, and avatar emoji</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CreatePage.MetaDescription">Meta Description</label>
+                                <textarea class="form-control" asp-for="CreatePage.MetaDescription" rows="2" placeholder="SEO meta description (150-160 characters recommended)"></textarea>
+                                <span asp-validation-for="CreatePage.MetaDescription" class="text-danger"></span>
+                                <small class="form-text text-muted">Used for SEO and social media sharing</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CreatePage.MetaKeywords">Meta Keywords</label>
+                                <input type="text" class="form-control" asp-for="CreatePage.MetaKeywords" placeholder="tax, itr, gst, compliance">
+                                <span asp-validation-for="CreatePage.MetaKeywords" class="text-danger"></span>
+                                <small class="form-text text-muted">Comma-separated keywords for SEO</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CreatePage.LastUpdated">Last Updated</label>
+                                <input type="text" class="form-control" asp-for="CreatePage.LastUpdated" placeholder="e.g., January 2024">
+                                <span asp-validation-for="CreatePage.LastUpdated" class="text-danger"></span>
+                                <small class="form-text text-muted">Display text for when the page was last updated</small>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" asp-for="CreatePage.IsActive" checked>
+                                    <label class="form-check-label" asp-for="CreatePage.IsActive">
+                                        Active
+                                    </label>
+                                </div>
+                                <small class="form-text text-muted">If unchecked, the page will be inactive and not visible to the public</small>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Create Page
+                            </button>
+                            <a href="/Admin/Content/Pages" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize Quill editor
+            var quill = new Quill('#pageContent', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        [{ 'align': [] }],
+                        ['link', 'image'],
+                        ['clean'],
+                        ['code-block']
+                    ]
+                },
+                placeholder: 'Enter page content...'
+            });
+
+            // Initialize Quill editors for About page content fields
+            var ourStoryQuill = null;
+            var howWeWorkQuill = null;
+            var whoWeServeQuill = null;
+
+            function initializeAboutPageEditors() {
+                if (document.getElementById('ourStoryContent') && !ourStoryQuill) {
+                    ourStoryQuill = new Quill('#ourStoryContent', {
+                        theme: 'snow',
+                        modules: {
+                            toolbar: [
+                                [{ 'header': [1, 2, 3, false] }],
+                                ['bold', 'italic', 'underline'],
+                                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                ['link'],
+                                ['clean']
+                            ]
+                        },
+                        placeholder: 'Enter Our Story content...'
+                    });
+                }
+
+                if (document.getElementById('howWeWorkContent') && !howWeWorkQuill) {
+                    howWeWorkQuill = new Quill('#howWeWorkContent', {
+                        theme: 'snow',
+                        modules: {
+                            toolbar: [
+                                [{ 'header': [1, 2, 3, false] }],
+                                ['bold', 'italic', 'underline'],
+                                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                ['link'],
+                                ['clean']
+                            ]
+                        },
+                        placeholder: 'Enter How We Work content...'
+                    });
+                }
+
+                if (document.getElementById('whoWeServeContent') && !whoWeServeQuill) {
+                    whoWeServeQuill = new Quill('#whoWeServeContent', {
+                        theme: 'snow',
+                        modules: {
+                            toolbar: [
+                                [{ 'header': [1, 2, 3, false] }],
+                                ['bold', 'italic', 'underline'],
+                                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                ['link'],
+                                ['clean']
+                            ]
+                        },
+                        placeholder: 'Enter Who We Serve content...'
+                    });
+                }
+            }
+
+            // Show/hide About page fields based on slug
+            function toggleAboutPageFields() {
+                var slug = $('input[name="CreatePage.Slug"]').val().toLowerCase().trim();
+                if (slug === 'about') {
+                    $('#aboutPageFields').slideDown(300, function() {
+                        initializeAboutPageEditors();
+                        // Initialize JSON editors if not already initialized
+                        if ($('#statsEditor').length && statItemCounter === 0) loadStats();
+                        if ($('#checklistEditor').length && checklistCounter === 0) loadChecklist();
+                        if ($('#missionCardsEditor').length && missionCardCounter === 0) loadMissionCards();
+                        if ($('#categoriesEditor').length && categoryCounter === 0) loadCategories();
+                        if ($('#valuesEditor').length && valueCounter === 0) loadValues();
+                        if ($('#teamMembersEditor').length && teamMemberCounter === 0) loadTeamMembers();
+                    });
+                } else {
+                    $('#aboutPageFields').slideUp();
+                }
+            }
+
+            // Check slug on input
+            $('input[name="CreatePage.Slug"]').on('input', function() {
+                toggleAboutPageFields();
+            });
+
+            // Initial check
+            toggleAboutPageFields();
+
+            // Stats Editor functionality
+            var statsContainer = $('#statsItemsContainer');
+            var statsJsonHidden = $('#statsJsonHidden');
+            var statItemCounter = 0;
+
+            function createStatItemHtml(stat, index) {
+                return `
+                    <div class="stat-item card mb-3" data-index="${index}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Stat Item ${index + 1}</h6>
+                                <button type="button" class="btn btn-sm btn-danger remove-stat-btn">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label">Icon (Emoji)</label>
+                                    <input type="text" class="form-control stat-icon" placeholder="👥" value="${stat.icon || ''}" maxlength="10">
+                                    <small class="text-muted">e.g., 👥, 🎓, ✅</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Value</label>
+                                    <input type="text" class="form-control stat-value" placeholder="1M+" value="${stat.value || ''}">
+                                    <small class="text-muted">e.g., 1M+, 3000+</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Label</label>
+                                    <input type="text" class="form-control stat-label" placeholder="Trusted Users" value="${stat.label || ''}">
+                                    <small class="text-muted">e.g., Trusted Users</small>
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="form-label">Description</label>
+                                    <input type="text" class="form-control stat-description" placeholder="Individuals & businesses across India" value="${stat.description || ''}">
+                                    <small class="text-muted">Brief description</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function updateStatsJson() {
+                var stats = [];
+                $('.stat-item').each(function() {
+                    var icon = $(this).find('.stat-icon').val().trim();
+                    var value = $(this).find('.stat-value').val().trim();
+                    var label = $(this).find('.stat-label').val().trim();
+                    var description = $(this).find('.stat-description').val().trim();
+                    if (icon || value || label || description) {
+                        stats.push({ icon: icon, value: value, label: label, description: description });
+                    }
+                });
+                statsJsonHidden.val(JSON.stringify(stats));
+            }
+
+            function loadStats() {
+                var existingJson = statsJsonHidden.val();
+                if (existingJson && existingJson.trim() !== '') {
+                    try {
+                        var stats = JSON.parse(existingJson);
+                        if (Array.isArray(stats)) {
+                            stats.forEach(function(stat, index) {
+                                statsContainer.append(createStatItemHtml(stat, index));
+                                statItemCounter = index + 1;
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error parsing stats JSON:', e);
+                        statsContainer.append(createStatItemHtml({}, 0));
+                        statItemCounter = 1;
+                    }
+                } else {
+                    statsContainer.append(createStatItemHtml({}, 0));
+                    statItemCounter = 1;
+                }
+            }
+
+            $('#addStatBtn').on('click', function() {
+                statsContainer.append(createStatItemHtml({}, statItemCounter));
+                statItemCounter++;
+                updateStatsJson();
+            });
+
+            $(document).on('click', '.remove-stat-btn', function() {
+                if ($('.stat-item').length > 1) {
+                    $(this).closest('.stat-item').remove();
+                    updateStatsJson();
+                } else {
+                    alert('You must have at least one stat item.');
+                }
+            });
+
+            $(document).on('input', '.stat-icon, .stat-value, .stat-label, .stat-description', function() {
+                updateStatsJson();
+            });
+
+            // Checklist Editor functionality
+            var checklistContainer = $('#checklistItemsContainer');
+            var checklistJsonHidden = $('#checklistJsonHidden');
+            var checklistCounter = 0;
+
+            function createChecklistItemHtml(item, index) {
+                return `
+                    <div class="checklist-item card mb-2" data-index="${index}">
+                        <div class="card-body p-2">
+                            <div class="d-flex align-items-center">
+                                <input type="text" class="form-control checklist-text" placeholder="Enter checklist item" value="${item || ''}">
+                                <button type="button" class="btn btn-sm btn-danger ms-2 remove-checklist-btn">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function updateChecklistJson() {
+                var items = [];
+                $('.checklist-item').each(function() {
+                    var text = $(this).find('.checklist-text').val().trim();
+                    if (text) {
+                        items.push(text);
+                    }
+                });
+                checklistJsonHidden.val(JSON.stringify(items));
+            }
+
+            function loadChecklist() {
+                var existingJson = checklistJsonHidden.val();
+                if (existingJson && existingJson.trim() !== '') {
+                    try {
+                        var items = JSON.parse(existingJson);
+                        if (Array.isArray(items)) {
+                            items.forEach(function(item, index) {
+                                checklistContainer.append(createChecklistItemHtml(item, index));
+                                checklistCounter = index + 1;
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error parsing checklist JSON:', e);
+                        checklistContainer.append(createChecklistItemHtml('', 0));
+                        checklistCounter = 1;
+                    }
+                } else {
+                    checklistContainer.append(createChecklistItemHtml('', 0));
+                    checklistCounter = 1;
+                }
+            }
+
+            $('#addChecklistItemBtn').on('click', function() {
+                checklistContainer.append(createChecklistItemHtml('', checklistCounter));
+                checklistCounter++;
+                updateChecklistJson();
+            });
+
+            $(document).on('click', '.remove-checklist-btn', function() {
+                if ($('.checklist-item').length > 1) {
+                    $(this).closest('.checklist-item').remove();
+                    updateChecklistJson();
+                } else {
+                    alert('You must have at least one checklist item.');
+                }
+            });
+
+            $(document).on('input', '.checklist-text', function() {
+                updateChecklistJson();
+            });
+
+            // Mission Cards Editor functionality
+            var missionCardsContainer = $('#missionCardsContainer');
+            var missionCardsJsonHidden = $('#missionCardsJsonHidden');
+            var missionCardCounter = 0;
+
+            function createMissionCardHtml(card, index) {
+                return `
+                    <div class="mission-card-item card mb-3" data-index="${index}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Mission Card ${index + 1}</h6>
+                                <button type="button" class="btn btn-sm btn-danger remove-mission-card-btn">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label">Icon (Emoji)</label>
+                                    <input type="text" class="form-control mission-card-icon" placeholder="🎯" value="${card.icon || ''}" maxlength="10">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Title</label>
+                                    <input type="text" class="form-control mission-card-title" placeholder="Empower Taxpayers" value="${card.title || ''}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Description</label>
+                                    <input type="text" class="form-control mission-card-description" placeholder="Description text" value="${card.description || ''}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function updateMissionCardsJson() {
+                var cards = [];
+                $('.mission-card-item').each(function() {
+                    var icon = $(this).find('.mission-card-icon').val().trim();
+                    var title = $(this).find('.mission-card-title').val().trim();
+                    var description = $(this).find('.mission-card-description').val().trim();
+                    if (icon || title || description) {
+                        cards.push({ icon: icon, title: title, description: description });
+                    }
+                });
+                missionCardsJsonHidden.val(JSON.stringify(cards));
+            }
+
+            function loadMissionCards() {
+                var existingJson = missionCardsJsonHidden.val();
+                if (existingJson && existingJson.trim() !== '') {
+                    try {
+                        var cards = JSON.parse(existingJson);
+                        if (Array.isArray(cards)) {
+                            cards.forEach(function(card, index) {
+                                missionCardsContainer.append(createMissionCardHtml(card, index));
+                                missionCardCounter = index + 1;
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error parsing mission cards JSON:', e);
+                        missionCardsContainer.append(createMissionCardHtml({}, 0));
+                        missionCardCounter = 1;
+                    }
+                } else {
+                    missionCardsContainer.append(createMissionCardHtml({}, 0));
+                    missionCardCounter = 1;
+                }
+            }
+
+            $('#addMissionCardBtn').on('click', function() {
+                missionCardsContainer.append(createMissionCardHtml({}, missionCardCounter));
+                missionCardCounter++;
+                updateMissionCardsJson();
+            });
+
+            $(document).on('click', '.remove-mission-card-btn', function() {
+                if ($('.mission-card-item').length > 1) {
+                    $(this).closest('.mission-card-item').remove();
+                    updateMissionCardsJson();
+                } else {
+                    alert('You must have at least one mission card.');
+                }
+            });
+
+            $(document).on('input', '.mission-card-icon, .mission-card-title, .mission-card-description', function() {
+                updateMissionCardsJson();
+            });
+
+            // Categories Editor functionality
+            var categoriesContainer = $('#categoriesContainer');
+            var categoriesJsonHidden = $('#categoriesJsonHidden');
+            var categoryCounter = 0;
+
+            function createCategoryHtml(category, index) {
+                return `
+                    <div class="category-item card mb-3" data-index="${index}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Category ${index + 1}</h6>
+                                <button type="button" class="btn btn-sm btn-danger remove-category-btn">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label">Icon (Emoji)</label>
+                                    <input type="text" class="form-control category-icon" placeholder="💼" value="${category.icon || ''}" maxlength="10">
+                                </div>
+                                <div class="col-md-10">
+                                    <label class="form-label">Label</label>
+                                    <input type="text" class="form-control category-label" placeholder="Salaried Individuals" value="${category.label || ''}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function updateCategoriesJson() {
+                var categories = [];
+                $('.category-item').each(function() {
+                    var icon = $(this).find('.category-icon').val().trim();
+                    var label = $(this).find('.category-label').val().trim();
+                    if (icon || label) {
+                        categories.push({ icon: icon, label: label });
+                    }
+                });
+                categoriesJsonHidden.val(JSON.stringify(categories));
+            }
+
+            function loadCategories() {
+                var existingJson = categoriesJsonHidden.val();
+                if (existingJson && existingJson.trim() !== '') {
+                    try {
+                        var categories = JSON.parse(existingJson);
+                        if (Array.isArray(categories)) {
+                            categories.forEach(function(category, index) {
+                                categoriesContainer.append(createCategoryHtml(category, index));
+                                categoryCounter = index + 1;
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error parsing categories JSON:', e);
+                        categoriesContainer.append(createCategoryHtml({}, 0));
+                        categoryCounter = 1;
+                    }
+                } else {
+                    categoriesContainer.append(createCategoryHtml({}, 0));
+                    categoryCounter = 1;
+                }
+            }
+
+            $('#addCategoryBtn').on('click', function() {
+                categoriesContainer.append(createCategoryHtml({}, categoryCounter));
+                categoryCounter++;
+                updateCategoriesJson();
+            });
+
+            $(document).on('click', '.remove-category-btn', function() {
+                if ($('.category-item').length > 1) {
+                    $(this).closest('.category-item').remove();
+                    updateCategoriesJson();
+                } else {
+                    alert('You must have at least one category.');
+                }
+            });
+
+            $(document).on('input', '.category-icon, .category-label', function() {
+                updateCategoriesJson();
+            });
+
+            // Values Editor functionality
+            var valuesContainer = $('#valuesContainer');
+            var valuesJsonHidden = $('#valuesJsonHidden');
+            var valueCounter = 0;
+
+            function createValueHtml(value, index) {
+                return `
+                    <div class="value-item card mb-3" data-index="${index}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Item ${index + 1}</h6>
+                                <button type="button" class="btn btn-sm btn-danger remove-value-btn">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label">Icon (Emoji)</label>
+                                    <input type="text" class="form-control value-icon" placeholder="💡" value="${value.icon || ''}" maxlength="10">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Title</label>
+                                    <input type="text" class="form-control value-title" placeholder="Clarity" value="${value.title || ''}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Subtitle</label>
+                                    <input type="text" class="form-control value-subtitle" placeholder="over jargon" value="${value.subtitle || ''}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function updateValuesJson() {
+                var values = [];
+                $('.value-item').each(function() {
+                    var icon = $(this).find('.value-icon').val().trim();
+                    var title = $(this).find('.value-title').val().trim();
+                    var subtitle = $(this).find('.value-subtitle').val().trim();
+                    if (icon || title || subtitle) {
+                        values.push({ icon: icon, title: title, subtitle: subtitle });
+                    }
+                });
+                valuesJsonHidden.val(JSON.stringify(values));
+            }
+
+            function loadValues() {
+                var existingJson = valuesJsonHidden.val();
+                if (existingJson && existingJson.trim() !== '') {
+                    try {
+                        var values = JSON.parse(existingJson);
+                        if (Array.isArray(values)) {
+                            values.forEach(function(value, index) {
+                                valuesContainer.append(createValueHtml(value, index));
+                                valueCounter = index + 1;
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error parsing values JSON:', e);
+                        valuesContainer.append(createValueHtml({}, 0));
+                        valueCounter = 1;
+                    }
+                } else {
+                    valuesContainer.append(createValueHtml({}, 0));
+                    valueCounter = 1;
+                }
+            }
+
+            $('#addValueBtn').on('click', function() {
+                valuesContainer.append(createValueHtml({}, valueCounter));
+                valueCounter++;
+                updateValuesJson();
+            });
+
+            $(document).on('click', '.remove-value-btn', function() {
+                if ($('.value-item').length > 1) {
+                    $(this).closest('.value-item').remove();
+                    updateValuesJson();
+                } else {
+                    alert('You must have at least one item.');
+                }
+            });
+
+            $(document).on('input', '.value-icon, .value-title, .value-subtitle', function() {
+                updateValuesJson();
+            });
+
+            // Team Members Editor functionality
+            var teamMembersContainer = $('#teamMembersContainer');
+            var teamMembersJsonHidden = $('#teamMembersJsonHidden');
+            var teamMemberCounter = 0;
+
+            function createTeamMemberHtml(member, index) {
+                return `
+                    <div class="team-member-item card mb-3" data-index="${index}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Team Member ${index + 1}</h6>
+                                <button type="button" class="btn btn-sm btn-danger remove-team-member-btn">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label">Avatar (Emoji)</label>
+                                    <input type="text" class="form-control team-member-avatar" placeholder="👨‍💼" value="${member.avatar || ''}" maxlength="10">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control team-member-name" placeholder="John Doe" value="${member.name || ''}">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Role</label>
+                                    <input type="text" class="form-control team-member-role" placeholder="CA" value="${member.role || ''}">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Bio</label>
+                                    <textarea class="form-control team-member-bio" rows="2" placeholder="Bio text">${member.bio || ''}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function updateTeamMembersJson() {
+                var members = [];
+                $('.team-member-item').each(function() {
+                    var avatar = $(this).find('.team-member-avatar').val().trim();
+                    var name = $(this).find('.team-member-name').val().trim();
+                    var role = $(this).find('.team-member-role').val().trim();
+                    var bio = $(this).find('.team-member-bio').val().trim();
+                    if (avatar || name || role || bio) {
+                        members.push({ avatar: avatar, name: name, role: role, bio: bio });
+                    }
+                });
+                teamMembersJsonHidden.val(JSON.stringify(members));
+            }
+
+            function loadTeamMembers() {
+                var existingJson = teamMembersJsonHidden.val();
+                if (existingJson && existingJson.trim() !== '') {
+                    try {
+                        var members = JSON.parse(existingJson);
+                        if (Array.isArray(members)) {
+                            members.forEach(function(member, index) {
+                                teamMembersContainer.append(createTeamMemberHtml(member, index));
+                                teamMemberCounter = index + 1;
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error parsing team members JSON:', e);
+                        teamMembersContainer.append(createTeamMemberHtml({}, 0));
+                        teamMemberCounter = 1;
+                    }
+                } else {
+                    teamMembersContainer.append(createTeamMemberHtml({}, 0));
+                    teamMemberCounter = 1;
+                }
+            }
+
+            $('#addTeamMemberBtn').on('click', function() {
+                teamMembersContainer.append(createTeamMemberHtml({}, teamMemberCounter));
+                teamMemberCounter++;
+                updateTeamMembersJson();
+            });
+
+            $(document).on('click', '.remove-team-member-btn', function() {
+                if ($('.team-member-item').length > 1) {
+                    $(this).closest('.team-member-item').remove();
+                    updateTeamMembersJson();
+                } else {
+                    alert('You must have at least one team member.');
+                }
+            });
+
+            $(document).on('input', '.team-member-avatar, .team-member-name, .team-member-role, .team-member-bio', function() {
+                updateTeamMembersJson();
+            });
+
+
+            // Update the hidden textareas before form submission
+            $('form').on('submit', function() {
+                var content = document.querySelector('#pageContent .ql-editor').innerHTML;
+                $('textarea[name="CreatePage.Content"]').val(content);
+
+                if (ourStoryQuill) {
+                    var ourStoryContent = document.querySelector('#ourStoryContent .ql-editor').innerHTML;
+                    $('textarea[name="CreatePage.OurStoryContent"]').val(ourStoryContent);
+                }
+
+                if (howWeWorkQuill) {
+                    var howWeWorkContent = document.querySelector('#howWeWorkContent .ql-editor').innerHTML;
+                    $('textarea[name="CreatePage.HowWeWorkContent"]').val(howWeWorkContent);
+                }
+
+                if (whoWeServeQuill) {
+                    var whoWeServeContent = document.querySelector('#whoWeServeContent .ql-editor').innerHTML;
+                    $('textarea[name="CreatePage.WhoWeServeContent"]').val(whoWeServeContent);
+                }
+
+                // Update all JSON fields before submission
+                if ($('#statsEditor').length) {
+                    updateStatsJson();
+                }
+                if ($('#checklistEditor').length) {
+                    updateChecklistJson();
+                }
+                if ($('#missionCardsEditor').length) {
+                    updateMissionCardsJson();
+                }
+                if ($('#categoriesEditor').length) {
+                    updateCategoriesJson();
+                }
+                if ($('#valuesEditor').length) {
+                    updateValuesJson();
+                }
+                if ($('#teamMembersEditor').length) {
+                    updateTeamMembersJson();
+                }
+            });
+        });
+    </script>
+}

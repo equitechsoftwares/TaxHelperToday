@@ -1,0 +1,183 @@
+@page "{id:long}"
+@model TaxHelperToday.Pages.Admin.Content.Blogs.EditModel
+@{
+    ViewData["Title"] = "Edit Blog Post";
+    Layout = "~/Pages/Admin/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Edit Blog Post</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Content/Blogs">Blogs</a></li>
+                    <li class="breadcrumb-item active">Edit</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Blog Post: @Model.CurrentBlogPost?.Title</h3>
+                    </div>
+                    <form method="post">
+                        <div class="card-body">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label asp-for="BlogPost.Slug">Slug <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" asp-for="BlogPost.Slug" placeholder="e.g., tax-saving-tips-2024" required>
+                                <span asp-validation-for="BlogPost.Slug" class="text-danger"></span>
+                                <small class="form-text text-muted">URL-friendly identifier (lowercase, hyphens only)</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BlogPost.Title">Title <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" asp-for="BlogPost.Title" placeholder="Enter blog post title" required>
+                                <span asp-validation-for="BlogPost.Title" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BlogPost.Excerpt">Excerpt</label>
+                                <textarea class="form-control" asp-for="BlogPost.Excerpt" rows="3" placeholder="Short summary of the blog post">@(Model.BlogPost.Excerpt ?? Model.CurrentBlogPost?.Excerpt)</textarea>
+                                <span asp-validation-for="BlogPost.Excerpt" class="text-danger"></span>
+                                <small class="form-text text-muted">Brief summary shown in blog listings</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BlogPost.Content">Content <span class="text-danger">*</span></label>
+                                <div id="blogContent" style="min-height: 400px;">
+                                    @Html.Raw(Model.CurrentBlogPost?.Content ?? "")
+                                </div>
+                                <textarea asp-for="BlogPost.Content" style="display: none;">@(Model.BlogPost.Content ?? Model.CurrentBlogPost?.Content)</textarea>
+                                <span asp-validation-for="BlogPost.Content" class="text-danger"></span>
+                                <small class="form-text text-muted">Use the rich text editor to format your content</small>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="BlogPost.Category">Category</label>
+                                        <input type="text" class="form-control" asp-for="BlogPost.Category" placeholder="e.g., Tax Planning, ITR, GST" value="@(Model.BlogPost.Category ?? Model.CurrentBlogPost?.Category)">
+                                        <span asp-validation-for="BlogPost.Category" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="BlogPost.ReadTime">Read Time</label>
+                                        <input type="text" class="form-control" asp-for="BlogPost.ReadTime" placeholder="e.g., 5 min read" value="@(Model.BlogPost.ReadTime ?? Model.CurrentBlogPost?.ReadTime)">
+                                        <span asp-validation-for="BlogPost.ReadTime" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BlogPost.FeaturedImageUrl">Featured Image URL</label>
+                                <input type="url" class="form-control" asp-for="BlogPost.FeaturedImageUrl" placeholder="https://example.com/image.jpg" value="@(Model.BlogPost.FeaturedImageUrl ?? Model.CurrentBlogPost?.FeaturedImageUrl)">
+                                <span asp-validation-for="BlogPost.FeaturedImageUrl" class="text-danger"></span>
+                                <small class="form-text text-muted">URL to the featured image for this blog post</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BlogPost.MetaDescription">Meta Description</label>
+                                <textarea class="form-control" asp-for="BlogPost.MetaDescription" rows="2" placeholder="SEO meta description (150-160 characters recommended)">@(Model.BlogPost.MetaDescription ?? Model.CurrentBlogPost?.MetaDescription)</textarea>
+                                <span asp-validation-for="BlogPost.MetaDescription" class="text-danger"></span>
+                                <small class="form-text text-muted">Used for SEO and social media sharing</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BlogPost.MetaKeywords">Meta Keywords</label>
+                                <input type="text" class="form-control" asp-for="BlogPost.MetaKeywords" placeholder="tax, itr, gst, compliance" value="@(Model.BlogPost.MetaKeywords ?? Model.CurrentBlogPost?.MetaKeywords)">
+                                <span asp-validation-for="BlogPost.MetaKeywords" class="text-danger"></span>
+                                <small class="form-text text-muted">Comma-separated keywords for SEO</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="TagsInput">Tags <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" asp-for="TagsInput" placeholder="Enter tags separated by commas (e.g., tax, itr, planning)" value="@Model.TagsInput" required>
+                                <span asp-validation-for="TagsInput" class="text-danger"></span>
+                                <small class="form-text text-muted">Comma-separated tags for categorization</small>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="isPublished" id="isPublished" value="true" @(Model.CurrentBlogPost?.IsPublished == true ? "checked" : "")>
+                                    <input type="hidden" name="isPublished" value="false">
+                                    <label class="form-check-label" for="isPublished">
+                                        Published
+                                    </label>
+                                </div>
+                                <small class="form-text text-muted">Check to publish, uncheck to save as draft</small>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Update Blog Post
+                            </button>
+                            <a href="/Admin/Content/Blogs" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize Quill editor with existing content
+            var quill = new Quill('#blogContent', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        [{ 'align': [] }],
+                        ['link', 'image'],
+                        ['clean'],
+                        ['code-block']
+                    ]
+                },
+                placeholder: 'Enter blog post content...'
+            });
+
+            // Update the hidden textarea before form submission
+            $('form').on('submit', function() {
+                var content = document.querySelector('#blogContent .ql-editor').innerHTML;
+                $('textarea[name="BlogPost.Content"]').val(content);
+            });
+        });
+    </script>
+}

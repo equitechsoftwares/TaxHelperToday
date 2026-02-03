@@ -1,0 +1,296 @@
+@page
+@model AboutModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<section class="page-hero-modern">
+  <div class="hero-background"></div>
+  <div class="container">
+    @if (!string.IsNullOrEmpty(Model.Eyebrow))
+    {
+      <p class="eyebrow">@Model.Eyebrow</p>
+    }
+    @if (!string.IsNullOrEmpty(Model.HeroTitle))
+    {
+      <h1>@Html.Raw(Model.HeroTitle)</h1>
+    }
+    @if (!string.IsNullOrEmpty(Model.HeroText))
+    {
+      <p class="page-hero-text">
+        @Html.Raw(Model.HeroText)
+      </p>
+    }
+  </div>
+</section>
+
+<!-- Stats Section -->
+@if (Model.Stats != null && Model.Stats.Any())
+{
+  <section class="stats-banner">
+    <div class="container">
+      <div class="stats-grid">
+        @foreach (var stat in Model.Stats)
+        {
+          <div class="stat-item">
+            <div class="stat-icon">@stat.Icon</div>
+            <div class="stat-content">
+              <div class="stat-value">@stat.Value</div>
+              <div class="stat-label">@stat.Label</div>
+              <div class="stat-desc">@stat.Description</div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+@if (!string.IsNullOrEmpty(Model.OurStoryContent))
+{
+  <section class="section">
+    <div class="container">
+      <!-- Our Story Section -->
+      <div class="about-feature-grid">
+        <div class="about-feature-content">
+          @if (!string.IsNullOrEmpty(Model.OurStoryTitle))
+          {
+            <h2>@Model.OurStoryTitle</h2>
+          }
+          @Html.Raw(Model.OurStoryContent)
+        </div>
+        <div class="about-feature-image">
+          <div class="about-image-placeholder about-image-story">
+            <div class="image-circle image-circle-1">👨‍💼</div>
+            <div class="image-circle image-circle-2">👩‍💼</div>
+            <div class="image-circle image-circle-3">👨‍💻</div>
+            <div class="image-circle image-circle-4">👩‍💻</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+}
+
+@if (!string.IsNullOrEmpty(Model.HowWeWorkContent) || (Model.HowWeWorkChecklist != null && Model.HowWeWorkChecklist.Any()))
+{
+  <section class="section section-alt">
+    <div class="container">
+      <!-- How We Work Section -->
+      <div class="about-feature-grid about-feature-grid-reverse">
+        <div class="about-feature-image">
+          <div class="about-image-placeholder about-image-work">
+            <div class="work-image-content">
+              <div class="work-badge">
+                <span class="work-badge-icon">✓</span>
+                <span>Expert Team</span>
+              </div>
+              <div class="work-people">
+                <div class="work-person work-person-1">👨‍💼</div>
+                <div class="work-person work-person-2">👩‍💼</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-feature-content">
+          @if (!string.IsNullOrEmpty(Model.HowWeWorkTitle))
+          {
+            <h2>@Model.HowWeWorkTitle</h2>
+          }
+          @if (!string.IsNullOrEmpty(Model.HowWeWorkContent))
+          {
+            @Html.Raw(Model.HowWeWorkContent)
+          }
+          @if (Model.HowWeWorkChecklist != null && Model.HowWeWorkChecklist.Any())
+          {
+            <ul class="checklist-modern">
+              @foreach (var item in Model.HowWeWorkChecklist)
+              {
+                <li>
+                  <span class="check-icon">✓</span>
+                  <span>@Html.Raw(item)</span>
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+}
+
+<!-- Mission Section -->
+@if (Model.MissionCards != null && Model.MissionCards.Any())
+{
+  <section class="section">
+    <div class="container">
+      <header class="section-heading">
+        @if (!string.IsNullOrEmpty(Model.MissionEyebrow))
+        {
+          <p class="eyebrow">@Model.MissionEyebrow</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.MissionTitle))
+        {
+          <h2>@Html.Raw(Model.MissionTitle)</h2>
+        }
+      </header>
+      <div class="mission-grid">
+        @foreach (var card in Model.MissionCards)
+        {
+          <div class="mission-card">
+            <div class="mission-icon">@card.Icon</div>
+            <h3>@card.Title</h3>
+            <p>@card.Description</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+@if (!string.IsNullOrEmpty(Model.WhoWeServeContent) || (Model.WhoWeServeCategories != null && Model.WhoWeServeCategories.Any()) || (Model.Values != null && Model.Values.Any()))
+{
+  <section class="section section-alt">
+    <div class="container">
+      <div class="about-content-grid">
+        @if (!string.IsNullOrEmpty(Model.WhoWeServeContent) || (Model.WhoWeServeCategories != null && Model.WhoWeServeCategories.Any()))
+        {
+          <div class="about-card">
+            <div class="about-card-icon">🎯</div>
+            @if (!string.IsNullOrEmpty(Model.WhoWeServeTitle))
+            {
+              <h2>@Model.WhoWeServeTitle</h2>
+            }
+            @if (!string.IsNullOrEmpty(Model.WhoWeServeContent))
+            {
+              @Html.Raw(Model.WhoWeServeContent)
+            }
+            @if (Model.WhoWeServeCategories != null && Model.WhoWeServeCategories.Any())
+            {
+              <div class="served-categories">
+                @foreach (var category in Model.WhoWeServeCategories)
+                {
+                  <div class="category-badge">
+                    <span class="category-icon">@category.Icon</span>
+                    <span>@category.Label</span>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        }
+        @if (Model.Values != null && Model.Values.Any())
+        {
+          <div class="about-card">
+            <div class="about-card-icon">💎</div>
+            @if (!string.IsNullOrEmpty(Model.WhatWeStandForTitle))
+            {
+              <h2>@Model.WhatWeStandForTitle</h2>
+            }
+            <div class="values-grid">
+              @foreach (var value in Model.Values)
+              {
+                <div class="value-pill">
+                  <span class="value-icon">@value.Icon</span>
+                  <div>
+                    <strong>@value.Title</strong>
+                    <span>@value.Subtitle</span>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+<!-- Team Section -->
+@if (Model.TeamMembers != null && Model.TeamMembers.Any())
+{
+  <section class="section">
+    <div class="container">
+      <header class="section-heading">
+        @if (!string.IsNullOrEmpty(Model.TeamSectionTitle))
+        {
+          <p class="eyebrow">@Model.TeamSectionTitle</p>
+          <h2>@Model.TeamSectionTitle</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model.TeamSectionSubtitle))
+        {
+          <p class="section-subtitle">
+            @Html.Raw(Model.TeamSectionSubtitle)
+          </p>
+        }
+      </header>
+      <div class="team-slider-wrapper">
+        <button class="slider-arrow slider-arrow-left team-slider-arrow-left" aria-label="Previous team member">‹</button>
+        <div class="team-slider">
+          <div class="team-track">
+            @foreach (var member in Model.TeamMembers)
+            {
+              <div class="team-card">
+                <div class="team-avatar">
+                  <div class="team-avatar-placeholder">@member.Avatar</div>
+                </div>
+                <div class="team-info">
+                  <h3>@member.Name</h3>
+                  <p class="team-role">@member.Role</p>
+                  <p class="team-bio">@member.Bio</p>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+        <button class="slider-arrow slider-arrow-right team-slider-arrow-right" aria-label="Next team member">›</button>
+      </div>
+    </div>
+  </section>
+}
+
+@section Scripts {
+<script>
+  $(function() {
+    // Team slider
+    var teamTrack = $('.team-track');
+    var teamCards = $('.team-card');
+    if (teamCards.length > 0) {
+      var currentTeamIndex = 0;
+      var cardsPerView = window.innerWidth > 900 ? 3 : window.innerWidth > 720 ? 2 : 1;
+      
+      function updateTeamSlider() {
+        var translateX = -(currentTeamIndex * (100 / cardsPerView));
+        teamTrack.css('transform', 'translateX(' + translateX + '%)');
+        
+        $('.team-slider-arrow-left').prop('disabled', currentTeamIndex === 0);
+        $('.team-slider-arrow-right').prop('disabled', currentTeamIndex >= teamCards.length - cardsPerView);
+      }
+      
+      $('.team-slider-arrow-left').on('click', function() {
+        if (currentTeamIndex > 0) {
+          currentTeamIndex--;
+          updateTeamSlider();
+        }
+      });
+      
+      $('.team-slider-arrow-right').on('click', function() {
+        if (currentTeamIndex < teamCards.length - cardsPerView) {
+          currentTeamIndex++;
+          updateTeamSlider();
+        }
+      });
+      
+      $(window).on('resize', function() {
+        cardsPerView = window.innerWidth > 900 ? 3 : window.innerWidth > 720 ? 2 : 1;
+        if (currentTeamIndex > teamCards.length - cardsPerView) {
+          currentTeamIndex = Math.max(0, teamCards.length - cardsPerView);
+        }
+        updateTeamSlider();
+      });
+      
+      updateTeamSlider();
+    }
+  });
+</script>
+}

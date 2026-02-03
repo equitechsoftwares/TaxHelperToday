@@ -1,0 +1,1307 @@
+[2026-01-30 00:52:45.266 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 00:52:46.133 +05:30 INF] Database connection verified
+[2026-01-30 00:52:46.427 +05:30 INF] Starting data seeding...
+[2026-01-30 00:52:46.453 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 00:52:46.466 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 00:52:46.475 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 00:52:46.485 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 00:52:46.485 +05:30 INF] Data seeding completed successfully
+[2026-01-30 00:52:46.488 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 00:52:46.547 +05:30 ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5231: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+[2026-01-30 00:52:46.568 +05:30 FTL] Application terminated unexpectedly
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5231: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at Program.<Main>$(String[] args) in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\Program.cs:line 209
+[2026-01-30 00:55:35.360 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 00:55:36.145 +05:30 INF] Database connection verified
+[2026-01-30 00:55:36.405 +05:30 INF] Starting data seeding...
+[2026-01-30 00:55:36.455 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 00:55:36.471 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 00:55:36.482 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 00:55:36.492 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 00:55:36.493 +05:30 INF] Data seeding completed successfully
+[2026-01-30 00:55:36.499 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 00:56:13.083 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 01:06:31.654 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 01:06:32.650 +05:30 INF] Database connection verified
+[2026-01-30 01:06:32.914 +05:30 INF] Seeded default roles
+[2026-01-30 01:06:33.375 +05:30 INF] Created default admin user: admin@taxhelpertoday.com / Admin@123
+[2026-01-30 01:06:33.379 +05:30 INF] Starting data seeding...
+[2026-01-30 01:06:33.459 +05:30 INF] Seeded 6 services
+[2026-01-30 01:06:33.643 +05:30 INF] Seeded 4 blog posts
+[2026-01-30 01:06:33.691 +05:30 INF] Seeded 16 FAQs
+[2026-01-30 01:06:33.717 +05:30 INF] Seeded 2 pages
+[2026-01-30 01:06:33.718 +05:30 INF] Data seeding completed successfully
+[2026-01-30 01:06:33.722 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 01:06:56.838 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 01:07:09.327 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 10:25:16.069 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 10:25:20.720 +05:30 INF] Database connection verified
+[2026-01-30 10:25:21.625 +05:30 INF] Starting data seeding...
+[2026-01-30 10:25:21.701 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 10:25:21.724 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 10:25:21.756 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 10:25:21.775 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 10:25:21.777 +05:30 INF] Data seeding completed successfully
+[2026-01-30 10:25:21.785 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 10:25:39.586 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 10:42:42.839 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 10:42:49.100 +05:30 INF] Database connection verified
+[2026-01-30 10:42:49.536 +05:30 INF] Starting data seeding...
+[2026-01-30 10:42:49.569 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 10:42:49.579 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 10:42:49.586 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 10:42:49.594 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 10:42:49.594 +05:30 INF] Data seeding completed successfully
+[2026-01-30 10:42:49.596 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 10:43:56.435 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 12:59:42.480 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 12:59:46.516 +05:30 INF] Database connection verified
+[2026-01-30 12:59:47.264 +05:30 INF] Starting data seeding...
+[2026-01-30 12:59:47.334 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 12:59:47.361 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 12:59:47.384 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 12:59:47.411 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 12:59:47.412 +05:30 INF] Data seeding completed successfully
+[2026-01-30 12:59:47.425 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 13:00:45.724 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 13:12:34.582 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 13:15:21.918 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 13:15:23.891 +05:30 INF] Database connection verified
+[2026-01-30 13:15:24.545 +05:30 INF] Starting data seeding...
+[2026-01-30 13:15:24.616 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 13:15:24.637 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 13:15:24.654 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 13:15:24.669 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 13:15:24.669 +05:30 INF] Data seeding completed successfully
+[2026-01-30 13:15:24.678 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 13:15:54.547 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 13:18:52.096 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 13:18:54.702 +05:30 INF] Database connection verified
+[2026-01-30 13:18:55.387 +05:30 INF] Starting data seeding...
+[2026-01-30 13:18:55.440 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 13:18:55.457 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 13:18:55.471 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 13:18:55.482 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 13:18:55.482 +05:30 INF] Data seeding completed successfully
+[2026-01-30 13:18:55.487 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 13:19:03.905 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 13:19:05.431 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unexpected 'asp-for' expression result type 'System.Nullable`1[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' for <input>. 'asp-for' must be of type 'System.Boolean' or 'System.String' that can be parsed as a 'System.Boolean' if 'type' is 'checkbox'.
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.GenerateCheckBox(ModelExplorer modelExplorer, TagHelperOutput output, IDictionary`2 htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.Process(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.RunAsync(TagHelperExecutionContext executionContext)
+   at TaxHelperToday.Pages.Admin.Content.Services.Pages_Admin_Content_Services_Edit.<ExecuteAsync>b__32_0() in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\Pages\Admin\Content\Services\Edit.cshtml:line 45
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.GetChildContentAsync(Boolean useCachedResult, HtmlEncoder encoder)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at TaxHelperToday.Pages.Admin.Content.Services.Pages_Admin_Content_Services_Edit.ExecuteAsync() in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\Pages\Admin\Content\Services\Edit.cshtml:line 5
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context) in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\TaxHelperToday.Infrastructure\Middleware\AdminAuthorizationMiddleware.cs:line 44
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context) in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\TaxHelperToday.Infrastructure\Middleware\JwtCookieMiddleware.cs:line 37
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 13:20:09.121 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unexpected 'asp-for' expression result type 'System.Nullable`1[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' for <input>. 'asp-for' must be of type 'System.Boolean' or 'System.String' that can be parsed as a 'System.Boolean' if 'type' is 'checkbox'.
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.GenerateCheckBox(ModelExplorer modelExplorer, TagHelperOutput output, IDictionary`2 htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.Process(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.RunAsync(TagHelperExecutionContext executionContext)
+   at TaxHelperToday.Pages.Admin.Content.Services.Pages_Admin_Content_Services_Edit.<ExecuteAsync>b__32_0()
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.GetChildContentAsync(Boolean useCachedResult, HtmlEncoder encoder)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at TaxHelperToday.Pages.Admin.Content.Services.Pages_Admin_Content_Services_Edit.ExecuteAsync()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 13:20:33.927 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentOutOfRangeException: Token 20001a7 is not valid in the scope of module System.ModuleHandle. (Parameter 'typeToken')
+   at System.ModuleHandle.ResolveTypeHandle(Int32 typeToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+   at System.Attribute.InternalIsDefined(PropertyInfo element, Type attributeType, Boolean inherit)
+   at System.Attribute.IsDefined(MemberInfo element, Type attributeType, Boolean inherit)
+   at Microsoft.Extensions.Internal.PropertyActivator`1.<>c__DisplayClass11_0.<GetActivatableProperties>b__0(PropertyInfo property)
+   at System.Linq.Enumerable.ArrayWhereSelectIterator`2.ToArray()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator..ctor(Type pageType, Type declaredModelType, IModelMetadataProvider metadataProvider, PropertyValueAccessors propertyValueAccessors)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageFactoryProvider.CreatePageFactory(CompiledPageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.CreateCacheEntry(CompiledPageActionDescriptor compiledActionDescriptor, FilterItem[] cachedFilters)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.GetCachedResult(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageRequestDelegateFactory.<>c__DisplayClass13_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 13:21:58.749 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 13:22:00.301 +05:30 INF] Database connection verified
+[2026-01-30 13:22:00.768 +05:30 INF] Starting data seeding...
+[2026-01-30 13:22:00.813 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 13:22:00.827 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 13:22:00.840 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 13:22:00.855 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 13:22:00.856 +05:30 INF] Data seeding completed successfully
+[2026-01-30 13:22:00.863 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 13:23:09.806 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 13:28:50.414 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 14:43:29.826 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 14:43:32.890 +05:30 INF] Database connection verified
+[2026-01-30 14:43:33.342 +05:30 INF] Starting data seeding...
+[2026-01-30 14:43:33.390 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 14:43:33.406 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 14:43:33.414 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 14:43:33.423 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 14:43:33.423 +05:30 INF] Data seeding completed successfully
+[2026-01-30 14:43:33.427 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 14:43:43.407 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 14:44:07.033 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 14:47:28.871 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 14:47:32.188 +05:30 INF] Database connection verified
+[2026-01-30 14:47:33.221 +05:30 INF] Starting data seeding...
+[2026-01-30 14:47:33.302 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 14:47:33.318 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 14:47:33.329 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 14:47:33.343 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 14:47:33.343 +05:30 INF] Data seeding completed successfully
+[2026-01-30 14:47:33.356 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 14:47:33.688 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 15:00:41.840 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 15:01:13.780 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 15:01:16.223 +05:30 INF] Database connection verified
+[2026-01-30 15:01:17.082 +05:30 INF] Starting data seeding...
+[2026-01-30 15:01:17.168 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 15:01:17.184 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 15:01:17.199 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 15:01:17.228 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 15:01:17.229 +05:30 INF] Data seeding completed successfully
+[2026-01-30 15:01:17.238 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 15:01:46.125 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 15:05:52.420 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 15:05:55.078 +05:30 INF] Database connection verified
+[2026-01-30 15:05:55.954 +05:30 INF] Starting data seeding...
+[2026-01-30 15:05:56.128 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 15:05:56.141 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 15:05:56.152 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 15:05:56.161 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 15:05:56.161 +05:30 INF] Data seeding completed successfully
+[2026-01-30 15:05:56.176 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 15:06:24.769 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 15:16:06.570 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentOutOfRangeException: Token 2007ffd is not valid in the scope of module System.ModuleHandle. (Parameter 'typeToken')
+   at System.ModuleHandle.ResolveTypeHandle(Int32 typeToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+   at Microsoft.Extensions.Internal.PropertyActivator`1.<>c__DisplayClass11_0.<GetActivatableProperties>b__0(PropertyInfo property)
+   at System.Linq.Enumerable.ArrayWhereSelectIterator`2.ToArray()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator..ctor(Type pageType, Type declaredModelType, IModelMetadataProvider metadataProvider, PropertyValueAccessors propertyValueAccessors)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageFactoryProvider.CreatePageFactory(CompiledPageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.CreateCacheEntry(CompiledPageActionDescriptor compiledActionDescriptor, FilterItem[] cachedFilters)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.GetCachedResult(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageRequestDelegateFactory.<>c__DisplayClass13_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 15:16:44.022 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentOutOfRangeException: Token 2007ffd is not valid in the scope of module System.ModuleHandle. (Parameter 'typeToken')
+   at System.ModuleHandle.ResolveTypeHandle(Int32 typeToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+   at Microsoft.Extensions.Internal.PropertyActivator`1.<>c__DisplayClass11_0.<GetActivatableProperties>b__0(PropertyInfo property)
+   at System.Linq.Enumerable.ArrayWhereSelectIterator`2.ToArray()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator..ctor(Type pageType, Type declaredModelType, IModelMetadataProvider metadataProvider, PropertyValueAccessors propertyValueAccessors)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageFactoryProvider.CreatePageFactory(CompiledPageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.CreateCacheEntry(CompiledPageActionDescriptor compiledActionDescriptor, FilterItem[] cachedFilters)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.GetCachedResult(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageRequestDelegateFactory.<>c__DisplayClass13_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 15:16:56.286 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentOutOfRangeException: Token 2007ffd is not valid in the scope of module System.ModuleHandle. (Parameter 'typeToken')
+   at System.ModuleHandle.ResolveTypeHandle(Int32 typeToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+   at Microsoft.Extensions.Internal.PropertyActivator`1.<>c__DisplayClass11_0.<GetActivatableProperties>b__0(PropertyInfo property)
+   at System.Linq.Enumerable.ArrayWhereSelectIterator`2.ToArray()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator..ctor(Type pageType, Type declaredModelType, IModelMetadataProvider metadataProvider, PropertyValueAccessors propertyValueAccessors)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageFactoryProvider.CreatePageFactory(CompiledPageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.CreateCacheEntry(CompiledPageActionDescriptor compiledActionDescriptor, FilterItem[] cachedFilters)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.GetCachedResult(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageRequestDelegateFactory.<>c__DisplayClass13_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 15:17:02.383 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 15:17:18.130 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentOutOfRangeException: Token 2007ffd is not valid in the scope of module System.ModuleHandle. (Parameter 'typeToken')
+   at System.ModuleHandle.ResolveTypeHandle(Int32 typeToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+   at Microsoft.Extensions.Internal.PropertyActivator`1.<>c__DisplayClass11_0.<GetActivatableProperties>b__0(PropertyInfo property)
+   at System.Linq.Enumerable.ArrayWhereSelectIterator`2.ToArray()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator..ctor(Type pageType, Type declaredModelType, IModelMetadataProvider metadataProvider, PropertyValueAccessors propertyValueAccessors)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageFactoryProvider.CreatePageFactory(CompiledPageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.CreateCacheEntry(CompiledPageActionDescriptor compiledActionDescriptor, FilterItem[] cachedFilters)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.GetCachedResult(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageRequestDelegateFactory.<>c__DisplayClass13_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 15:18:09.303 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 15:18:11.257 +05:30 INF] Database connection verified
+[2026-01-30 15:18:12.133 +05:30 INF] Starting data seeding...
+[2026-01-30 15:18:12.185 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 15:18:12.205 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 15:18:12.225 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 15:18:12.241 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 15:18:12.241 +05:30 INF] Data seeding completed successfully
+[2026-01-30 15:18:12.249 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 15:18:29.395 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 15:22:31.831 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 15:22:41.616 +05:30 INF] Database connection verified
+[2026-01-30 15:22:42.416 +05:30 INF] Starting data seeding...
+[2026-01-30 15:22:42.525 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 15:22:42.547 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 15:22:42.576 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 15:22:42.602 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 15:22:42.602 +05:30 INF] Data seeding completed successfully
+[2026-01-30 15:22:42.612 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 15:22:44.130 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 15:31:27.713 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 15:31:39.442 +05:30 INF] Database connection verified
+[2026-01-30 15:31:45.575 +05:30 INF] Starting data seeding...
+[2026-01-30 15:31:47.396 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 15:31:47.617 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 15:31:47.769 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 15:31:48.119 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 15:31:48.130 +05:30 INF] Data seeding completed successfully
+[2026-01-30 15:31:48.282 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 15:32:59.272 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 15:33:00.792 +05:30 INF] Database connection verified
+[2026-01-30 15:33:01.249 +05:30 INF] Starting data seeding...
+[2026-01-30 15:33:01.367 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 15:33:01.390 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 15:33:01.400 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 15:33:01.421 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 15:33:01.421 +05:30 INF] Data seeding completed successfully
+[2026-01-30 15:33:01.428 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 15:33:33.286 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 15:49:37.251 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 15:49:40.984 +05:30 INF] Database connection verified
+[2026-01-30 15:49:42.620 +05:30 INF] Starting data seeding...
+[2026-01-30 15:49:42.755 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 15:49:42.789 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 15:49:42.819 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 15:49:42.836 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 15:49:42.837 +05:30 INF] Data seeding completed successfully
+[2026-01-30 15:49:42.852 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 15:50:09.011 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 15:51:07.715 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 16:09:35.095 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: on is not a valid value for Boolean.
+ ---> System.FormatException: String 'on' was not recognized as a valid Boolean.
+   at System.Boolean.Parse(String value)
+   at System.ComponentModel.BooleanConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   --- End of inner exception stack trace ---
+   at System.ComponentModel.BooleanConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingHelper.ConvertSimpleType(Object value, Type destinationType, CultureInfo culture)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GetModelStateValue(ViewContext viewContext, String key, Type destinationType)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GenerateInput(ViewContext viewContext, InputType inputType, ModelExplorer modelExplorer, String expression, Object value, Boolean useViewData, Boolean isChecked, Boolean setId, Boolean isExplicitValue, String format, IDictionary`2 htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GenerateCheckBox(ViewContext viewContext, ModelExplorer modelExplorer, String expression, Nullable`1 isChecked, Object htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.GenerateCheckBox(ModelExplorer modelExplorer, TagHelperOutput output, IDictionary`2 htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.Process(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.RunAsync(TagHelperExecutionContext executionContext)
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<<ExecuteAsync>b__21#8_2#8>d.MoveNext()
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.GetChildContentAsync(Boolean useCachedResult, HtmlEncoder encoder)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<<ExecuteAsync>b__21#8_1#8>d.MoveNext()
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<ExecuteAsync>d__21#8.MoveNext()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 16:09:35.197 +05:30 ERR] An exception was thrown attempting to display the error page.
+System.TypeLoadException: Could not resolve type 'TaxHelperToday.Pages.Admin.Pages_Admin_Login+<ExecuteAsync>d__21#8' in assembly 'TaxHelperToday, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+   at System.Reflection.TypeNameResolver.GetType(String escapedTypeName, ReadOnlySpan`1 nestedTypeNames, TypeName parsedName)
+   at System.Reflection.TypeNameResolver.Resolve(TypeName typeName)
+   at System.Reflection.TypeNameResolver.GetTypeHelper(Char* pTypeName, RuntimeAssembly requestingAssembly, Boolean throwOnError, Boolean requireAssemblyQualifiedName, IntPtr unsafeAccessorMethod)
+   at System.Reflection.CustomAttribute.<CreateCustomAttributeInstance>g____PInvoke|30_0(QCallModule __pModule_native, ObjectHandleOnStack __type_native, ObjectHandleOnStack __pCtor_native, IntPtr* __ppBlob_native, IntPtr __pEndBlob_native, Int32* __pcNamedArgs_native, ObjectHandleOnStack __instance_native)
+   at System.Reflection.CustomAttribute.AddCustomAttributes(ListBuilder`1& attributes, RuntimeModule decoratedModule, Int32 decoratedMetadataToken, RuntimeType attributeFilterType, Boolean mustBeInheritable, ListBuilder`1 derivedAttributes)
+   at System.Reflection.CustomAttribute.GetCustomAttributes(RuntimeMethodInfo method, RuntimeType caType, Boolean inherit)
+   at System.Reflection.CustomAttributeExtensions.GetCustomAttributes[T](MemberInfo element)
+   at Microsoft.Extensions.StackTrace.Sources.StackTraceHelper.TryResolveStateMachineMethod(MethodBase& method, Type& declaringType)
+   at Microsoft.Extensions.StackTrace.Sources.StackTraceHelper.GetMethodDisplayString(MethodBase method)
+   at Microsoft.Extensions.StackTrace.Sources.StackTraceHelper.GetFrames(Exception exception, AggregateException& error)
+   at Microsoft.Extensions.StackTrace.Sources.ExceptionDetailsProvider.GetStackFrames(Exception original)
+   at Microsoft.Extensions.StackTrace.Sources.ExceptionDetailsProvider.GetDetails(Exception exception)+MoveNext()
+   at Microsoft.AspNetCore.Diagnostics.RazorViews.ErrorPage.ExecuteAsync()
+   at Microsoft.Extensions.RazorViews.BaseView.ExecuteAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 16:09:35.230 +05:30 ERR] Connection id "0HNIVT4IIMDO2", Request id "0HNIVT4IIMDO2:00000001": An unhandled exception was thrown by the application.
+System.FormatException: on is not a valid value for Boolean.
+ ---> System.FormatException: String 'on' was not recognized as a valid Boolean.
+   at System.Boolean.Parse(String value)
+   at System.ComponentModel.BooleanConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   --- End of inner exception stack trace ---
+   at System.ComponentModel.BooleanConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingHelper.ConvertSimpleType(Object value, Type destinationType, CultureInfo culture)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GetModelStateValue(ViewContext viewContext, String key, Type destinationType)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GenerateInput(ViewContext viewContext, InputType inputType, ModelExplorer modelExplorer, String expression, Object value, Boolean useViewData, Boolean isChecked, Boolean setId, Boolean isExplicitValue, String format, IDictionary`2 htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GenerateCheckBox(ViewContext viewContext, ModelExplorer modelExplorer, String expression, Nullable`1 isChecked, Object htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.GenerateCheckBox(ModelExplorer modelExplorer, TagHelperOutput output, IDictionary`2 htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.Process(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.RunAsync(TagHelperExecutionContext executionContext)
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<<ExecuteAsync>b__21#8_2#8>d.MoveNext()
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.GetChildContentAsync(Boolean useCachedResult, HtmlEncoder encoder)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<<ExecuteAsync>b__21#8_1#8>d.MoveNext()
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<ExecuteAsync>d__21#8.MoveNext()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+[2026-01-30 16:12:01.236 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: on is not a valid value for Boolean.
+ ---> System.FormatException: String 'on' was not recognized as a valid Boolean.
+   at System.Boolean.Parse(String value)
+   at System.ComponentModel.BooleanConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   --- End of inner exception stack trace ---
+   at System.ComponentModel.BooleanConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingHelper.ConvertSimpleType(Object value, Type destinationType, CultureInfo culture)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GetModelStateValue(ViewContext viewContext, String key, Type destinationType)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GenerateInput(ViewContext viewContext, InputType inputType, ModelExplorer modelExplorer, String expression, Object value, Boolean useViewData, Boolean isChecked, Boolean setId, Boolean isExplicitValue, String format, IDictionary`2 htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GenerateCheckBox(ViewContext viewContext, ModelExplorer modelExplorer, String expression, Nullable`1 isChecked, Object htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.GenerateCheckBox(ModelExplorer modelExplorer, TagHelperOutput output, IDictionary`2 htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.Process(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.RunAsync(TagHelperExecutionContext executionContext)
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<<ExecuteAsync>b__21#8_2#8>d.MoveNext()
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.GetChildContentAsync(Boolean useCachedResult, HtmlEncoder encoder)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<<ExecuteAsync>b__21#8_1#8>d.MoveNext()
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<ExecuteAsync>d__21#8.MoveNext()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 16:12:02.142 +05:30 ERR] An exception was thrown attempting to display the error page.
+System.TypeLoadException: Could not resolve type 'TaxHelperToday.Pages.Admin.Pages_Admin_Login+<ExecuteAsync>d__21#8' in assembly 'TaxHelperToday, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+   at System.Reflection.TypeNameResolver.GetType(String escapedTypeName, ReadOnlySpan`1 nestedTypeNames, TypeName parsedName)
+   at System.Reflection.TypeNameResolver.Resolve(TypeName typeName)
+   at System.Reflection.TypeNameResolver.GetTypeHelper(Char* pTypeName, RuntimeAssembly requestingAssembly, Boolean throwOnError, Boolean requireAssemblyQualifiedName, IntPtr unsafeAccessorMethod)
+   at System.Reflection.CustomAttribute.<CreateCustomAttributeInstance>g____PInvoke|30_0(QCallModule __pModule_native, ObjectHandleOnStack __type_native, ObjectHandleOnStack __pCtor_native, IntPtr* __ppBlob_native, IntPtr __pEndBlob_native, Int32* __pcNamedArgs_native, ObjectHandleOnStack __instance_native)
+   at System.Reflection.CustomAttribute.AddCustomAttributes(ListBuilder`1& attributes, RuntimeModule decoratedModule, Int32 decoratedMetadataToken, RuntimeType attributeFilterType, Boolean mustBeInheritable, ListBuilder`1 derivedAttributes)
+   at System.Reflection.CustomAttribute.GetCustomAttributes(RuntimeMethodInfo method, RuntimeType caType, Boolean inherit)
+   at System.Reflection.CustomAttributeExtensions.GetCustomAttributes[T](MemberInfo element)
+   at Microsoft.Extensions.StackTrace.Sources.StackTraceHelper.TryResolveStateMachineMethod(MethodBase& method, Type& declaringType)
+   at Microsoft.Extensions.StackTrace.Sources.StackTraceHelper.GetMethodDisplayString(MethodBase method)
+   at Microsoft.Extensions.StackTrace.Sources.StackTraceHelper.GetFrames(Exception exception, AggregateException& error)
+   at Microsoft.Extensions.StackTrace.Sources.ExceptionDetailsProvider.GetStackFrames(Exception original)
+   at Microsoft.Extensions.StackTrace.Sources.ExceptionDetailsProvider.GetDetails(Exception exception)+MoveNext()
+   at Microsoft.AspNetCore.Diagnostics.RazorViews.ErrorPage.ExecuteAsync()
+   at Microsoft.Extensions.RazorViews.BaseView.ExecuteAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 16:12:02.387 +05:30 ERR] Connection id "0HNIVT4IIMDO4", Request id "0HNIVT4IIMDO4:00000001": An unhandled exception was thrown by the application.
+System.FormatException: on is not a valid value for Boolean.
+ ---> System.FormatException: String 'on' was not recognized as a valid Boolean.
+   at System.Boolean.Parse(String value)
+   at System.ComponentModel.BooleanConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   --- End of inner exception stack trace ---
+   at System.ComponentModel.BooleanConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingHelper.ConvertSimpleType(Object value, Type destinationType, CultureInfo culture)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GetModelStateValue(ViewContext viewContext, String key, Type destinationType)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GenerateInput(ViewContext viewContext, InputType inputType, ModelExplorer modelExplorer, String expression, Object value, Boolean useViewData, Boolean isChecked, Boolean setId, Boolean isExplicitValue, String format, IDictionary`2 htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.DefaultHtmlGenerator.GenerateCheckBox(ViewContext viewContext, ModelExplorer modelExplorer, String expression, Nullable`1 isChecked, Object htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.GenerateCheckBox(ModelExplorer modelExplorer, TagHelperOutput output, IDictionary`2 htmlAttributes)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.Process(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.RunAsync(TagHelperExecutionContext executionContext)
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<<ExecuteAsync>b__21#8_2#8>d.MoveNext()
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.GetChildContentAsync(Boolean useCachedResult, HtmlEncoder encoder)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<<ExecuteAsync>b__21#8_1#8>d.MoveNext()
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at TaxHelperToday.Pages.Admin.Pages_Admin_Login#8.<ExecuteAsync>d__21#8.MoveNext()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+[2026-01-30 16:12:30.342 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 16:12:32.983 +05:30 INF] Database connection verified
+[2026-01-30 16:12:33.660 +05:30 INF] Starting data seeding...
+[2026-01-30 16:12:33.725 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 16:12:33.744 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 16:12:33.767 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 16:12:33.787 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 16:12:33.787 +05:30 INF] Data seeding completed successfully
+[2026-01-30 16:12:33.796 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 16:13:17.518 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 16:16:10.032 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 16:20:08.201 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 16:20:11.988 +05:30 INF] Database connection verified
+[2026-01-30 16:20:13.488 +05:30 INF] Starting data seeding...
+[2026-01-30 16:20:13.608 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 16:20:13.632 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 16:20:13.664 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 16:20:13.682 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 16:20:13.682 +05:30 INF] Data seeding completed successfully
+[2026-01-30 16:20:13.698 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 16:20:17.281 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 16:32:30.577 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 16:38:07.681 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 16:38:11.320 +05:30 INF] Database connection verified
+[2026-01-30 16:38:12.233 +05:30 INF] Starting data seeding...
+[2026-01-30 16:38:12.284 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 16:38:12.303 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 16:38:12.319 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 16:38:12.347 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 16:38:12.347 +05:30 INF] Data seeding completed successfully
+[2026-01-30 16:38:12.355 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 16:38:30.661 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 16:38:33.392 +05:30 INF] Database connection verified
+[2026-01-30 16:38:34.661 +05:30 INF] Starting data seeding...
+[2026-01-30 16:38:34.716 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 16:38:34.740 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 16:38:34.750 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 16:38:34.766 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 16:38:34.766 +05:30 INF] Data seeding completed successfully
+[2026-01-30 16:38:34.778 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 16:38:48.807 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 16:44:24.390 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 16:44:27.075 +05:30 INF] Database connection verified
+[2026-01-30 16:44:27.925 +05:30 INF] Starting data seeding...
+[2026-01-30 16:44:28.019 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 16:44:28.040 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 16:44:28.051 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 16:44:28.066 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 16:44:28.067 +05:30 INF] Data seeding completed successfully
+[2026-01-30 16:44:28.083 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 16:44:30.954 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 16:45:03.515 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 16:45:06.167 +05:30 INF] Database connection verified
+[2026-01-30 16:45:07.281 +05:30 INF] Starting data seeding...
+[2026-01-30 16:45:07.359 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 16:45:07.383 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 16:45:07.402 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 16:45:07.415 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 16:45:07.415 +05:30 INF] Data seeding completed successfully
+[2026-01-30 16:45:07.426 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 16:45:24.575 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 16:50:15.678 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 16:54:02.598 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 16:54:05.715 +05:30 INF] Database connection verified
+[2026-01-30 16:54:07.330 +05:30 INF] Starting data seeding...
+[2026-01-30 16:54:07.415 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 16:54:07.440 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 16:54:07.472 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 16:54:07.495 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 16:54:07.495 +05:30 INF] Data seeding completed successfully
+[2026-01-30 16:54:07.507 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 16:54:12.603 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 17:01:05.422 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 17:01:09.497 +05:30 INF] Database connection verified
+[2026-01-30 17:01:10.553 +05:30 INF] Starting data seeding...
+[2026-01-30 17:01:10.608 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 17:01:10.626 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 17:01:10.644 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 17:01:10.658 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 17:01:10.658 +05:30 INF] Data seeding completed successfully
+[2026-01-30 17:01:10.662 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 17:01:21.475 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 17:01:47.728 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 17:01:50.311 +05:30 INF] Database connection verified
+[2026-01-30 17:01:51.487 +05:30 INF] Starting data seeding...
+[2026-01-30 17:01:51.560 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 17:01:51.579 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 17:01:51.595 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 17:01:51.606 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 17:01:51.607 +05:30 INF] Data seeding completed successfully
+[2026-01-30 17:01:51.615 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 17:04:05.373 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 17:06:20.776 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 17:15:57.834 +05:30 ERR] Error during logout for user System Administrator
+System.InvalidOperationException: The authentication handler registered for scheme 'Bearer' is 'JwtBearerHandler' which cannot be used for SignOutAsync. Did you forget to call AddAuthentication().AddCookie("Cookies") and SignOutAsync("Cookies",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.SignOutAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationServiceImpl.SignOutAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at TaxHelperToday.Pages.Admin.LogoutModel.OnPostAsync()
+[2026-01-30 17:16:00.574 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 17:19:13.213 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 17:19:33.177 +05:30 INF] Database connection verified
+[2026-01-30 17:19:34.981 +05:30 INF] Starting data seeding...
+[2026-01-30 17:19:35.022 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 17:19:35.035 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 17:19:35.048 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 17:19:35.057 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 17:19:35.057 +05:30 INF] Data seeding completed successfully
+[2026-01-30 17:19:35.061 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 17:19:36.888 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 17:48:53.319 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 17:48:55.214 +05:30 INF] Database connection verified
+[2026-01-30 17:48:55.691 +05:30 INF] Starting data seeding...
+[2026-01-30 17:48:55.741 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 17:48:55.756 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 17:48:55.768 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 17:48:55.782 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 17:48:55.783 +05:30 INF] Data seeding completed successfully
+[2026-01-30 17:48:55.790 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 17:49:20.062 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 17:53:39.411 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 17:55:11.001 +05:30 ERR] Error during logout for user System Administrator
+System.InvalidOperationException: The authentication handler registered for scheme 'Bearer' is 'JwtBearerHandler' which cannot be used for SignOutAsync. Did you forget to call AddAuthentication().AddCookie("Cookies") and SignOutAsync("Cookies",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.SignOutAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationServiceImpl.SignOutAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at TaxHelperToday.Pages.Admin.LogoutModel.OnPostAsync() in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\Pages\Admin\Logout.cshtml.cs:line 52
+[2026-01-30 17:55:19.454 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 17:55:20.742 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 17:55:39.837 +05:30 INF] User 1 revoked 13 active sessions
+[2026-01-30 17:56:02.214 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 18:01:21.329 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 18:01:24.200 +05:30 INF] Database connection verified
+[2026-01-30 18:01:24.760 +05:30 ERR] Failed executing DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u.id, u.created_at, u.email, u.email_verification_token, u.full_name, u.is_active, u.is_email_verified, u.last_login_at, u.password_hash, u.password_reset_expires, u.password_reset_token, u.phone, u.token_version, u.updated_at
+FROM users AS u
+WHERE u.email = 'admin@taxhelpertoday.com'
+LIMIT 1
+[2026-01-30 18:01:24.791 +05:30 ERR] An exception occurred while iterating over the results of a query for context type 'TaxHelperToday.Infrastructure.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:01:24.796 +05:30 ERR] Error connecting to database. Please ensure PostgreSQL is running and connection string is correct.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\Program.cs:line 166
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:01:24.843 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 18:02:04.657 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 18:02:11.501 +05:30 ERR] Failed executing DbCommand (17ms) [Parameters=[@p='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT u.id, u.created_at, u.email, u.email_verification_token, u.full_name, u.is_active, u.is_email_verified, u.last_login_at, u.password_hash, u.password_reset_expires, u.password_reset_token, u.phone, u.token_version, u.updated_at
+FROM users AS u
+WHERE u.id = @p
+LIMIT 1
+[2026-01-30 18:02:11.505 +05:30 ERR] An exception occurred while iterating over the results of a query for context type 'TaxHelperToday.Infrastructure.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:02:11.520 +05:30 ERR] An unhandled exception has occurred while executing the request.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context) in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\TaxHelperToday.Infrastructure\Middleware\JwtCookieMiddleware.cs:line 76
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:04:22.106 +05:30 ERR] Failed executing DbCommand (3ms) [Parameters=[@p='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT u.id, u.created_at, u.email, u.email_verification_token, u.full_name, u.is_active, u.is_email_verified, u.last_login_at, u.password_hash, u.password_reset_expires, u.password_reset_token, u.phone, u.token_version, u.updated_at
+FROM users AS u
+WHERE u.id = @p
+LIMIT 1
+[2026-01-30 18:04:22.499 +05:30 ERR] An exception occurred while iterating over the results of a query for context type 'TaxHelperToday.Infrastructure.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:04:22.806 +05:30 ERR] An unhandled exception has occurred while executing the request.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context) in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\TaxHelperToday.Infrastructure\Middleware\JwtCookieMiddleware.cs:line 76
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:04:26.341 +05:30 ERR] Failed executing DbCommand (2ms) [Parameters=[@p='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT u.id, u.created_at, u.email, u.email_verification_token, u.full_name, u.is_active, u.is_email_verified, u.last_login_at, u.password_hash, u.password_reset_expires, u.password_reset_token, u.phone, u.token_version, u.updated_at
+FROM users AS u
+WHERE u.id = @p
+LIMIT 1
+[2026-01-30 18:04:26.353 +05:30 ERR] An exception occurred while iterating over the results of a query for context type 'TaxHelperToday.Infrastructure.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:04:26.368 +05:30 ERR] An unhandled exception has occurred while executing the request.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context) in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\TaxHelperToday.Infrastructure\Middleware\JwtCookieMiddleware.cs:line 76
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:05:11.222 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 18:05:12.975 +05:30 INF] Database connection verified
+[2026-01-30 18:05:13.489 +05:30 ERR] Failed executing DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u.id, u.created_at, u.email, u.email_verification_token, u.full_name, u.is_active, u.is_email_verified, u.last_login_at, u.password_hash, u.password_reset_expires, u.password_reset_token, u.phone, u.token_version, u.updated_at
+FROM users AS u
+WHERE u.email = 'admin@taxhelpertoday.com'
+LIMIT 1
+[2026-01-30 18:05:13.531 +05:30 ERR] An exception occurred while iterating over the results of a query for context type 'TaxHelperToday.Infrastructure.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:05:13.573 +05:30 ERR] Error connecting to database. Please ensure PostgreSQL is running and connection string is correct.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\Program.cs:line 166
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:05:13.596 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 18:12:46.916 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 18:12:48.116 +05:30 INF] Database connection verified
+[2026-01-30 18:12:48.415 +05:30 ERR] Failed executing DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u.id, u.created_at, u.email, u.email_verification_token, u.full_name, u.is_active, u.is_email_verified, u.last_login_at, u.password_hash, u.password_reset_expires, u.password_reset_token, u.phone, u.token_version, u.updated_at
+FROM users AS u
+WHERE u.email = 'admin@taxhelpertoday.com'
+LIMIT 1
+[2026-01-30 18:12:48.433 +05:30 ERR] An exception occurred while iterating over the results of a query for context type 'TaxHelperToday.Infrastructure.Data.ApplicationDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:12:48.453 +05:30 ERR] Error connecting to database. Please ensure PostgreSQL is running and connection string is correct.
+Npgsql.PostgresException (0x80004005): 42703: column u.token_version does not exist
+
+POSITION: 205
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\Program.cs:line 166
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column u.token_version does not exist
+    Position: 205
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+[2026-01-30 18:12:48.482 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 18:13:52.820 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 18:13:54.364 +05:30 INF] Database connection verified
+[2026-01-30 18:13:54.761 +05:30 INF] Seeded default roles
+[2026-01-30 18:13:55.311 +05:30 INF] Created default admin user: admin@taxhelpertoday.com / Admin@123
+[2026-01-30 18:13:55.316 +05:30 INF] Starting data seeding...
+[2026-01-30 18:13:55.404 +05:30 INF] Seeded 6 services
+[2026-01-30 18:13:55.637 +05:30 INF] Seeded 4 blog posts
+[2026-01-30 18:13:55.685 +05:30 INF] Seeded 16 FAQs
+[2026-01-30 18:13:55.715 +05:30 INF] Seeded 2 pages
+[2026-01-30 18:13:55.715 +05:30 INF] Data seeding completed successfully
+[2026-01-30 18:13:55.718 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 18:14:40.776 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 18:15:14.966 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 18:15:24.529 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 18:15:30.744 +05:30 INF] User 1 revoked 2 active sessions
+[2026-01-30 18:18:40.159 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 18:18:44.200 +05:30 INF] Database connection verified
+[2026-01-30 18:18:45.485 +05:30 INF] Starting data seeding...
+[2026-01-30 18:18:45.660 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 18:18:45.687 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 18:18:45.715 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 18:18:45.742 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 18:18:45.742 +05:30 INF] Data seeding completed successfully
+[2026-01-30 18:18:45.755 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 18:18:46.026 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 18:19:42.168 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 18:19:42.166 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 18:20:00.202 +05:30 INF] User 1 revoked 2 active sessions
+[2026-01-30 18:20:11.481 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 18:20:24.239 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 18:20:34.833 +05:30 INF] User 1 revoked 2 active sessions
+[2026-01-30 18:20:59.960 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 18:27:04.127 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 18:27:05.769 +05:30 INF] Database connection verified
+[2026-01-30 18:27:06.517 +05:30 INF] Starting data seeding...
+[2026-01-30 18:27:06.570 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 18:27:06.585 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 18:27:06.602 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 18:27:06.619 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 18:27:06.619 +05:30 INF] Data seeding completed successfully
+[2026-01-30 18:27:06.627 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 18:27:19.614 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 18:34:52.850 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentOutOfRangeException: Token 2000000 is not valid in the scope of module System.ModuleHandle. (Parameter 'typeToken')
+   at System.ModuleHandle.ResolveTypeHandle(Int32 typeToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+   at Microsoft.Extensions.Internal.PropertyActivator`1.<>c__DisplayClass11_0.<GetActivatableProperties>b__0(PropertyInfo property)
+   at System.Linq.Enumerable.ArrayWhereSelectIterator`2.ToArray()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator..ctor(Type pageType, Type declaredModelType, IModelMetadataProvider metadataProvider, PropertyValueAccessors propertyValueAccessors)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageFactoryProvider.CreatePageFactory(CompiledPageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.CreateCacheEntry(CompiledPageActionDescriptor compiledActionDescriptor, FilterItem[] cachedFilters)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.GetCachedResult(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageRequestDelegateFactory.<>c__DisplayClass13_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-01-30 18:37:24.056 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 18:37:55.849 +05:30 INF] Database connection verified
+[2026-01-30 18:38:06.829 +05:30 INF] Starting data seeding...
+[2026-01-30 18:38:09.173 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 18:38:09.208 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 18:38:09.240 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 18:38:09.297 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 18:38:09.297 +05:30 INF] Data seeding completed successfully
+[2026-01-30 18:38:09.307 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 18:38:33.820 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 18:39:54.157 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 18:45:59.711 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 18:46:00.896 +05:30 INF] Database connection verified
+[2026-01-30 18:46:01.296 +05:30 INF] Starting data seeding...
+[2026-01-30 18:46:01.327 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 18:46:01.336 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 18:46:01.350 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 18:46:01.357 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 18:46:01.357 +05:30 INF] Data seeding completed successfully
+[2026-01-30 18:46:01.360 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 18:46:03.093 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-01-30 19:01:27.517 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-01-30 19:04:00.157 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 19:04:03.309 +05:30 INF] Database connection verified
+[2026-01-30 19:04:03.756 +05:30 INF] Starting data seeding...
+[2026-01-30 19:04:03.794 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 19:04:03.805 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 19:04:03.813 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 19:04:03.820 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 19:04:03.821 +05:30 INF] Data seeding completed successfully
+[2026-01-30 19:04:03.826 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 19:13:27.143 +05:30 WRN] Failed to determine the https port for redirect.

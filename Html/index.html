@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaxHelperToday | Smart Tax Compliance & Planning</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="home">
+  <!-- Top Promotional Banner with Deadline -->
+  <section class="promo-banner">
+    <div class="container">
+      <div class="promo-banner-content">
+        <span class="promo-icon">⏰</span>
+        <div class="promo-text">
+          <strong>ITR Filing Deadline Approaching!</strong>
+          <span>The deadline is in <span id="deadline-countdown">30 days</span>. File now to avoid penalties and maximize your refund. <span class="promo-support">Need help? Call <a href="tel:+918910397497">+91-89103-97497</a> or email <a href="mailto:mrhoque64@gmail.com">mrhoque64@gmail.com</a>.</span></span>
+        </div>
+        <a href="contact.html" class="btn btn-primary btn-small">File ITR Now</a>
+      </div>
+    </div>
+  </section>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/img/logo.png" alt="TaxHelperToday Logo">
+        <span class="logo-text">
+          <span class="logo-title">TaxHelperToday</span>
+          <span class="logo-subtitle">Compliance. Clarity. Confidence.</span>
+        </span>
+      </a>
+      <nav class="main-nav">
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="has-dropdown">
+            <span class="nav-link-parent">Services</span>
+            <ul class="dropdown-menu">
+              <li class="dropdown-section">
+                <span class="dropdown-heading">Income Tax</span>
+                <ul>
+                  <li><a href="service-detail.html?id=itr-individual">Individual ITR Filing</a></li>
+                  <li><a href="service-detail.html?id=itr-business">Business &amp; Professional ITR</a></li>
+                  <li><a href="service-detail.html?id=tax-planning">Year-Round Tax Planning</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-section">
+                <span class="dropdown-heading">GST &amp; TDS</span>
+                <ul>
+                  <li><a href="service-detail.html?id=gst-compliance">GST Registration &amp; Returns</a></li>
+                  <li><a href="service-detail.html?id=tds-compliance">TDS &amp; TCS Compliance</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-section">
+                <span class="dropdown-heading">Support</span>
+                <ul>
+                  <li><a href="service-detail.html?id=notice-management">Notice Response &amp; Representation</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="contact.html" class="btn btn-primary header-cta">Get Expert Help</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-background"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">India's Trusted CA-Led Tax Companion</p>
+          <h1>File taxes with confidence, not confusion.</h1>
+          <p class="hero-subtitle">
+            TaxHelperToday blends Chartered Accountant expertise with smart tools to help
+            you stay compliant, minimise tax outgo, and respond to notices without stress.
+          </p>
+          <div class="hero-actions">
+            <a href="contact.html" class="btn btn-primary btn-large">Start Your Tax Journey</a>
+            <a href="#services" class="btn btn-outline btn-large">Explore Services</a>
+          </div>
+          <div class="hero-trust-badges">
+            <div class="trust-badge-item">
+              <span class="trust-icon">⭐</span>
+              <div>
+                <strong>4.9/5</strong>
+                <span>From 6,800+ Reviews</span>
+              </div>
+            </div>
+            <div class="trust-badge-item">
+              <span class="trust-icon">✓</span>
+              <div>
+                <strong>100%</strong>
+                <span>Accuracy Guarantee</span>
+              </div>
+            </div>
+            <div class="trust-badge-item">
+              <span class="trust-icon">👥</span>
+              <div>
+                <strong>1M+</strong>
+                <span>Trusted Users</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-metric-row">
+            <div class="metric">
+              <span class="metric-value" data-metric="clients">0</span>+
+              <span class="metric-label">Individuals & Businesses Guided</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value" data-metric="savings">0</span>L+
+              <span class="metric-label">Tax Savings Identified</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value" data-metric="years">0</span>+
+              <span class="metric-label">Years of CA Experience</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <span class="card-badge">Free Consultation</span>
+            </div>
+            <h2>Get a Free Compliance Health Check</h2>
+            <p class="hero-card-text">
+              Share a few details and our team will review your tax position for missed
+              deductions, compliance gaps, and upcoming deadlines.
+            </p>
+            <form class="mini-enquiry" id="mini-enquiry">
+              <div class="field">
+                <label for="mini-name">Full Name</label>
+                <input type="text" id="mini-name" name="name" required>
+              </div>
+              <div class="field">
+                <label for="mini-email">Email</label>
+                <input type="email" id="mini-email" name="email" required>
+              </div>
+              <div class="field">
+                <label for="mini-type">You are a</label>
+                <select id="mini-type" name="type" required>
+                  <option value="">Select</option>
+                  <option value="salaried">Salaried Individual</option>
+                  <option value="business">Business Owner</option>
+                  <option value="professional">Professional / Freelancer</option>
+                  <option value="nri">NRI</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Request Callback</button>
+              <p class="form-note">No spam. A qualified expert will contact you within 24 hours.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics Banner -->
+    <section class="stats-banner">
+      <div class="container">
+        <header class="stats-heading">
+          <p class="eyebrow">Proven Track Record</p>
+          <h2>Numbers that show how we help taxpayers succeed.</h2>
+          <p class="section-subtitle">
+            From first-time filers to growing businesses, TaxHelperToday combines expert guidance and robust processes
+            to consistently deliver better outcomes.
+          </p>
+        </header>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+              <div class="stat-value">1M+</div>
+              <div class="stat-label">Trusted Users</div>
+              <div class="stat-desc">Individuals, freelancers & businesses across India</div>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">💰</div>
+            <div class="stat-content">
+              <div class="stat-value">94%</div>
+              <div class="stat-label">Average Tax Savings</div>
+              <div class="stat-desc">Clients who pay less tax versus their earlier filings</div>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-content">
+              <div class="stat-value">24hr</div>
+              <div class="stat-label">Fast Filing</div>
+              <div class="stat-desc">Most returns prepared & filed within one working day</div>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">🎓</div>
+            <div class="stat-content">
+              <div class="stat-value">3000+</div>
+              <div class="stat-label">Tax Experts</div>
+              <div class="stat-desc">Experienced CAs and tax professionals on our network</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promotional CTA Banner -->
+    <section class="cta-banner">
+      <div class="container">
+        <div class="cta-banner-content">
+          <div class="cta-text">
+            <h2>File ITR in Just 3 Minutes</h2>
+            <p>Get expert-assisted tax filing with 365 days support. Free notice compliance included.</p>
+          </div>
+          <a href="contact.html" class="btn btn-primary btn-large">Start Filing Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section section-how-it-works">
+      <div class="container">
+        <header class="section-heading">
+          <p class="eyebrow">Simple Process</p>
+          <h2>File your ITR in 4 simple steps</h2>
+          <p class="section-subtitle">
+            Our streamlined process makes tax filing quick, easy, and stress-free.
+          </p>
+        </header>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <div class="step-icon">📝</div>
+            <h3>Answer Simple Questions</h3>
+            <p>Just a few minutes to share your tax details online. We'll handle the rest.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <div class="step-icon">👨‍💼</div>
+            <h3>Meet Your CA Expert</h3>
+            <p>Get matched with a qualified Chartered Accountant who reviews your return.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <div class="step-icon">✅</div>
+            <h3>Review & Optimize</h3>
+            <p>We maximize your deductions and ensure 100% accuracy before filing.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <div class="step-icon">📤</div>
+            <h3>File & Get Refund</h3>
+            <p>Your ITR is filed securely with the Income Tax Department. Track your refund.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-why">
+      <div class="container">
+        <header class="section-heading">
+          <p class="eyebrow">Why TaxHelperToday</p>
+          <h2>Made for Indians who want peace of mind at tax time.</h2>
+          <p class="section-subtitle">
+            From salaried employees to high-growth startups, we combine CA-led oversight,
+            structured checklists, and technology to get your filings right the first time.
+          </p>
+        </header>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">👨‍💼</div>
+            <h3>CA-Led, Not Bot-Led</h3>
+            <p>
+              Every return and compliance review is prepared or reviewed by an experienced
+              Chartered Accountant who understands Indian tax law in depth.
+            </p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">📅</div>
+            <h3>Planned, Not Last-Minute</h3>
+            <p>
+              We help you plan investments and deductions across the year so that tax season
+              is about filing, not firefighting.
+            </p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Transparent, Flat Pricing</h3>
+            <p>
+              Clearly defined plans for individuals, professionals, and businesses. No surprise
+              add-ons, no confusing fine print.
+            </p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">📋</div>
+            <h3>Notice-Ready Documentation</h3>
+            <p>
+              We maintain a clean documentation trail so that if a notice arrives, you already
+              have the data and expert support to respond quickly.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Plans Section -->
+    <section class="section section-pricing section-alt">
+      <div class="container">
+        <header class="section-heading">
+          <p class="eyebrow">Transparent Pricing</p>
+          <h2>Choose the plan that fits your needs</h2>
+          <p class="section-subtitle">
+            All plans include expert CA review and 100% accuracy guarantee.
+          </p>
+        </header>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>Essential</h3>
+              <div class="pricing-amount">
+                <span class="currency">₹</span>
+                <span class="price">999</span>
+                <span class="period">/year</span>
+              </div>
+              <p class="pricing-description">Perfect for salaried individuals</p>
+            </div>
+            <ul class="pricing-features">
+              <li>✓ ITR filing by CA expert</li>
+              <li>✓ Tax optimization</li>
+              <li>✓ Accuracy guarantee</li>
+              <li>✓ Form 16 import</li>
+              <li>✓ E-verification support</li>
+            </ul>
+            <a href="contact.html" class="btn btn-outline btn-block">Get Started</a>
+          </div>
+          <div class="pricing-card pricing-card-featured">
+            <div class="pricing-badge">Most Popular</div>
+            <div class="pricing-header">
+              <h3>Professional</h3>
+              <div class="pricing-amount">
+                <span class="currency">₹</span>
+                <span class="price">2,499</span>
+                <span class="period">/year</span>
+              </div>
+              <p class="pricing-description">Best for freelancers & professionals</p>
+            </div>
+            <ul class="pricing-features">
+              <li>✓ Everything in Essential</li>
+              <li>✓ Multiple income sources</li>
+              <li>✓ Capital gains handling</li>
+              <li>✓ HRA optimization</li>
+              <li>✓ Investment planning support</li>
+              <li>✓ Priority CA support</li>
+            </ul>
+            <a href="contact.html" class="btn btn-primary btn-block">Get Started</a>
+          </div>
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>Business</h3>
+              <div class="pricing-amount">
+                <span class="currency">₹</span>
+                <span class="price">4,999</span>
+                <span class="period">/year</span>
+              </div>
+              <p class="pricing-description">Complete solution for businesses</p>
+            </div>
+            <ul class="pricing-features">
+              <li>✓ Everything in Professional</li>
+              <li>✓ GST filing support</li>
+              <li>✓ TDS return filing</li>
+              <li>✓ Business tax planning</li>
+              <li>✓ Dedicated CA support</li>
+              <li>✓ Year-round consultation</li>
+            </ul>
+            <a href="contact.html" class="btn btn-outline btn-block">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-trust">
+      <div class="container trust-grid">
+        <div>
+          <header class="section-heading">
+            <p class="eyebrow">Trust & Security</p>
+            <h2>Your data, handled like your signature.</h2>
+          </header>
+          <p>
+            TaxHelperToday follows strict confidentiality protocols, multi-factor verification for
+            sensitive actions, and secure storage so that your financial data stays protected.
+          </p>
+          <ul class="trust-list">
+            <li>Bank-grade encryption for document uploads</li>
+            <li>Access controlled team workspaces</li>
+            <li>Audit-ready logs of filings and approvals</li>
+          </ul>
+          <a href="trust-safety.html" class="link-inline">Learn more about Trust &amp; Safety</a>
+        </div>
+        <div class="trust-panel">
+          <div class="trust-badge">
+            <span class="trust-badge-label">Designed for</span>
+            <span class="trust-badge-title">Zero Surprise Notices</span>
+          </div>
+          <p class="trust-text">
+            Clean records, timely filings, and proactive corrections reduce the chances of avoidable
+            tax notices and stressful follow-ups.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section section-testimonials">
+      <div class="container">
+        <header class="section-heading">
+          <p class="eyebrow">Customer Reviews</p>
+          <h2>Trusted by thousands of taxpayers</h2>
+          <p class="section-subtitle">
+            See what our customers say about their experience with TaxHelperToday.
+          </p>
+        </header>
+        <div class="testimonials-slider-wrapper">
+          <button class="slider-arrow slider-arrow-left" aria-label="Previous testimonial">‹</button>
+          <div class="testimonials-slider">
+            <div class="testimonials-track">
+              <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Excellent service! My CA was very professional and helped me save ₹45,000 in taxes. The entire process was smooth and stress-free."</p>
+                <div class="testimonial-author">
+                  <strong>Rajesh Kumar</strong>
+                  <span>Software Engineer, Bangalore</span>
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"I've been using TaxHelperToday for 3 years now. They handle everything - from filing to responding to notices. Highly recommended!"</p>
+                <div class="testimonial-author">
+                  <strong>Priya Sharma</strong>
+                  <span>Freelancer, Mumbai</span>
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Fast turnaround, great support team, and my refund was processed quickly. Will definitely use their services again next year."</p>
+                <div class="testimonial-author">
+                  <strong>Amrit Singh</strong>
+                  <span>Business Owner, Delhi</span>
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"As an NRI, tax filing was always complicated for me. TaxHelperToday made it so simple and their CA explained everything clearly. Worth every rupee!"</p>
+                <div class="testimonial-author">
+                  <strong>Vikram Mehta</strong>
+                  <span>NRI, Dubai</span>
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Received a tax notice and was worried. Their team helped me respond within 2 days and resolved it completely. Professional and reliable service!"</p>
+                <div class="testimonial-author">
+                  <strong>Anjali Reddy</strong>
+                  <span>Marketing Manager, Hyderabad</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="slider-arrow slider-arrow-right" aria-label="Next testimonial">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Proposition Banner -->
+    <section class="section value-banner section-alt">
+      <div class="container">
+        <header class="section-heading">
+          <p class="eyebrow">What We Guarantee</p>
+          <h2>What sets TaxHelperToday apart</h2>
+        </header>
+        <div class="value-banner-grid">
+          <div class="value-item">
+            <div class="value-icon">✅</div>
+            <h3>97.4% Get It Right First Time</h3>
+            <p>Expert-assisted ITR filing ensures accuracy on the first attempt</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🆓</div>
+            <h3>No Hidden Charges</h3>
+            <p>Fully transparent pricing with no surprise fees</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">📞</div>
+            <h3>24/7 Expert Support</h3>
+            <p>Year-round query resolution and notice management</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img src="assets/img/logo.png" alt="TaxHelperToday Logo">
+          <span class="logo-text">
+            <span class="logo-title">TaxHelperToday</span>
+            <span class="logo-subtitle">CA-Led Tax Compliance</span>
+          </span>
+        </a>
+        <p class="footer-copy">
+          TaxHelperToday is an independent tax and compliance advisory platform. We help individuals
+          and businesses understand and meet their obligations under Indian tax laws.
+        </p>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="trust-safety.html">Trust &amp; Safety</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© <span id="current-year"></span> TaxHelperToday. All rights reserved.</p>
+        <p class="footer-note">
+          Designed and Developed by <a href="https://equitechsoftwares.com/" target="_blank" rel="noopener noreferrer">Equitech Softwares</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+

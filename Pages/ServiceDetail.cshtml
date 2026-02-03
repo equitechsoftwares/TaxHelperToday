@@ -1,0 +1,190 @@
+@page
+@model ServiceDetailModel
+@{
+    ViewData["Title"] = Model.Service?.Name ?? "Service Details";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+  <div class="container" style="margin-top: 20px;">
+    <div class="message-banner" style="background: #27b46a; color: white; padding: 16px; border-radius: 8px; margin-bottom: 20px; position: relative; display: flex; align-items: center; justify-content: space-between; transition: opacity 0.3s ease-out;">
+      <span>@TempData["SuccessMessage"]</span>
+      <button type="button" class="message-close-btn" style="background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 0; margin-left: 16px; line-height: 1; opacity: 0.8; transition: opacity 0.2s;" aria-label="Close">×</button>
+    </div>
+  </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+  <div class="container" style="margin-top: 20px;">
+    <div class="message-banner" style="background: #d34b4b; color: white; padding: 16px; border-radius: 8px; margin-bottom: 20px; position: relative; display: flex; align-items: center; justify-content: space-between; transition: opacity 0.3s ease-out;">
+      <span>@TempData["ErrorMessage"]</span>
+      <button type="button" class="message-close-btn" style="background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 0; margin-left: 16px; line-height: 1; opacity: 0.8; transition: opacity 0.2s;" aria-label="Close">×</button>
+    </div>
+  </div>
+}
+
+@if (Model.Service != null)
+{
+  <section class="section">
+    <div class="container">
+      <div class="service-detail-container">
+        <div class="service-detail-header">
+          <div class="service-detail-meta">
+            @if (!string.IsNullOrEmpty(Model.Service.Type))
+            {
+              <span class="service-detail-type">@Model.Service.Type</span>
+            }
+            @if (!string.IsNullOrEmpty(Model.Service.Level))
+            {
+              <span class="service-detail-level">📊 @Model.Service.Level</span>
+            }
+          </div>
+          
+          <h1>@Model.Service.Name</h1>
+          
+          @if (!string.IsNullOrEmpty(Model.Service.Highlight))
+          {
+            <p class="service-detail-highlight">@Model.Service.Highlight</p>
+          }
+        </div>
+        
+        @if (!string.IsNullOrEmpty(Model.Service.Description))
+        {
+          <div class="service-detail-content">
+            <p>@Model.Service.Description</p>
+          </div>
+        }
+        
+        @if (!string.IsNullOrEmpty(Model.Service.Content))
+        {
+          <div class="service-detail-content">
+            @Html.Raw(Model.Service.Content)
+          </div>
+        }
+        
+        <div class="service-detail-footer">
+          <a href="/Contact" class="btn btn-primary">Get Expert Help</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="section section-alt" id="service-contact-section">
+    <div class="container">
+      <div class="service-contact-wrapper">
+        <div class="service-contact-header">
+          @if (!string.IsNullOrEmpty(Model.Service?.EnquiryTitle))
+          {
+            <h2>@Model.Service.EnquiryTitle</h2>
+          }
+          @if (!string.IsNullOrEmpty(Model.Service?.EnquirySubtitle))
+          {
+            <p>@Model.Service.EnquirySubtitle</p>
+          }
+        </div>
+        <div class="service-contact-form-card">
+          @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+          {
+            <div class="alert alert-success" role="alert">
+              @Model.SuccessMessage
+            </div>
+          }
+          @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+          {
+            <div class="alert alert-danger" role="alert">
+              @Model.ErrorMessage
+            </div>
+          }
+          <form id="service-contact-form" class="form-modern" method="post">
+            <input type="hidden" name="slug" value="@Model.Service.Slug" />
+            <div class="field">
+              <label for="service-contact-name">Full Name</label>
+              <input type="text" id="service-contact-name" name="name" required>
+            </div>
+            <div class="field">
+              <label for="service-contact-email">Email</label>
+              <input type="email" id="service-contact-email" name="email" required>
+            </div>
+            <div class="field">
+              <label for="service-contact-phone">Mobile Number</label>
+              <input type="tel" id="service-contact-phone" name="phone" pattern="[0-9]{10}" placeholder="10-digit mobile number">
+            </div>
+            <div class="field">
+              <label for="service-contact-service">Service Interested In</label>
+              <input type="text" id="service-contact-service" name="service" value="@Model.Service.Name" readonly>
+            </div>
+            <div class="field">
+              <label for="service-contact-message">How can we help?</label>
+              <textarea id="service-contact-message" name="message" rows="5" placeholder="Tell us about your requirements or any specific questions..." required></textarea>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Service?.EnquiryButtonText))
+            {
+              <button type="submit" class="btn btn-primary btn-block">@Model.Service.EnquiryButtonText</button>
+            }
+            else
+            {
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            }
+            @if (!string.IsNullOrEmpty(Model.Service?.EnquiryNote))
+            {
+              <p class="form-note">
+                @Model.Service.EnquiryNote
+              </p>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+}
+else
+{
+  <section class="section">
+    <div class="container">
+      <div class="service-detail-error">
+        <div class="empty-icon">📋</div>
+        <h3>Service not found</h3>
+        <p>The service you're looking for doesn't exist or has been removed.</p>
+        <a href="/" class="btn btn-primary">Back to Home</a>
+      </div>
+    </div>
+  </section>
+}
+
+@section Scripts {
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const messageBanners = document.querySelectorAll('.message-banner');
+    
+    messageBanners.forEach(function(banner) {
+      // Auto-hide after 5 seconds
+      const autoHideTimer = setTimeout(function() {
+        hideBanner(banner);
+      }, 5000);
+      
+      // Close button click handler
+      const closeBtn = banner.querySelector('.message-close-btn');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+          clearTimeout(autoHideTimer);
+          hideBanner(banner);
+        });
+        closeBtn.addEventListener('mouseenter', function() {
+          this.style.opacity = '1';
+        });
+        closeBtn.addEventListener('mouseleave', function() {
+          this.style.opacity = '0.8';
+        });
+      }
+    });
+    
+    function hideBanner(banner) {
+      banner.style.opacity = '0';
+      setTimeout(function() {
+        banner.style.display = 'none';
+      }, 300);
+    }
+  });
+</script>
+}

@@ -1,0 +1,87 @@
+@page
+@model BlogsModel
+@{
+    ViewData["Title"] = "Blogs & Guides";
+}
+
+<section class="page-hero-modern">
+  <div class="hero-background"></div>
+  <div class="container">
+    @if (!string.IsNullOrEmpty(Model.HeroEyebrow))
+    {
+      <p class="eyebrow">@Model.HeroEyebrow</p>
+    }
+    @if (!string.IsNullOrEmpty(Model.HeroTitle))
+    {
+      <h1>@Html.Raw(Model.HeroTitle)</h1>
+    }
+    @if (!string.IsNullOrEmpty(Model.HeroText))
+    {
+      <p class="page-hero-text">
+        @Html.Raw(Model.HeroText)
+      </p>
+    }
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="blog-search-section">
+      <div class="blog-categories-wrapper">
+        <p class="filter-label">Filter by category:</p>
+        <div class="filter-pill-group" id="blog-category-filters">
+          <a href="/Blogs" class="filter-pill @(string.IsNullOrEmpty(Request.Query["category"]) ? "is-active" : "")">All</a>
+          @foreach (var cat in Model.Categories)
+          {
+            <a href="/Blogs?category=@Uri.EscapeDataString(cat)" class="filter-pill @(Request.Query["category"] == cat ? "is-active" : "")">@cat</a>
+          }
+        </div>
+      </div>
+    </div>
+    
+    @if (Model.BlogPosts.Any())
+    {
+      <div class="card-grid card-grid-blogs">
+        @foreach (var blog in Model.BlogPosts)
+        {
+          <article class="card">
+            <div class="card-meta">
+              @if (!string.IsNullOrEmpty(blog.Category))
+              {
+                @blog.Category
+              }
+              @if (blog.Tags != null && blog.Tags.Any())
+              {
+                @if (!string.IsNullOrEmpty(blog.Category))
+                {
+                  <text> · </text>
+                }
+                @string.Join(" · ", blog.Tags)
+              }
+            </div>
+            <h3>@blog.Title</h3>
+            @if (!string.IsNullOrEmpty(blog.Excerpt))
+            {
+              <p>@blog.Excerpt</p>
+            }
+            <div class="card-footer">
+              @if (!string.IsNullOrEmpty(blog.ReadTime))
+              {
+                <span>@blog.ReadTime</span>
+              }
+              <a href="/BlogDetail?slug=@blog.Slug" class="link-inline">Read</a>
+            </div>
+          </article>
+        }
+      </div>
+    }
+    else
+    {
+      <div class="blog-empty-state">
+        <div class="empty-icon">📚</div>
+        <h3>No blogs found</h3>
+        <p>Try adjusting your search or filter criteria.</p>
+      </div>
+    }
+  </div>
+</section>

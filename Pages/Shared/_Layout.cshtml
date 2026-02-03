@@ -1,0 +1,35 @@
+﻿@{
+    var pageValue = ViewContext.RouteData.Values["page"]?.ToString()?.ToLower().Replace("/", "") ?? "home";
+    if (pageValue == "index" || pageValue == "") pageValue = "home";
+    if (pageValue == "blogdetail") pageValue = "blog-detail";
+    if (pageValue == "servicedetail") pageValue = "service-detail";
+    if (pageValue == "privacypolicy") pageValue = "privacy";
+    if (pageValue == "termsconditions") pageValue = "terms";
+    if (pageValue == "trustsafety") pageValue = "trust-safety";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@(ViewData["Title"] != null ? ViewData["Title"] + " - " : "")TaxHelperToday | Smart Tax Compliance & Planning</title>
+
+    <link rel="icon" type="image/png" href="~/img/logo.png" asp-append-version="true" />
+    <link rel="shortcut icon" type="image/png" href="~/img/logo.png" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+</head>
+<body data-page="@pageValue">
+    @await Html.PartialAsync("_Header")
+
+    <main>
+        @RenderBody()
+    </main>
+
+    @await Html.PartialAsync("_Footer")
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,242 @@
+@page
+@model TaxHelperToday.Pages.Admin.Contact.EnquiriesModel
+@{
+    ViewData["Title"] = "Contact Enquiries";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Contact Enquiries</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Contact</a></li>
+                    <li class="breadcrumb-item active">Enquiries</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">All Contact Enquiries</h3>
+                    </div>
+                    <div class="card-body">
+                        <table id="enquiriesTable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Sln</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Subject</th>
+                                    <th>Type</th>
+                                    <th>Service</th>
+                                    <th>Status</th>
+                                    <th>Assigned To</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int sln = 1; }
+                                @foreach (var enquiry in Model.Enquiries)
+                                {
+                                    <tr>
+                                        <td>@(sln++)</td>
+                                        <td>@enquiry.Name</td>
+                                        <td>@enquiry.Email</td>
+                                        <td>@(enquiry.Phone ?? "-")</td>
+                                        <td>@(enquiry.Subject ?? "No Subject")</td>
+                                        <td>@(enquiry.EnquiryType ?? "-")</td>
+                                        <td>@(enquiry.ServiceName ?? "-")</td>
+                                        <td>
+                                            @switch (enquiry.Status?.ToLower())
+                                            {
+                                                case "pending":
+                                                    <span class="badge badge-warning">Pending</span>
+                                                    break;
+                                                case "in progress":
+                                                    <span class="badge badge-info">In Progress</span>
+                                                    break;
+                                                case "resolved":
+                                                    <span class="badge badge-success">Resolved</span>
+                                                    break;
+                                                case "closed":
+                                                    <span class="badge badge-secondary">Closed</span>
+                                                    break;
+                                                default:
+                                                    <span class="badge badge-secondary">@enquiry.Status</span>
+                                                    break;
+                                            }
+                                        </td>
+                                        <td>@(enquiry.AssignedToName ?? "Unassigned")</td>
+                                        <td>@enquiry.CreatedAt.ToString("MMM dd, yyyy HH:mm")</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#enquiryModal@(enquiry.Id)" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <a href="/Admin/Contact/Enquiries/Details/@enquiry.Id" class="btn btn-sm btn-primary" title="Open Details Page">
+                                                <i class="fas fa-external-link-alt"></i>
+                                            </a>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown">
+                                                    Status
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="Pending" class="d-inline">
+                                                        <button type="submit" class="dropdown-item">Pending</button>
+                                                    </form>
+                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="In Progress" class="d-inline">
+                                                        <button type="submit" class="dropdown-item">In Progress</button>
+                                                    </form>
+                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="Resolved" class="d-inline">
+                                                        <button type="submit" class="dropdown-item">Resolved</button>
+                                                    </form>
+                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="Closed" class="d-inline">
+                                                        <button type="submit" class="dropdown-item">Closed</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <form method="post" asp-page-handler="Delete" asp-route-id="@enquiry.Id" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this enquiry?');">
+                                                <button type="submit" class="btn btn-sm btn-danger" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Modal for enquiry details -->
+                                    <div class="modal fade" id="enquiryModal@(enquiry.Id)" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Enquiry Details</h5>
+                                                    <button type="button" class="close" data-dismiss="modal">
+                                                        <span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <dl class="row">
+                                                        <dt class="col-sm-3">Name:</dt>
+                                                        <dd class="col-sm-9">@enquiry.Name</dd>
+
+                                                        <dt class="col-sm-3">Email:</dt>
+                                                        <dd class="col-sm-9">@enquiry.Email</dd>
+
+                                                        <dt class="col-sm-3">Phone:</dt>
+                                                        <dd class="col-sm-9">@(enquiry.Phone ?? "-")</dd>
+
+                                                        <dt class="col-sm-3">Subject:</dt>
+                                                        <dd class="col-sm-9">@(enquiry.Subject ?? "No Subject")</dd>
+
+                                                        <dt class="col-sm-3">Enquiry Type:</dt>
+                                                        <dd class="col-sm-9">@(enquiry.EnquiryType ?? "-")</dd>
+
+                                                        <dt class="col-sm-3">Service:</dt>
+                                                        <dd class="col-sm-9">@(enquiry.ServiceName ?? "-")</dd>
+
+                                                        <dt class="col-sm-3">Status:</dt>
+                                                        <dd class="col-sm-9">
+                                                            @switch (enquiry.Status?.ToLower())
+                                                            {
+                                                                case "pending":
+                                                                    <span class="badge badge-warning">Pending</span>
+                                                                    break;
+                                                                case "in progress":
+                                                                    <span class="badge badge-info">In Progress</span>
+                                                                    break;
+                                                                case "resolved":
+                                                                    <span class="badge badge-success">Resolved</span>
+                                                                    break;
+                                                                case "closed":
+                                                                    <span class="badge badge-secondary">Closed</span>
+                                                                    break;
+                                                                default:
+                                                                    <span class="badge badge-secondary">@enquiry.Status</span>
+                                                                    break;
+                                                            }
+                                                        </dd>
+
+                                                        <dt class="col-sm-3">Assigned To:</dt>
+                                                        <dd class="col-sm-9">@(enquiry.AssignedToName ?? "Unassigned")</dd>
+
+                                                        <dt class="col-sm-3">Message:</dt>
+                                                        <dd class="col-sm-9">
+                                                            <div class="border p-2 bg-light">
+                                                                @enquiry.Message
+                                                            </div>
+                                                        </dd>
+
+                                                        @if (!string.IsNullOrEmpty(enquiry.Notes))
+                                                        {
+                                                            <dt class="col-sm-3">Notes:</dt>
+                                                            <dd class="col-sm-9">
+                                                                <div class="border p-2 bg-light">
+                                                                    @enquiry.Notes
+                                                                </div>
+                                                            </dd>
+                                                        }
+
+                                                        <dt class="col-sm-3">Created:</dt>
+                                                        <dd class="col-sm-9">@enquiry.CreatedAt.ToString("MMM dd, yyyy HH:mm")</dd>
+
+                                                        <dt class="col-sm-3">Last Updated:</dt>
+                                                        <dd class="col-sm-9">@enquiry.UpdatedAt.ToString("MMM dd, yyyy HH:mm")</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(function () {
+            $("#enquiriesTable").DataTable({
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false,
+                "order": [[9, "desc"]], // Sort by Created date descending (column index updated due to Sln column)
+                "columnDefs": [
+                    { "orderable": false, "targets": [10] } // Disable sorting on Actions column
+                ]
+            });
+        });
+    </script>
+}

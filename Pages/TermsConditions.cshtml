@@ -1,0 +1,40 @@
+@page
+@model TermsConditionsModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<section class="page-hero-modern">
+  <div class="hero-background"></div>
+  <div class="container">
+    @if (!string.IsNullOrEmpty(Model.Eyebrow))
+    {
+      <p class="eyebrow">@Model.Eyebrow</p>
+    }
+    @if (!string.IsNullOrEmpty(Model.HeroTitle))
+    {
+      <h1>@Html.Raw(Model.HeroTitle)</h1>
+    }
+    @if (!string.IsNullOrEmpty(Model.HeroText))
+    {
+      <p class="page-hero-text">
+        @Html.Raw(Model.HeroText)
+      </p>
+    }
+  </div>
+</section>
+
+<section class="section">
+  <div class="container legal-container">
+    <article id="terms-content">
+      @if (!string.IsNullOrEmpty(Model.Content))
+      {
+        @Html.Raw(Model.Content)
+      }
+      else
+      {
+        <p>Terms & Conditions content will be loaded from the database.</p>
+      }
+    </article>
+  </div>
+</section>

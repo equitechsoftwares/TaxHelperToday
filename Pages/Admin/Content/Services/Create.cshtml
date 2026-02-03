@@ -1,0 +1,175 @@
+@page
+@model TaxHelperToday.Pages.Admin.Content.Services.CreateModel
+@{
+    ViewData["Title"] = "Create Service";
+    Layout = "~/Pages/Admin/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Create Service</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Content/Services">Services</a></li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">New Service</h3>
+                    </div>
+                    <form method="post">
+                        <div class="card-body">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label asp-for="Service.Slug">Slug <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" asp-for="Service.Slug" placeholder="e.g., tax-consultation" required>
+                                <span asp-validation-for="Service.Slug" class="text-danger"></span>
+                                <small class="form-text text-muted">URL-friendly identifier (lowercase, hyphens only)</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Service.Name">Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" asp-for="Service.Name" placeholder="e.g., Tax Consultation" required>
+                                <span asp-validation-for="Service.Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Service.Description">Description</label>
+                                <textarea class="form-control" asp-for="Service.Description" rows="3" placeholder="Short description of the service"></textarea>
+                                <span asp-validation-for="Service.Description" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Service.Content">Content</label>
+                                <div id="serviceContent" style="min-height: 300px;">
+                                    @Html.Raw(Model.Service?.Content ?? "")
+                                </div>
+                                <textarea asp-for="Service.Content" style="display: none;"></textarea>
+                                <span asp-validation-for="Service.Content" class="text-danger"></span>
+                                <small class="form-text text-muted">Use the rich text editor to format your content with headings, lists, links, and more.</small>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Service.Type">Type</label>
+                                        <input type="text" class="form-control" asp-for="Service.Type" placeholder="e.g., Consultation, Filing, Planning">
+                                        <span asp-validation-for="Service.Type" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Service.Level">Level</label>
+                                        <input type="text" class="form-control" asp-for="Service.Level" placeholder="e.g., Basic, Advanced, Premium">
+                                        <span asp-validation-for="Service.Level" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Service.Highlight">Highlight</label>
+                                <textarea class="form-control" asp-for="Service.Highlight" rows="2" placeholder="Key highlight or feature"></textarea>
+                                <span asp-validation-for="Service.Highlight" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Service.IconUrl">Icon URL</label>
+                                <input type="url" class="form-control" asp-for="Service.IconUrl" placeholder="https://example.com/icon.png">
+                                <span asp-validation-for="Service.IconUrl" class="text-danger"></span>
+                                <small class="form-text text-muted">URL to an icon image for this service</small>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Service.DisplayOrder">Display Order</label>
+                                        <input type="number" class="form-control" asp-for="Service.DisplayOrder" value="0">
+                                        <span asp-validation-for="Service.DisplayOrder" class="text-danger"></span>
+                                        <small class="form-text text-muted">Lower numbers appear first</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-switch mt-4">
+                                            <input type="checkbox" class="custom-control-input" asp-for="Service.IsActive" checked>
+                                            <label class="custom-control-label" asp-for="Service.IsActive">Active</label>
+                                        </div>
+                                        <span asp-validation-for="Service.IsActive" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Create Service
+                            </button>
+                            <a href="/Admin/Content/Services" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        $(document).ready(function() {
+            var quill = new Quill('#serviceContent', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        [{ 'align': [] }],
+                        ['link', 'image'],
+                        ['clean'],
+                        ['code-block']
+                    ]
+                },
+                placeholder: 'Enter service content details...'
+            });
+
+            // Update the hidden textarea before form submission
+            $('form').on('submit', function() {
+                var content = document.querySelector('#serviceContent .ql-editor').innerHTML;
+                $('textarea[name="Service.Content"]').val(content);
+            });
+        });
+    </script>
+}

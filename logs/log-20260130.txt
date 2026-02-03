@@ -1,0 +1,51 @@
+[2026-01-30 00:36:48.527 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 00:36:58.446 +05:30 ERR] Error connecting to database. Please ensure PostgreSQL is running and connection string is correct.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Failed to connect to 127.0.0.1:5432
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at Npgsql.Internal.NpgsqlConnector.Connect(NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.Connect(NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.Open()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternal(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlDatabaseCreator.<Exists>b__17_0()
+   at Microsoft.EntityFrameworkCore.ExecutionStrategyExtensions.<>c__1`1.<Execute>b__1_0(Func`1 operationScoped)
+   at Microsoft.EntityFrameworkCore.ExecutionStrategyExtensions.<>c__DisplayClass12_0`2.<Execute>b__0(DbContext _, TState s)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ExecutionStrategyExtensions.Execute[TState,TResult](IExecutionStrategy strategy, TState state, Func`2 operation, Func`2 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ExecutionStrategyExtensions.Execute[TState,TResult](IExecutionStrategy strategy, TState state, Func`2 operation)
+   at Microsoft.EntityFrameworkCore.ExecutionStrategyExtensions.Execute[TResult](IExecutionStrategy strategy, Func`1 operation)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlDatabaseCreator.Exists()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabaseCreator.EnsureCreated()
+   at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.EnsureCreated()
+   at Program.<Main>$(String[] args) in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\Program.cs:line 147
+[2026-01-30 00:36:58.469 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 00:39:59.697 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 00:40:01.359 +05:30 INF] Database connection verified
+[2026-01-30 00:40:01.670 +05:30 INF] Seeded default roles
+[2026-01-30 00:40:02.281 +05:30 INF] Created default admin user: admin@taxhelpertoday.com / Admin@123
+[2026-01-30 00:40:02.285 +05:30 INF] Starting data seeding...
+[2026-01-30 00:40:02.376 +05:30 INF] Seeded 6 services
+[2026-01-30 00:40:02.649 +05:30 INF] Seeded 4 blog posts
+[2026-01-30 00:40:02.694 +05:30 INF] Seeded 16 FAQs
+[2026-01-30 00:40:02.734 +05:30 INF] Seeded 2 pages
+[2026-01-30 00:40:02.735 +05:30 INF] Data seeding completed successfully
+[2026-01-30 00:40:02.740 +05:30 INF] TaxHelperToday application started successfully
+[2026-01-30 00:48:30.620 +05:30 INF] Starting TaxHelperToday application
+[2026-01-30 00:48:31.450 +05:30 INF] Database connection verified
+[2026-01-30 00:48:31.717 +05:30 INF] Starting data seeding...
+[2026-01-30 00:48:31.739 +05:30 INF] Services already exist, skipping seed
+[2026-01-30 00:48:31.747 +05:30 INF] Blog posts already exist, skipping seed
+[2026-01-30 00:48:31.756 +05:30 INF] FAQs already exist, skipping seed
+[2026-01-30 00:48:31.763 +05:30 INF] Pages already exist, skipping seed
+[2026-01-30 00:48:31.764 +05:30 INF] Data seeding completed successfully
+[2026-01-30 00:48:31.769 +05:30 INF] TaxHelperToday application started successfully

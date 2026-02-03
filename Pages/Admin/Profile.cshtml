@@ -1,0 +1,132 @@
+@page
+@model TaxHelperToday.Pages.Admin.ProfileModel
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Pages/Admin/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>My Profile</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item active">Profile</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Update Profile Information</h3>
+                    </div>
+                    <form method="post">
+                        <div class="card-body">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label asp-for="Profile.Email">Email Address <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" asp-for="Profile.Email" placeholder="Enter email address" required>
+                                <span asp-validation-for="Profile.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Profile.FullName">Full Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" asp-for="Profile.FullName" placeholder="Enter full name" required>
+                                <span asp-validation-for="Profile.FullName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Profile.Phone">Phone Number</label>
+                                <input type="text" class="form-control" asp-for="Profile.Phone" placeholder="Enter phone number">
+                                <span asp-validation-for="Profile.Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Update Profile
+                            </button>
+                            <a href="/Admin/Dashboard" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Account Information</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.CurrentUser != null)
+                        {
+                            <dl class="row">
+                                <dt class="col-sm-5">User ID:</dt>
+                                <dd class="col-sm-7">@Model.CurrentUser.Id</dd>
+
+                                <dt class="col-sm-5">Email:</dt>
+                                <dd class="col-sm-7">@Model.CurrentUser.Email</dd>
+
+                                <dt class="col-sm-5">Full Name:</dt>
+                                <dd class="col-sm-7">@Model.CurrentUser.FullName</dd>
+
+                                @if (!string.IsNullOrEmpty(Model.CurrentUser.Phone))
+                                {
+                                    <dt class="col-sm-5">Phone:</dt>
+                                    <dd class="col-sm-7">@Model.CurrentUser.Phone</dd>
+                                }
+
+                                <dt class="col-sm-5">Roles:</dt>
+                                <dd class="col-sm-7">
+                                    @if (Model.CurrentUser.Roles.Any())
+                                    {
+                                        @string.Join(", ", Model.CurrentUser.Roles)
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">No roles assigned</span>
+                                    }
+                                </dd>
+                            </dl>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

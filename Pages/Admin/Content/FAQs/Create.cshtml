@@ -1,0 +1,96 @@
+@page
+@model TaxHelperToday.Pages.Admin.Content.FAQs.CreateModel
+@{
+    ViewData["Title"] = "Create FAQ";
+    Layout = "~/Pages/Admin/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Create FAQ</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Content/FAQs">FAQs</a></li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">New FAQ</h3>
+                    </div>
+                    <form method="post">
+                        <div class="card-body">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label asp-for="Faq.Question">Question <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" asp-for="Faq.Question" placeholder="Enter the question" required>
+                                <span asp-validation-for="Faq.Question" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Faq.Answer">Answer <span class="text-danger">*</span></label>
+                                <textarea class="form-control" asp-for="Faq.Answer" rows="5" placeholder="Enter the answer" required></textarea>
+                                <span asp-validation-for="Faq.Answer" class="text-danger"></span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Faq.Category">Category</label>
+                                        <input type="text" class="form-control" asp-for="Faq.Category" placeholder="e.g., General, ITR, GST">
+                                        <span asp-validation-for="Faq.Category" class="text-danger"></span>
+                                        <small class="form-text text-muted">Optional category to group related FAQs</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Faq.DisplayOrder">Display Order</label>
+                                        <input type="number" class="form-control" asp-for="Faq.DisplayOrder" value="0" min="0">
+                                        <span asp-validation-for="Faq.DisplayOrder" class="text-danger"></span>
+                                        <small class="form-text text-muted">Lower numbers appear first</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" asp-for="Faq.IsActive" checked>
+                                    <label class="form-check-label" asp-for="Faq.IsActive">
+                                        Active (visible on website)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Create FAQ</button>
+                            <a href="/Admin/Content/FAQs" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,129 @@
+@using System.Linq
+@using TaxHelperToday.Infrastructure.Data
+@using TaxHelperToday.Modules.Content.Application.Services
+@inject ApplicationDbContext DbContext
+@inject IServiceService ServiceService
+
+@{
+    var currentPage = ViewContext.RouteData.Values["page"]?.ToString() ?? "";
+    var isHome = currentPage == "/Index" || currentPage == "/";
+    var isAbout = currentPage == "/About";
+    var isBlogs = currentPage == "/Blogs" || currentPage == "/BlogDetail";
+    var isFaqs = currentPage == "/Faqs";
+    var isContact = currentPage == "/Contact";
+
+    // Load active services grouped by type
+    var allServices = (await ServiceService.GetAllAsync(activeOnly: true)).ToList();
+    var servicesByType = allServices
+        .Where(s => !string.IsNullOrEmpty(s.Type))
+        .GroupBy(s => s.Type!)
+        .OrderBy(g => g.Key)
+        .ToList();
+
+    // Load banner and contact settings
+    var settings = DbContext.AdminSettings.ToList();
+
+    string contactEmail = settings.FirstOrDefault(s => s.Key == "contact_email")?.Value ?? "mrhoque64@gmail.com";
+    string contactPhone = settings.FirstOrDefault(s => s.Key == "contact_phone")?.Value ?? "+91-89103-97497";
+    string contactPhoneDigits = new string(contactPhone.Where(char.IsDigit).ToArray());
+    if (string.IsNullOrWhiteSpace(contactPhoneDigits))
+    {
+        contactPhoneDigits = "918910397497";
+    }
+
+    string deadlineTitle = settings.FirstOrDefault(s => s.Key == "it_deadline_title")?.Value
+                           ?? "ITR Filing Deadline Approaching!";
+    string deadlineText = settings.FirstOrDefault(s => s.Key == "it_deadline_text")?.Value
+                          ?? "File now to avoid penalties and maximize your refund.";
+    string buttonText = settings.FirstOrDefault(s => s.Key == "it_deadline_button_text")?.Value
+                        ?? "File ITR Now";
+    string deadlineDateSetting = settings.FirstOrDefault(s => s.Key == "it_deadline_date")?.Value
+                                 ?? "2024-07-31";
+    string supportTemplate = settings.FirstOrDefault(s => s.Key == "it_deadline_support_template")?.Value
+                             ?? "Need help? Call {{phone}} or email {{email}}.";
+
+    string supportHtml = supportTemplate
+        .Replace("{{phone}}", $"<a href=\"tel:+{contactPhoneDigits}\">{contactPhone}</a>")
+        .Replace("{{email}}", $"<a href=\"mailto:{contactEmail}\">{contactEmail}</a>");
+
+    bool showDeadlineBanner = (settings.FirstOrDefault(s => s.Key == "it_deadline_countdown")?.Value ?? "true")
+        .Equals("true", StringComparison.OrdinalIgnoreCase);
+}
+
+@if (showDeadlineBanner)
+{
+    <!-- Top Promotional Banner with Deadline -->
+    <section class="promo-banner">
+        <div class="container">
+            <div class="promo-banner-content">
+                <span class="promo-icon">⏰</span>
+                <div class="promo-text">
+                    <strong>@deadlineTitle</strong>
+                    <span>
+                        The deadline is in
+                        <span id="deadline-countdown" data-deadline="@deadlineDateSetting">30 days</span>.
+                        @deadlineText
+                        <span class="promo-support">@Html.Raw(supportHtml)</span>
+                    </span>
+                </div>
+                <a href="/Contact" class="btn btn-primary btn-small">@buttonText</a>
+            </div>
+        </div>
+    </section>
+}
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo">
+      <img src="~/img/logo.png" alt="TaxHelperToday Logo">
+      <span class="logo-text">
+        <span class="logo-title">TaxHelperToday</span>
+        <span class="logo-subtitle">Compliance. Clarity. Confidence.</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/" class="@(isHome ? "active" : "")">Home</a></li>
+        <li><a href="/About" class="@(isAbout ? "active" : "")">About</a></li>
+        <li class="has-dropdown">
+          <span class="nav-link-parent @(currentPage.Contains("/Service") ? "active" : "")">Services</span>
+          @if (servicesByType.Any())
+          {
+            <ul class="dropdown-menu">
+              @foreach (var typeGroup in servicesByType)
+              {
+                <li class="dropdown-section">
+                  <span class="dropdown-heading">@typeGroup.Key</span>
+                  <ul>
+                    @foreach (var service in typeGroup.OrderBy(s => s.DisplayOrder).ThenBy(s => s.Name))
+                    {
+                      <li><a href="/ServiceDetail?slug=@service.Slug">@service.Name</a></li>
+                    }
+                  </ul>
+                </li>
+              }
+            </ul>
+          }
+          else
+          {
+            <ul class="dropdown-menu">
+              <li class="dropdown-section">
+                <span class="dropdown-heading">Services</span>
+                <ul>
+                  <li><a href="/Contact">Contact Us</a></li>
+                </ul>
+              </li>
+            </ul>
+          }
+        </li>
+        <li><a href="/Blogs" class="@(isBlogs ? "active" : "")">Blogs</a></li>
+        <li><a href="/Faqs" class="@(isFaqs ? "active" : "")">FAQs</a></li>
+        <li><a href="/Contact" class="@(isContact ? "active" : "")">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="/Contact" class="btn btn-primary header-cta">Get Expert Help</a>
+  </div>
+</header>

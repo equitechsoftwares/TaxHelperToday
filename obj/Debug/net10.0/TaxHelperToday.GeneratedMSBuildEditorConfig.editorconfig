@@ -1,0 +1,199 @@
+is_global = true
+build_property.TargetFramework = net10.0
+build_property.TargetFramework = net10.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v10.0
+build_property.RootNamespace = TaxHelperToday
+build_property.RootNamespace = TaxHelperToday
+build_property.ProjectDir = F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 10.0
+build_property.EnableCodeStyleSeverity = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/About.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Contact/Enquiries.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGFjdFxFbnF1aXJpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Contact/Enquiries/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGFjdFxFbnF1aXJpZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Contact/MiniEnquiries.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGFjdFxNaW5pRW5xdWlyaWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Contact/MiniEnquiries/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGFjdFxNaW5pRW5xdWlyaWVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/Blogs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxCbG9nc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/Blogs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxCbG9nc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/Blogs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxCbG9nc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/FAQs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxGQVFzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/FAQs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxGQVFzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/FAQs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxGQVFzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/Pages/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxQYWdlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/Pages/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxQYWdlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxQYWdlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/Services/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxTZXJ2aWNlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/Services/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxTZXJ2aWNlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Content/Services/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29udGVudFxTZXJ2aWNlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTG9nb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Settings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cU2V0dGluZ3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/Users/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVXNlcnNcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cX0FkbWluTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Admin/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/BlogDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmxvZ0RldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Blogs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmxvZ3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Faqs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFxcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/PrivacyPolicy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeVBvbGljeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/ServiceDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VydmljZURldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Shared/_Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Gb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Shared/_Header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9IZWFkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/TermsConditions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVybXNDb25kaXRpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/TrustSafety.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJ1c3RTYWZldHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Equitech Softwares/Projects/Rafijul/TaxHelperToday/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-tb05h8rdk1

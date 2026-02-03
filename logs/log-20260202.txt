@@ -1,0 +1,153 @@
+[2026-02-02 19:20:20.562 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 19:20:28.407 +05:30 INF] Database connection verified
+[2026-02-02 19:20:31.449 +05:30 INF] Starting data seeding...
+[2026-02-02 19:20:32.066 +05:30 INF] Services already exist, skipping seed
+[2026-02-02 19:20:32.152 +05:30 INF] Blog posts already exist, skipping seed
+[2026-02-02 19:20:32.197 +05:30 INF] FAQs already exist, skipping seed
+[2026-02-02 19:20:32.236 +05:30 INF] Pages already exist, skipping seed
+[2026-02-02 19:20:32.240 +05:30 INF] Data seeding completed successfully
+[2026-02-02 19:20:32.289 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 19:20:33.353 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 19:23:54.445 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-02-02 19:24:11.308 +05:30 ERR] Error during logout for user System Administrator
+System.InvalidOperationException: The authentication handler registered for scheme 'Bearer' is 'JwtBearerHandler' which cannot be used for SignOutAsync. Did you forget to call AddAuthentication().AddCookie("Cookies") and SignOutAsync("Cookies",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.SignOutAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationServiceImpl.SignOutAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at TaxHelperToday.Pages.Admin.LogoutModel.OnPostAsync() in F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\Pages\Admin\Logout.cshtml.cs:line 52
+[2026-02-02 19:30:14.015 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-02-02 19:58:47.360 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 19:58:50.730 +05:30 INF] Database connection verified
+[2026-02-02 19:58:51.317 +05:30 INF] Starting data seeding...
+[2026-02-02 19:58:51.364 +05:30 INF] Services already exist, skipping seed
+[2026-02-02 19:58:51.379 +05:30 INF] Blog posts already exist, skipping seed
+[2026-02-02 19:58:51.395 +05:30 INF] FAQs already exist, skipping seed
+[2026-02-02 19:58:51.412 +05:30 INF] Pages already exist, skipping seed
+[2026-02-02 19:58:51.412 +05:30 INF] Data seeding completed successfully
+[2026-02-02 19:58:51.419 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 20:01:13.503 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 20:01:20.520 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-02-02 20:01:52.275 +05:30 ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentOutOfRangeException: Token 2000000 is not valid in the scope of module System.ModuleHandle. (Parameter 'typeToken')
+   at System.ModuleHandle.ResolveTypeHandle(Int32 typeToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+   at System.Attribute.InternalIsDefined(PropertyInfo element, Type attributeType, Boolean inherit)
+   at Microsoft.Extensions.Internal.PropertyActivator`1.<>c__DisplayClass11_0.<GetActivatableProperties>b__0(PropertyInfo property)
+   at System.Linq.Enumerable.ArrayWhereSelectIterator`2.ToArray(ReadOnlySpan`1 source, Func`2 predicate, Func`2 selector)
+   at System.Linq.Enumerable.ArrayWhereSelectIterator`2.ToArray()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator..ctor(Type pageType, Type declaredModelType, IModelMetadataProvider metadataProvider, PropertyValueAccessors propertyValueAccessors)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageFactoryProvider.CreatePageFactory(CompiledPageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.CreateCacheEntry(CompiledPageActionDescriptor compiledActionDescriptor, FilterItem[] cachedFilters)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvokerCache.GetCachedResult(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageRequestDelegateFactory.<>c__DisplayClass13_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.AdminAuthorizationMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaxHelperToday.Infrastructure.Middleware.JwtCookieMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-02-02 20:09:14.365 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 20:09:16.166 +05:30 INF] Database connection verified
+[2026-02-02 20:09:16.723 +05:30 INF] Starting data seeding...
+[2026-02-02 20:09:16.767 +05:30 INF] Services already exist, skipping seed
+[2026-02-02 20:09:16.783 +05:30 INF] Blog posts already exist, skipping seed
+[2026-02-02 20:09:16.793 +05:30 INF] FAQs already exist, skipping seed
+[2026-02-02 20:09:16.805 +05:30 INF] Pages already exist, skipping seed
+[2026-02-02 20:09:16.805 +05:30 INF] Data seeding completed successfully
+[2026-02-02 20:09:16.810 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 20:09:20.472 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 20:34:17.803 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 20:34:20.567 +05:30 INF] Database connection verified
+[2026-02-02 20:34:21.724 +05:30 INF] Seeded default roles
+[2026-02-02 20:34:23.708 +05:30 INF] Created default admin user: admin@taxhelpertoday.com / Admin@123
+[2026-02-02 20:34:23.723 +05:30 INF] Starting data seeding...
+[2026-02-02 20:34:24.096 +05:30 INF] Seeded 6 services
+[2026-02-02 20:34:25.016 +05:30 INF] Seeded 4 blog posts
+[2026-02-02 20:34:25.175 +05:30 INF] Seeded 16 FAQs
+[2026-02-02 20:34:25.304 +05:30 INF] Seeded 3 pages (Privacy Policy, Terms & Conditions, Trust & Safety - all with full content)
+[2026-02-02 20:34:25.304 +05:30 INF] Data seeding completed successfully
+[2026-02-02 20:34:25.317 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 20:36:36.327 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 20:36:59.712 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-02-02 20:43:42.848 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 20:43:45.834 +05:30 INF] Database connection verified
+[2026-02-02 20:43:47.159 +05:30 INF] Starting data seeding...
+[2026-02-02 20:43:47.267 +05:30 INF] Services already exist, skipping seed
+[2026-02-02 20:43:47.294 +05:30 INF] Blog posts already exist, skipping seed
+[2026-02-02 20:43:47.313 +05:30 INF] FAQs already exist, skipping seed
+[2026-02-02 20:43:47.331 +05:30 INF] Pages already exist, skipping seed
+[2026-02-02 20:43:47.331 +05:30 INF] Data seeding completed successfully
+[2026-02-02 20:43:47.343 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 20:43:56.311 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 20:45:23.957 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 20:45:25.837 +05:30 INF] Database connection verified
+[2026-02-02 20:45:26.425 +05:30 INF] Starting data seeding...
+[2026-02-02 20:45:26.480 +05:30 INF] Services already exist, skipping seed
+[2026-02-02 20:45:26.499 +05:30 INF] Blog posts already exist, skipping seed
+[2026-02-02 20:45:26.516 +05:30 INF] FAQs already exist, skipping seed
+[2026-02-02 20:45:26.532 +05:30 INF] Pages already exist, skipping seed
+[2026-02-02 20:45:26.536 +05:30 INF] Data seeding completed successfully
+[2026-02-02 20:45:26.545 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 20:45:31.072 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 20:45:52.415 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 20:45:54.339 +05:30 INF] Database connection verified
+[2026-02-02 20:45:54.962 +05:30 INF] Starting data seeding...
+[2026-02-02 20:45:55.033 +05:30 INF] Services already exist, skipping seed
+[2026-02-02 20:45:55.048 +05:30 INF] Blog posts already exist, skipping seed
+[2026-02-02 20:45:55.063 +05:30 INF] FAQs already exist, skipping seed
+[2026-02-02 20:45:55.079 +05:30 INF] Pages already exist, skipping seed
+[2026-02-02 20:45:55.081 +05:30 INF] Data seeding completed successfully
+[2026-02-02 20:45:55.091 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 20:45:57.371 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 20:50:16.335 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 20:50:20.385 +05:30 INF] Database connection verified
+[2026-02-02 20:50:21.927 +05:30 INF] Starting data seeding...
+[2026-02-02 20:50:22.006 +05:30 INF] Services already exist, skipping seed
+[2026-02-02 20:50:22.032 +05:30 INF] Blog posts already exist, skipping seed
+[2026-02-02 20:50:22.048 +05:30 INF] FAQs already exist, skipping seed
+[2026-02-02 20:50:22.065 +05:30 INF] Pages already exist, skipping seed
+[2026-02-02 20:50:22.065 +05:30 INF] Data seeding completed successfully
+[2026-02-02 20:50:22.073 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 20:52:30.623 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 21:02:30.998 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 21:02:33.586 +05:30 INF] Database connection verified
+[2026-02-02 21:02:34.528 +05:30 INF] Starting data seeding...
+[2026-02-02 21:02:34.610 +05:30 INF] Services already exist, skipping seed
+[2026-02-02 21:02:34.628 +05:30 INF] Blog posts already exist, skipping seed
+[2026-02-02 21:02:34.645 +05:30 INF] FAQs already exist, skipping seed
+[2026-02-02 21:02:34.661 +05:30 INF] Pages already exist, skipping seed
+[2026-02-02 21:02:34.661 +05:30 INF] Data seeding completed successfully
+[2026-02-02 21:02:34.668 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 21:02:59.481 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 21:18:47.006 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 21:18:55.220 +05:30 INF] Database connection verified
+[2026-02-02 21:18:57.746 +05:30 INF] Starting data seeding...
+[2026-02-02 21:18:57.874 +05:30 INF] Services already exist, skipping seed
+[2026-02-02 21:18:57.899 +05:30 INF] Blog posts already exist, skipping seed
+[2026-02-02 21:18:57.928 +05:30 INF] FAQs already exist, skipping seed
+[2026-02-02 21:18:57.968 +05:30 INF] Pages already exist, skipping seed
+[2026-02-02 21:18:57.968 +05:30 INF] Data seeding completed successfully
+[2026-02-02 21:18:58.000 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 21:25:40.425 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 21:25:42.348 +05:30 INF] Database connection verified
+[2026-02-02 21:25:42.878 +05:30 INF] Seeded default roles
+[2026-02-02 21:25:44.122 +05:30 INF] Created default admin user: admin@taxhelpertoday.com / Admin@123
+[2026-02-02 21:25:44.129 +05:30 INF] Starting data seeding...
+[2026-02-02 21:25:44.296 +05:30 INF] Seeded 6 services
+[2026-02-02 21:25:44.731 +05:30 INF] Seeded 4 blog posts
+[2026-02-02 21:25:44.820 +05:30 INF] Seeded 16 FAQs
+[2026-02-02 21:25:44.886 +05:30 INF] Seeded 4 pages (Privacy Policy, Terms & Conditions, Trust & Safety, Contact - all with full content)
+[2026-02-02 21:25:44.886 +05:30 INF] Data seeding completed successfully
+[2026-02-02 21:25:44.892 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 21:29:45.779 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 21:29:47.071 +05:30 INF] User admin@taxhelpertoday.com logged in successfully
+[2026-02-02 22:02:16.208 +05:30 INF] Starting TaxHelperToday application
+[2026-02-02 22:02:18.566 +05:30 INF] Database connection verified
+[2026-02-02 22:02:18.842 +05:30 INF] Seeded default roles
+[2026-02-02 22:02:19.501 +05:30 INF] Created default admin user: admin@taxhelpertoday.com / Admin@123
+[2026-02-02 22:02:19.505 +05:30 INF] Starting data seeding...
+[2026-02-02 22:02:19.599 +05:30 INF] Seeded 6 services
+[2026-02-02 22:02:19.821 +05:30 INF] Seeded 4 blog posts
+[2026-02-02 22:02:19.874 +05:30 INF] Seeded 16 FAQs
+[2026-02-02 22:02:19.932 +05:30 INF] Seeded 5 pages (About, Privacy Policy, Terms & Conditions, Trust & Safety, Contact - all with full content)
+[2026-02-02 22:02:19.932 +05:30 INF] Data seeding completed successfully
+[2026-02-02 22:02:19.936 +05:30 INF] TaxHelperToday application started successfully
+[2026-02-02 22:02:55.470 +05:30 WRN] Failed to determine the https port for redirect.
+[2026-02-02 22:03:04.759 +05:30 INF] User admin@taxhelpertoday.com logged in successfully

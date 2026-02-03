@@ -1,0 +1,583 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="hero">
+  <div class="hero-background"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      @if (!string.IsNullOrEmpty(Model.HeroEyebrow))
+      {
+        <p class="eyebrow">@Model.HeroEyebrow</p>
+      }
+      else
+      {
+        <p class="eyebrow">India's Trusted CA-Led Tax Companion</p>
+      }
+      @if (!string.IsNullOrEmpty(Model.HeroTitle))
+      {
+        <h1>@Html.Raw(Model.HeroTitle)</h1>
+      }
+      else
+      {
+        <h1>File taxes with confidence, not confusion.</h1>
+      }
+      @if (!string.IsNullOrEmpty(Model.HeroSubtitle))
+      {
+        <p class="hero-subtitle">
+          @Html.Raw(Model.HeroSubtitle)
+        </p>
+      }
+      else
+      {
+        <p class="hero-subtitle">
+          TaxHelperToday blends Chartered Accountant expertise with smart tools to help
+          you stay compliant, minimise tax outgo, and respond to notices without stress.
+        </p>
+      }
+      <div class="hero-actions">
+        <a href="/Contact" class="btn btn-primary btn-large">Start Your Tax Journey</a>
+        <a href="#services" class="btn btn-outline btn-large">Explore Services</a>
+      </div>
+      @if (Model.HeroTrustBadges != null && Model.HeroTrustBadges.Any())
+      {
+        <div class="hero-trust-badges">
+          @foreach (var badge in Model.HeroTrustBadges)
+          {
+            <div class="trust-badge-item">
+              <span class="trust-icon">@badge.Icon</span>
+              <div>
+                <strong>@badge.Value</strong>
+                <span>@badge.Label</span>
+              </div>
+            </div>
+          }
+        </div>
+      }
+      else
+      {
+        <div class="hero-trust-badges">
+          <div class="trust-badge-item">
+            <span class="trust-icon">⭐</span>
+            <div>
+              <strong>4.9/5</strong>
+              <span>From 6,800+ Reviews</span>
+            </div>
+          </div>
+          <div class="trust-badge-item">
+            <span class="trust-icon">✓</span>
+            <div>
+              <strong>100%</strong>
+              <span>Accuracy Guarantee</span>
+            </div>
+          </div>
+          <div class="trust-badge-item">
+            <span class="trust-icon">👥</span>
+            <div>
+              <strong>1M+</strong>
+              <span>Trusted Users</span>
+            </div>
+          </div>
+        </div>
+      }
+      @if (Model.HeroMetrics != null && Model.HeroMetrics.Any())
+      {
+        <div class="hero-metric-row">
+          @foreach (var metric in Model.HeroMetrics)
+          {
+            <div class="metric">
+              <span class="metric-value" data-metric="@metric.Metric.ToLower()" data-target="@metric.Value">0</span>@(metric.Metric.ToLower() == "savings" ? "L" : "")+
+              <span class="metric-label">@metric.Label</span>
+            </div>
+          }
+        </div>
+      }
+      else
+      {
+        <div class="hero-metric-row">
+          <div class="metric">
+            <span class="metric-value" data-metric="clients">0</span>+
+            <span class="metric-label">Individuals & Businesses Guided</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value" data-metric="savings">0</span>L+
+            <span class="metric-label">Tax Savings Identified</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value" data-metric="years">0</span>+
+            <span class="metric-label">Years of CA Experience</span>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="hero-panel">
+      <div class="hero-card">
+        @if (TempData["MiniEnquirySuccessMessage"] != null)
+        {
+          <div class="mini-enquiry-message" style="background: #27b46a; color: white; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; line-height: 1.5; position: relative; display: flex; align-items: center; justify-content: space-between; transition: opacity 0.3s ease-out;">
+            <span>@TempData["MiniEnquirySuccessMessage"]</span>
+            <button type="button" class="message-close-btn" style="background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 0; margin-left: 16px; line-height: 1; opacity: 0.8; transition: opacity 0.2s;" aria-label="Close">×</button>
+          </div>
+        }
+        @if (TempData["MiniEnquiryErrorMessage"] != null)
+        {
+          <div class="mini-enquiry-message" style="background: #d34b4b; color: white; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; line-height: 1.5; position: relative; display: flex; align-items: center; justify-content: space-between; transition: opacity 0.3s ease-out;">
+            <span>@TempData["MiniEnquiryErrorMessage"]</span>
+            <button type="button" class="message-close-btn" style="background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 0; margin-left: 16px; line-height: 1; opacity: 0.8; transition: opacity 0.2s;" aria-label="Close">×</button>
+          </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.MiniEnquiryBadge))
+        {
+          <div class="hero-card-header">
+            <span class="card-badge">@Model.MiniEnquiryBadge</span>
+          </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.MiniEnquiryTitle))
+        {
+          <h2>@Model.MiniEnquiryTitle</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model.MiniEnquiryDescription))
+        {
+          <p class="hero-card-text">
+            @Html.Raw(Model.MiniEnquiryDescription)
+          </p>
+        }
+        <form class="mini-enquiry" id="mini-enquiry" method="post" asp-page-handler="MiniEnquiry">
+          @Html.AntiForgeryToken()
+          <div class="field">
+            <label for="mini-name">Full Name</label>
+            <input type="text" id="mini-name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="mini-email">Email</label>
+            <input type="email" id="mini-email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="mini-type">You are a</label>
+            <select id="mini-type" name="type" required>
+              <option value="">Select</option>
+              <option value="salaried">Salaried Individual</option>
+              <option value="business">Business Owner</option>
+              <option value="professional">Professional / Freelancer</option>
+              <option value="nri">NRI</option>
+            </select>
+          </div>
+          @if (!string.IsNullOrEmpty(Model.MiniEnquiryButtonText))
+          {
+            <button type="submit" class="btn btn-primary btn-block">@Model.MiniEnquiryButtonText</button>
+          }
+          else
+          {
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+          }
+          @if (!string.IsNullOrEmpty(Model.MiniEnquiryNote))
+          {
+            <p class="form-note">@Model.MiniEnquiryNote</p>
+          }
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Statistics Banner -->
+@if (Model.StatsBanner != null)
+{
+  <section class="stats-banner">
+    <div class="container">
+      <header class="stats-heading">
+        @if (!string.IsNullOrEmpty(Model.StatsBanner.Eyebrow))
+        {
+          <p class="eyebrow">@Model.StatsBanner.Eyebrow</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.StatsBanner.Title))
+        {
+          <h2>@Html.Raw(Model.StatsBanner.Title)</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model.StatsBanner.Subtitle))
+        {
+          <p class="section-subtitle">
+            @Html.Raw(Model.StatsBanner.Subtitle)
+          </p>
+        }
+      </header>
+      @if (Model.StatsBanner.Stats != null && Model.StatsBanner.Stats.Any())
+      {
+        <div class="stats-grid">
+          @foreach (var stat in Model.StatsBanner.Stats)
+          {
+            <div class="stat-item">
+              <div class="stat-icon">@stat.Icon</div>
+              <div class="stat-content">
+                <div class="stat-value">@stat.Value</div>
+                <div class="stat-label">@stat.Label</div>
+                <div class="stat-desc">@stat.Description</div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </section>
+}
+
+<!-- Promotional CTA Banner -->
+@if (Model.CtaBanner != null)
+{
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-banner-content">
+        <div class="cta-text">
+          @if (!string.IsNullOrEmpty(Model.CtaBanner.Title))
+          {
+            <h2>@Html.Raw(Model.CtaBanner.Title)</h2>
+          }
+          @if (!string.IsNullOrEmpty(Model.CtaBanner.Text))
+          {
+            <p>@Html.Raw(Model.CtaBanner.Text)</p>
+          }
+        </div>
+        <a href="/Contact" class="btn btn-primary btn-large">@(Model.CtaBanner.ButtonText ?? "Start Filing Now")</a>
+      </div>
+    </div>
+  </section>
+}
+
+<!-- How It Works Section -->
+@if (Model.HowItWorks != null)
+{
+  <section class="section section-how-it-works">
+    <div class="container">
+      <header class="section-heading">
+        @if (!string.IsNullOrEmpty(Model.HowItWorks.Eyebrow))
+        {
+          <p class="eyebrow">@Model.HowItWorks.Eyebrow</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.HowItWorks.Title))
+        {
+          <h2>@Html.Raw(Model.HowItWorks.Title)</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model.HowItWorks.Subtitle))
+        {
+          <p class="section-subtitle">
+            @Html.Raw(Model.HowItWorks.Subtitle)
+          </p>
+        }
+      </header>
+      @if (Model.HowItWorks.Steps != null && Model.HowItWorks.Steps.Any())
+      {
+        <div class="process-steps">
+          @foreach (var step in Model.HowItWorks.Steps)
+          {
+            <div class="process-step">
+              <div class="step-number">@step.Number</div>
+              <div class="step-icon">@step.Icon</div>
+              <h3>@step.Title</h3>
+              <p>@step.Text</p>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </section>
+}
+
+@if (Model.WhySection != null)
+{
+  <section class="section section-why">
+    <div class="container">
+      <header class="section-heading">
+        @if (!string.IsNullOrEmpty(Model.WhySection.Eyebrow))
+        {
+          <p class="eyebrow">@Model.WhySection.Eyebrow</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.WhySection.Title))
+        {
+          <h2>@Html.Raw(Model.WhySection.Title)</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model.WhySection.Subtitle))
+        {
+          <p class="section-subtitle">
+            @Html.Raw(Model.WhySection.Subtitle)
+          </p>
+        }
+      </header>
+      @if (Model.WhySection.Features != null && Model.WhySection.Features.Any())
+      {
+        <div class="feature-grid">
+          @foreach (var feature in Model.WhySection.Features)
+          {
+            <article class="feature-card">
+              <div class="feature-icon">@feature.Icon</div>
+              <h3>@feature.Title</h3>
+              <p>@feature.Text</p>
+            </article>
+          }
+        </div>
+      }
+    </div>
+  </section>
+}
+
+<!-- Pricing Plans Section -->
+@if (Model.PricingSection != null)
+{
+  <section class="section section-pricing section-alt">
+    <div class="container">
+      <header class="section-heading">
+        @if (!string.IsNullOrEmpty(Model.PricingSection.Eyebrow))
+        {
+          <p class="eyebrow">@Model.PricingSection.Eyebrow</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.PricingSection.Title))
+        {
+          <h2>@Html.Raw(Model.PricingSection.Title)</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model.PricingSection.Subtitle))
+        {
+          <p class="section-subtitle">
+            @Html.Raw(Model.PricingSection.Subtitle)
+          </p>
+        }
+      </header>
+      @if (Model.PricingSection.Plans != null && Model.PricingSection.Plans.Any())
+      {
+        <div class="pricing-grid">
+          @foreach (var plan in Model.PricingSection.Plans)
+          {
+            <div class="pricing-card @(plan.IsFeatured ? "pricing-card-featured" : "")">
+              @if (!string.IsNullOrEmpty(plan.Badge))
+              {
+                <div class="pricing-badge">@plan.Badge</div>
+              }
+              <div class="pricing-header">
+                <h3>@plan.Name</h3>
+                <div class="pricing-amount">
+                  <span class="currency">₹</span>
+                  <span class="price">@plan.Price</span>
+                  <span class="period">@plan.Period</span>
+                </div>
+                @if (!string.IsNullOrEmpty(plan.Description))
+                {
+                  <p class="pricing-description">@plan.Description</p>
+                }
+              </div>
+              @if (plan.Features != null && plan.Features.Any())
+              {
+                <ul class="pricing-features">
+                  @foreach (var feature in plan.Features)
+                  {
+                    <li>✓ @feature</li>
+                  }
+                </ul>
+              }
+              <a href="/Contact" class="btn @(plan.IsFeatured ? "btn-primary" : "btn-outline") btn-block">Get Started</a>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </section>
+}
+
+@if (Model.TrustSection != null)
+{
+  <section class="section section-trust">
+    <div class="container trust-grid">
+      <div>
+        <header class="section-heading">
+          @if (!string.IsNullOrEmpty(Model.TrustSection.Eyebrow))
+          {
+            <p class="eyebrow">@Model.TrustSection.Eyebrow</p>
+          }
+          @if (!string.IsNullOrEmpty(Model.TrustSection.Title))
+          {
+            <h2>@Html.Raw(Model.TrustSection.Title)</h2>
+          }
+        </header>
+        @if (!string.IsNullOrEmpty(Model.TrustSection.Text))
+        {
+          <p>
+            @Html.Raw(Model.TrustSection.Text)
+          </p>
+        }
+        @if (Model.TrustSection.ListItems != null && Model.TrustSection.ListItems.Any())
+        {
+          <ul class="trust-list">
+            @foreach (var item in Model.TrustSection.ListItems)
+            {
+              <li>@item</li>
+            }
+          </ul>
+        }
+        <a href="/TrustSafety" class="link-inline">Learn more about Trust &amp; Safety</a>
+      </div>
+      @if (Model.TrustSection.Badge != null)
+      {
+        <div class="trust-panel">
+          <div class="trust-badge">
+            <span class="trust-badge-label">@Model.TrustSection.Badge.Label</span>
+            <span class="trust-badge-title">@Model.TrustSection.Badge.Title</span>
+          </div>
+          @if (!string.IsNullOrEmpty(Model.TrustSection.BadgeText))
+          {
+            <p class="trust-text">
+              @Html.Raw(Model.TrustSection.BadgeText)
+            </p>
+          }
+        </div>
+      }
+    </div>
+  </section>
+}
+
+<!-- Testimonials Section -->
+@if (Model.TestimonialsSection != null)
+{
+  <section class="section section-testimonials">
+    <div class="container">
+      <header class="section-heading">
+        @if (!string.IsNullOrEmpty(Model.TestimonialsSection.Eyebrow))
+        {
+          <p class="eyebrow">@Model.TestimonialsSection.Eyebrow</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.TestimonialsSection.Title))
+        {
+          <h2>@Html.Raw(Model.TestimonialsSection.Title)</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model.TestimonialsSection.Subtitle))
+        {
+          <p class="section-subtitle">
+            @Html.Raw(Model.TestimonialsSection.Subtitle)
+          </p>
+        }
+      </header>
+      @if (Model.TestimonialsSection.Testimonials != null && Model.TestimonialsSection.Testimonials.Any())
+      {
+        <div class="testimonials-slider-wrapper">
+          <button class="slider-arrow slider-arrow-left" aria-label="Previous testimonial">‹</button>
+          <div class="testimonials-slider">
+            <div class="testimonials-track">
+              @foreach (var testimonial in Model.TestimonialsSection.Testimonials)
+              {
+                <div class="testimonial-card">
+                  @if (!string.IsNullOrEmpty(testimonial.Rating))
+                  {
+                    <div class="testimonial-rating">@testimonial.Rating</div>
+                  }
+                  <p class="testimonial-text">"@testimonial.Text"</p>
+                  @if (testimonial.Author != null)
+                  {
+                    <div class="testimonial-author">
+                      <strong>@testimonial.Author.Name</strong>
+                      @if (!string.IsNullOrEmpty(testimonial.Author.Role))
+                      {
+                        <span>@testimonial.Author.Role</span>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+          <button class="slider-arrow slider-arrow-right" aria-label="Next testimonial">›</button>
+        </div>
+      }
+    </div>
+  </section>
+}
+
+<!-- Value Proposition Banner -->
+@if (Model.ValueProposition != null)
+{
+  <section class="section value-banner section-alt">
+    <div class="container">
+      <header class="section-heading">
+        @if (!string.IsNullOrEmpty(Model.ValueProposition.Eyebrow))
+        {
+          <p class="eyebrow">@Model.ValueProposition.Eyebrow</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.ValueProposition.Title))
+        {
+          <h2>@Html.Raw(Model.ValueProposition.Title)</h2>
+        }
+      </header>
+      @if (Model.ValueProposition.Items != null && Model.ValueProposition.Items.Any())
+      {
+        <div class="value-banner-grid">
+          @foreach (var item in Model.ValueProposition.Items)
+          {
+            <div class="value-item">
+              <div class="value-icon">@item.Icon</div>
+              <h3>@item.Title</h3>
+              <p>@item.Text</p>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </section>
+}
+
+@section Scripts {
+<script>
+  $(function() {
+    // Testimonials slider
+    var testimonialsTrack = $('.testimonials-track');
+    var testimonialCards = $('.testimonial-card');
+    if (testimonialCards.length > 0) {
+      var currentTestimonialIndex = 0;
+      var cardsPerView = window.innerWidth > 900 ? 3 : window.innerWidth > 720 ? 2 : 1;
+      
+      function updateTestimonialsSlider() {
+        var translateX = -(currentTestimonialIndex * (100 / cardsPerView));
+        testimonialsTrack.css('transform', 'translateX(' + translateX + '%)');
+        
+        $('.testimonials-slider-wrapper .slider-arrow-left').prop('disabled', currentTestimonialIndex === 0);
+        $('.testimonials-slider-wrapper .slider-arrow-right').prop('disabled', currentTestimonialIndex >= testimonialCards.length - cardsPerView);
+      }
+      
+      $('.testimonials-slider-wrapper .slider-arrow-left').on('click', function() {
+        if (currentTestimonialIndex > 0) {
+          currentTestimonialIndex--;
+          updateTestimonialsSlider();
+        }
+      });
+      
+      $('.testimonials-slider-wrapper .slider-arrow-right').on('click', function() {
+        if (currentTestimonialIndex < testimonialCards.length - cardsPerView) {
+          currentTestimonialIndex++;
+          updateTestimonialsSlider();
+        }
+      });
+      
+      $(window).on('resize', function() {
+        cardsPerView = window.innerWidth > 900 ? 3 : window.innerWidth > 720 ? 2 : 1;
+        if (currentTestimonialIndex > testimonialCards.length - cardsPerView) {
+          currentTestimonialIndex = Math.max(0, testimonialCards.length - cardsPerView);
+        }
+        updateTestimonialsSlider();
+      });
+      
+      updateTestimonialsSlider();
+    }
+
+    // Close button functionality for mini enquiry messages
+    $('.mini-enquiry-message .message-close-btn').on('click', function() {
+      var $message = $(this).closest('.mini-enquiry-message');
+      $message.fadeOut(300, function() {
+        $(this).remove();
+      });
+    });
+
+    // Hover effect for close button
+    $('.mini-enquiry-message .message-close-btn').on('mouseenter', function() {
+      $(this).css('opacity', '1');
+    }).on('mouseleave', function() {
+      $(this).css('opacity', '0.8');
+    });
+  });
+</script>
+}

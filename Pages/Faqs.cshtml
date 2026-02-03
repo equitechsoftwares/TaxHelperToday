@@ -1,0 +1,126 @@
+@page
+@model FaqsModel
+@{
+    ViewData["Title"] = "FAQs";
+}
+
+<section class="page-hero-modern">
+  <div class="hero-background"></div>
+  <div class="container">
+    @if (!string.IsNullOrEmpty(Model.HeroEyebrow))
+    {
+      <p class="eyebrow">@Model.HeroEyebrow</p>
+    }
+    @if (!string.IsNullOrEmpty(Model.HeroTitle))
+    {
+      <h1>@Html.Raw(Model.HeroTitle)</h1>
+    }
+    @if (!string.IsNullOrEmpty(Model.HeroText))
+    {
+      <p class="page-hero-text">
+        @Html.Raw(Model.HeroText)
+      </p>
+    }
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="faq-tabs-container">
+      <div class="faq-tabs-wrapper">
+        <div class="faq-tabs" id="faq-tabs" role="tablist">
+          <button class="faq-tab is-active" data-tab="all" role="tab" aria-selected="true">All</button>
+          @foreach (var category in Model.Categories)
+          {
+            <button class="faq-tab" data-tab="@category.ToLower().Replace(" ", "-")" role="tab">@category</button>
+          }
+        </div>
+      </div>
+      
+      <div class="faq-tab-content-wrapper">
+        <div id="faq-tab-all" class="faq-tab-panel" role="tabpanel">
+          <div class="accordion-list-modern">
+            @foreach (var faq in Model.AllFaqs)
+            {
+              <div class="accordion-item">
+                <div class="accordion-header">
+                  <h3>@faq.Question</h3>
+                  <span class="accordion-toggle"><span class="toggle-icon">+</span></span>
+                </div>
+                <div class="accordion-body">
+                  @Html.Raw(faq.Answer)
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+        
+        @foreach (var category in Model.Categories)
+        {
+          var categoryId = category.ToLower().Replace(" ", "-");
+          <div id="faq-tab-@categoryId" class="faq-tab-panel" role="tabpanel" style="display: none;">
+            <div class="accordion-list-modern">
+              @foreach (var faq in Model.FaqsByCategory[category])
+              {
+                <div class="accordion-item">
+                  <div class="accordion-header">
+                    <h3>@faq.Question</h3>
+                    <span class="accordion-toggle"><span class="toggle-icon">+</span></span>
+                  </div>
+                  <div class="accordion-body">
+                    @Html.Raw(faq.Answer)
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+    
+    <div class="faq-help-section">
+      <div class="help-card">
+        <div class="help-icon">💬</div>
+        <div>
+          @if (!string.IsNullOrEmpty(Model.HelpCardTitle))
+          {
+            <h3>@Model.HelpCardTitle</h3>
+          }
+          @if (!string.IsNullOrEmpty(Model.HelpCardDescription))
+          {
+            <p>@Model.HelpCardDescription</p>
+          }
+          @if (!string.IsNullOrEmpty(Model.HelpCardButtonText))
+          {
+            <a href="/Contact" class="btn btn-primary">@Model.HelpCardButtonText</a>
+          }
+          else
+          {
+            <a href="/Contact" class="btn btn-primary">Contact</a>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+@section Scripts {
+<script>
+  $(function() {
+    $('.faq-tab').on('click', function() {
+      var tabId = $(this).data('tab');
+      
+      // Update active tab
+      $('.faq-tab').removeClass('is-active').attr('aria-selected', 'false');
+      $(this).addClass('is-active').attr('aria-selected', 'true');
+      
+      // Show/hide panels
+      $('.faq-tab-panel').hide();
+      $('#faq-tab-' + tabId).show();
+    });
+    
+    // Accordion functionality is handled globally in main.js via event delegation
+    // No need for custom handler here
+  });
+</script>
+}

@@ -1,0 +1,176 @@
+@page "/Admin/Contact/Enquiries/Details/{id}"
+@model TaxHelperToday.Pages.Admin.Contact.Enquiries.DetailsModel
+@{
+    ViewData["Title"] = "Enquiry Details";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Enquiry Details</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Contact/Enquiries">Contact</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Contact/Enquiries">Enquiries</a></li>
+                    <li class="breadcrumb-item active">Details</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        @if (Model.Enquiry == null)
+        {
+            <div class="alert alert-danger">
+                Enquiry not found.
+            </div>
+            <a href="/Admin/Contact/Enquiries" class="btn btn-secondary">Back to Enquiries</a>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Enquiry Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-3">Name:</dt>
+                                <dd class="col-sm-9">@Model.Enquiry.Name</dd>
+
+                                <dt class="col-sm-3">Email:</dt>
+                                <dd class="col-sm-9">
+                                    <a href="mailto:@Model.Enquiry.Email">@Model.Enquiry.Email</a>
+                                </dd>
+
+                                <dt class="col-sm-3">Phone:</dt>
+                                <dd class="col-sm-9">
+                                    @if (!string.IsNullOrEmpty(Model.Enquiry.Phone))
+                                    {
+                                        <a href="tel:@Model.Enquiry.Phone">@Model.Enquiry.Phone</a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">-</span>
+                                    }
+                                </dd>
+
+                                <dt class="col-sm-3">Subject:</dt>
+                                <dd class="col-sm-9">@(Model.Enquiry.Subject ?? "No Subject")</dd>
+
+                                <dt class="col-sm-3">Enquiry Type:</dt>
+                                <dd class="col-sm-9">@(Model.Enquiry.EnquiryType ?? "-")</dd>
+
+                                <dt class="col-sm-3">Service:</dt>
+                                <dd class="col-sm-9">@(Model.Enquiry.ServiceName ?? "-")</dd>
+
+                                <dt class="col-sm-3">Status:</dt>
+                                <dd class="col-sm-9">
+                                    @switch (Model.Enquiry.Status?.ToLower())
+                                    {
+                                        case "pending":
+                                            <span class="badge badge-warning">Pending</span>
+                                            break;
+                                        case "in progress":
+                                            <span class="badge badge-info">In Progress</span>
+                                            break;
+                                        case "resolved":
+                                            <span class="badge badge-success">Resolved</span>
+                                            break;
+                                        case "closed":
+                                            <span class="badge badge-secondary">Closed</span>
+                                            break;
+                                        default:
+                                            <span class="badge badge-secondary">@Model.Enquiry.Status</span>
+                                            break;
+                                    }
+                                </dd>
+
+                                <dt class="col-sm-3">Assigned To:</dt>
+                                <dd class="col-sm-9">@(Model.Enquiry.AssignedToName ?? "Unassigned")</dd>
+
+                                <dt class="col-sm-3">Message:</dt>
+                                <dd class="col-sm-9">
+                                    <div class="border p-3 bg-light rounded">
+                                        @Model.Enquiry.Message
+                                    </div>
+                                </dd>
+
+                                <dt class="col-sm-3">Created:</dt>
+                                <dd class="col-sm-9">@Model.Enquiry.CreatedAt.ToString("MMM dd, yyyy HH:mm")</dd>
+
+                                <dt class="col-sm-3">Last Updated:</dt>
+                                <dd class="col-sm-9">@Model.Enquiry.UpdatedAt.ToString("MMM dd, yyyy HH:mm")</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Actions</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Update Status</label>
+                                <div class="btn-group-vertical w-100" role="group">
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="Pending" class="mb-2">
+                                        <button type="submit" class="btn btn-warning btn-block @(Model.Enquiry.Status == "Pending" ? "active" : "")">
+                                            Pending
+                                        </button>
+                                    </form>
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="In Progress" class="mb-2">
+                                        <button type="submit" class="btn btn-info btn-block @(Model.Enquiry.Status == "In Progress" ? "active" : "")">
+                                            In Progress
+                                        </button>
+                                    </form>
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="Resolved" class="mb-2">
+                                        <button type="submit" class="btn btn-success btn-block @(Model.Enquiry.Status == "Resolved" ? "active" : "")">
+                                            Resolved
+                                        </button>
+                                    </form>
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="Closed" class="mb-2">
+                                        <button type="submit" class="btn btn-secondary btn-block @(Model.Enquiry.Status == "Closed" ? "active" : "")">
+                                            Closed
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Notes</label>
+                                <form method="post" asp-page-handler="UpdateNotes" asp-route-id="@Model.Enquiry.Id">
+                                    <textarea name="notes" class="form-control" rows="5" placeholder="Add notes about this enquiry...">@Model.Enquiry.Notes</textarea>
+                                    <button type="submit" class="btn btn-primary btn-sm mt-2">Save Notes</button>
+                                </form>
+                            </div>
+
+                            <div class="mt-3">
+                                <a href="/Admin/Contact/Enquiries" class="btn btn-secondary btn-block">
+                                    <i class="fas fa-arrow-left"></i> Back to Enquiries
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

@@ -1,0 +1,109 @@
+@page
+@model TaxHelperToday.Pages.Admin.Content.Services.IndexModel
+@{
+    ViewData["Title"] = "Services";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Services</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Content</a></li>
+                    <li class="breadcrumb-item active">Services</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">All Services</h3>
+                        <div class="card-tools">
+                            <a href="/Admin/Content/Services/Create" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> New Service
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="servicesTable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Sln</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Level</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int sln = 1; }
+                                @foreach (var service in Model.Services)
+                                {
+                                    <tr>
+                                        <td>@(sln++)</td>
+                                        <td>@service.Name</td>
+                                        <td>@(service.Type ?? "-")</td>
+                                        <td>@(service.Level ?? "-")</td>
+                                        <td>
+                                            @if (service.IsActive)
+                                            {
+                                                <span class="badge badge-success">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-secondary">Inactive</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="/Admin/Content/Services/Edit/@service.Id" class="btn btn-sm btn-info">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form method="post" asp-page-handler="Delete" asp-route-id="@service.Id" class="d-inline">
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(function () {
+            $("#servicesTable").DataTable({
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false,
+                "order": [], // no initial sort
+                "columnDefs": [
+                    { "orderable": false, "targets": [5] } // Disable sorting on Actions column
+                ]
+            });
+        });
+    </script>
+}

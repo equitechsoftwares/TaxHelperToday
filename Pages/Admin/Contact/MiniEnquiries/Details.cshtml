@@ -1,0 +1,170 @@
+@page "/Admin/Contact/MiniEnquiries/Details/{id}"
+@model TaxHelperToday.Pages.Admin.Contact.MiniEnquiries.DetailsModel
+@{
+    ViewData["Title"] = "Mini Enquiry Details";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Mini Enquiry Details</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Contact/MiniEnquiries">Contact</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Contact/MiniEnquiries">Mini Enquiries</a></li>
+                    <li class="breadcrumb-item active">Details</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        @if (Model.MiniEnquiry == null)
+        {
+            <div class="alert alert-danger">
+                Mini enquiry not found.
+            </div>
+            <a href="/Admin/Contact/MiniEnquiries" class="btn btn-secondary">Back to Mini Enquiries</a>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Mini Enquiry Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-3">Name:</dt>
+                                <dd class="col-sm-9">@Model.MiniEnquiry.Name</dd>
+
+                                <dt class="col-sm-3">Email:</dt>
+                                <dd class="col-sm-9">
+                                    <a href="mailto:@Model.MiniEnquiry.Email">@Model.MiniEnquiry.Email</a>
+                                </dd>
+
+                                <dt class="col-sm-3">User Type:</dt>
+                                <dd class="col-sm-9">
+                                    @if (!string.IsNullOrEmpty(Model.MiniEnquiry.UserType))
+                                    {
+                                        <span class="badge badge-info">@Model.MiniEnquiry.UserType</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">-</span>
+                                    }
+                                </dd>
+
+                                <dt class="col-sm-3">Status:</dt>
+                                <dd class="col-sm-9">
+                                    @switch (Model.MiniEnquiry.Status?.ToLower())
+                                    {
+                                        case "new":
+                                            <span class="badge badge-primary">New</span>
+                                            break;
+                                        case "contacted":
+                                            <span class="badge badge-info">Contacted</span>
+                                            break;
+                                        case "converted":
+                                            <span class="badge badge-success">Converted</span>
+                                            break;
+                                        case "closed":
+                                            <span class="badge badge-secondary">Closed</span>
+                                            break;
+                                        default:
+                                            <span class="badge badge-secondary">@Model.MiniEnquiry.Status</span>
+                                            break;
+                                    }
+                                </dd>
+
+                                <dt class="col-sm-3">Assigned To:</dt>
+                                <dd class="col-sm-9">@(Model.MiniEnquiry.AssignedToName ?? "Unassigned")</dd>
+
+                                @if (!string.IsNullOrEmpty(Model.MiniEnquiry.Notes))
+                                {
+                                    <dt class="col-sm-3">Notes:</dt>
+                                    <dd class="col-sm-9">
+                                        <div class="border p-3 bg-light rounded">
+                                            @Model.MiniEnquiry.Notes
+                                        </div>
+                                    </dd>
+                                }
+
+                                <dt class="col-sm-3">Created:</dt>
+                                <dd class="col-sm-9">@Model.MiniEnquiry.CreatedAt.ToString("MMM dd, yyyy HH:mm")</dd>
+
+                                <dt class="col-sm-3">Last Updated:</dt>
+                                <dd class="col-sm-9">@Model.MiniEnquiry.UpdatedAt.ToString("MMM dd, yyyy HH:mm")</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Actions</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Update Status</label>
+                                <div class="btn-group-vertical w-100" role="group">
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="New" class="mb-2">
+                                        <button type="submit" class="btn btn-primary btn-block @(Model.MiniEnquiry.Status == "New" ? "active" : "")">
+                                            New
+                                        </button>
+                                    </form>
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="Contacted" class="mb-2">
+                                        <button type="submit" class="btn btn-info btn-block @(Model.MiniEnquiry.Status == "Contacted" ? "active" : "")">
+                                            Contacted
+                                        </button>
+                                    </form>
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="Converted" class="mb-2">
+                                        <button type="submit" class="btn btn-success btn-block @(Model.MiniEnquiry.Status == "Converted" ? "active" : "")">
+                                            Converted
+                                        </button>
+                                    </form>
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="Closed" class="mb-2">
+                                        <button type="submit" class="btn btn-secondary btn-block @(Model.MiniEnquiry.Status == "Closed" ? "active" : "")">
+                                            Closed
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Notes</label>
+                                <form method="post" asp-page-handler="UpdateNotes" asp-route-id="@Model.MiniEnquiry.Id">
+                                    <textarea name="notes" class="form-control" rows="5" placeholder="Add notes about this mini enquiry...">@Model.MiniEnquiry.Notes</textarea>
+                                    <button type="submit" class="btn btn-primary btn-sm mt-2">Save Notes</button>
+                                </form>
+                            </div>
+
+                            <div class="mt-3">
+                                <a href="/Admin/Contact/MiniEnquiries" class="btn btn-secondary btn-block">
+                                    <i class="fas fa-arrow-left"></i> Back to Mini Enquiries
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

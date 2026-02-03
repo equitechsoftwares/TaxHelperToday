@@ -1,0 +1,67 @@
+@page
+@model BlogDetailModel
+@{
+    ViewData["Title"] = Model.BlogPost?.Title ?? "Blog Post";
+}
+
+@if (Model.BlogPost != null)
+{
+  <section class="section">
+    <div class="container">
+      <div class="blog-detail-container">
+        <div class="blog-detail-header">
+          <a href="/Blogs" class="blog-back-link">← Back to Blogs</a>
+          
+          <div class="blog-detail-meta">
+            @if (!string.IsNullOrEmpty(Model.BlogPost.Category))
+            {
+              <span class="blog-detail-category">@Model.BlogPost.Category</span>
+            }
+            @if (!string.IsNullOrEmpty(Model.BlogPost.ReadTime))
+            {
+              <span class="blog-detail-read-time">⏱️ @Model.BlogPost.ReadTime</span>
+            }
+            @if (Model.BlogPost.PublishedAt.HasValue)
+            {
+              <span class="blog-detail-read-time">📅 @Model.BlogPost.PublishedAt.Value.ToString("MMMM dd, yyyy")</span>
+            }
+          </div>
+          
+          <h1>@Model.BlogPost.Title</h1>
+          
+          @if (Model.BlogPost.Tags.Any())
+          {
+            <div class="blog-detail-tags">
+              @foreach (var tag in Model.BlogPost.Tags)
+              {
+                <span class="blog-tag">@tag</span>
+              }
+            </div>
+          }
+        </div>
+        
+        <div class="blog-detail-content">
+          @Html.Raw(Model.BlogPost.Content)
+        </div>
+        
+        <div class="blog-detail-footer">
+          <a href="/Blogs" class="btn btn-outline">← All Blogs</a>
+          <a href="/Contact" class="btn btn-primary">Get Expert Help</a>
+        </div>
+      </div>
+    </div>
+  </section>
+}
+else
+{
+  <section class="section">
+    <div class="container">
+      <div class="blog-detail-error">
+        <div class="empty-icon">📄</div>
+        <h3>Blog post not found</h3>
+        <p>The blog post you're looking for doesn't exist or has been removed.</p>
+        <a href="/Blogs" class="btn btn-primary">Back to Blogs</a>
+      </div>
+    </div>
+  </section>
+}
