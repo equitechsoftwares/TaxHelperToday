@@ -30,7 +30,7 @@
                     <div class="card-header">
                         <h3 class="card-title">New Blog Post</h3>
                     </div>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <div class="card-body">
                             @if (!ViewData.ModelState.IsValid)
                             {
@@ -92,10 +92,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label asp-for="BlogPost.FeaturedImageUrl">Featured Image URL</label>
-                                <input type="url" class="form-control" asp-for="BlogPost.FeaturedImageUrl" placeholder="https://example.com/image.jpg">
-                                <span asp-validation-for="BlogPost.FeaturedImageUrl" class="text-danger"></span>
-                                <small class="form-text text-muted">URL to the featured image for this blog post</small>
+                                <label asp-for="FeaturedImageFile">Featured Image</label>
+                                <input type="file" class="form-control" asp-for="FeaturedImageFile" accept="image/*">
+                                <div id="featuredImagePreviewContainer" class="mt-2" style="display:none;">
+                                    <img id="featuredImagePreview" src="#" alt="Featured image preview" style="max-height: 120px; border: 1px solid #ddd; padding: 4px; border-radius: 4px;" />
+                                </div>
+                                <span asp-validation-for="FeaturedImageFile" class="text-danger"></span>
+                                <small class="form-text text-muted">Upload a featured image (JPG/PNG/WebP/GIF). Optional.</small>
                             </div>
 
                             <div class="form-group">
@@ -177,6 +180,29 @@
                 var content = document.querySelector('#blogContent .ql-editor').innerHTML;
                 $('textarea[name="BlogPost.Content"]').val(content);
             });
+
+            // Featured image preview
+            const fileInput = document.querySelector('input[name="FeaturedImageFile"]');
+            const previewContainer = document.getElementById('featuredImagePreviewContainer');
+            const previewImage = document.getElementById('featuredImagePreview');
+
+            if (fileInput && previewContainer && previewImage) {
+                fileInput.addEventListener('change', function (event) {
+                    const file = event.target.files && event.target.files[0];
+                    if (!file) {
+                        previewContainer.style.display = 'none';
+                        previewImage.src = '#';
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewImage.src = e.target.result;
+                        previewContainer.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
         });
     </script>
 }

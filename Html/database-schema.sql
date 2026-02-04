@@ -237,8 +237,7 @@ INSERT INTO admin_settings (key, value, description) VALUES
     ('contact_whatsapp_number', '918910397497', 'WhatsApp Number (without + or spaces)'),
     ('contact_whatsapp_message', 'Hi, I''d like to get in touch with TaxHelperToday', 'WhatsApp Pre-filled Message'),
     ('contact_office_address', 'TaxHelperToday\n1, Royd Ln, Esplanade\nTaltala, Kolkata, West Bengal - 700016\nIndia', 'Office Address'),
-    ('contact_map_url', 'https://www.google.com/maps?q=1+Royd+Ln,+Esplanade,+Taltala,+Kolkata,+West+Bengal+700016&output=embed', 'Google Maps Embed URL'),
-    ('contact_map_directions_url', 'https://www.google.com/maps/place/1,+Royd+Ln,+Esplanade,+Taltala,+Kolkata,+West+Bengal+700016/@@22.5517171,88.3537581,17z/data=!3m1!4b1!4m5!3m4!1s0x3a02771b30ffd405:0x30a20c3cf4c869fd!8m2!3d22.5517122!4d88.356333?entry=ttu', 'Google Maps Directions URL'),
+    ('contact_map_location', '1 Royd Ln, Esplanade, Taltala, Kolkata, West Bengal 700016', 'Google Maps Location (address or place name)'),
 
     -- ITR deadline banner
     ('it_deadline_countdown', 'true', 'Show ITR deadline countdown'),

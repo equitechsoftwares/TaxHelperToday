@@ -45,8 +45,10 @@ namespace TaxHelperToday.Pages
         public string WhatsAppNumber { get; set; } = "918910397497";
         public string WhatsAppMessage { get; set; } = "Hi, I'd like to get in touch with TaxHelperToday";
         public string OfficeAddress { get; set; } = "TaxHelperToday<br>1, Royd Ln, Esplanade<br>Taltala, Kolkata, West Bengal - 700016<br>India";
-        public string MapUrl { get; set; } = "https://www.google.com/maps?q=1+Royd+Ln,+Esplanade,+Taltala,+Kolkata,+West+Bengal+700016&output=embed";
-        public string MapDirectionsUrl { get; set; } = "https://www.google.com/maps/place/1,+Royd+Ln,+Esplanade,+Taltala,+Kolkata,+West+Bengal+700016/@@22.5517171,88.3537581,17z/data=!3m1!4b1!4m5!3m4!1s0x3a02771b30ffd405:0x30a20c3cf4c869fd!8m2!3d22.5517122!4d88.356333?entry=ttu";
+        // Canonical location value used to generate map embed + directions URLs.
+        public string MapLocation { get; set; } = "1 Royd Ln, Esplanade, Taltala, Kolkata, West Bengal 700016";
+        public string MapUrl { get; set; } = string.Empty;
+        public string MapDirectionsUrl { get; set; } = string.Empty;
 
         public async Task OnGetAsync()
         {
@@ -94,14 +96,16 @@ namespace TaxHelperToday.Pages
                     case "contact_office_address":
                         OfficeAddress = (setting.Value ?? OfficeAddress).Replace("\n", "<br>");
                         break;
-                    case "contact_map_url":
-                        MapUrl = setting.Value ?? MapUrl;
-                        break;
-                    case "contact_map_directions_url":
-                        MapDirectionsUrl = setting.Value ?? MapDirectionsUrl;
+                    case "contact_map_location":
+                        MapLocation = setting.Value ?? MapLocation;
                         break;
                 }
             }
+
+            // Generate both URLs from the canonical location.
+            var q = Uri.EscapeDataString(MapLocation ?? string.Empty);
+            MapUrl = $"https://www.google.com/maps?q={q}&output=embed";
+            MapDirectionsUrl = $"https://www.google.com/maps?q={q}";
         }
 
         public async Task<IActionResult> OnPostAsync(string name, string email, string phone, string subject, string message, string service, string type)

@@ -81,11 +81,17 @@
           </div>
           @if (!string.IsNullOrEmpty(Model.ContactFormButtonText))
           {
-            <button type="submit" class="btn btn-primary btn-block">@Model.ContactFormButtonText</button>
+            <button type="submit" class="btn btn-primary btn-block" id="contact-form-submit">
+              <span class="btn-spinner"></span>
+              <span class="btn-text">@Model.ContactFormButtonText</span>
+            </button>
           }
           else
           {
-            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            <button type="submit" class="btn btn-primary btn-block" id="contact-form-submit">
+              <span class="btn-spinner"></span>
+              <span class="btn-text">Submit</span>
+            </button>
           }
           @if (!string.IsNullOrEmpty(Model.ContactFormNote))
           {

@@ -16,11 +16,23 @@ namespace TaxHelperToday.Pages.Admin.Contact
         }
 
         public List<MiniEnquiryViewModel> MiniEnquiries { get; set; } = new();
+        public string? SelectedStatus { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string status = null)
         {
-            var miniEnquiries = await _context.MiniEnquiries
+            SelectedStatus = status;
+
+            var query = _context.MiniEnquiries
                 .Include(e => e.AssignedUser)
+                .AsQueryable();
+
+            // Apply status filter if provided
+            if (!string.IsNullOrEmpty(status) && status != "All")
+            {
+                query = query.Where(e => e.Status != null && e.Status.ToLower() == status.ToLower());
+            }
+
+            var miniEnquiries = await query
                 .OrderByDescending(e => e.CreatedAt)
                 .ToListAsync();
 

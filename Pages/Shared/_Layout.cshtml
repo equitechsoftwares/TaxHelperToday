@@ -1,4 +1,6 @@
-﻿@{
+﻿@using TaxHelperToday.Infrastructure.Data
+@inject ApplicationDbContext DbContext
+@{
     var pageValue = ViewContext.RouteData.Values["page"]?.ToString()?.ToLower().Replace("/", "") ?? "home";
     if (pageValue == "index" || pageValue == "") pageValue = "home";
     if (pageValue == "blogdetail") pageValue = "blog-detail";
@@ -6,16 +8,40 @@
     if (pageValue == "privacypolicy") pageValue = "privacy";
     if (pageValue == "termsconditions") pageValue = "terms";
     if (pageValue == "trustsafety") pageValue = "trust-safety";
+    
+    var settings = DbContext.AdminSettings.ToList();
+    var siteName = settings.FirstOrDefault(s => s.Key == "site_name")?.Value ?? "TaxHelperToday";
+    var siteLogoRaw = settings.FirstOrDefault(s => s.Key == "site_logo_url")?.Value ?? "~/img/logo.png";
+    var siteLogoIsExternal = siteLogoRaw.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                             siteLogoRaw.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+
+    string ResolveAssetUrl(string raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw)) return Url.Content("~/img/logo.png");
+        return raw.StartsWith("http://", StringComparison.OrdinalIgnoreCase) || raw.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+            ? raw
+            : Url.Content(raw);
+    }
+
+    var siteLogoUrl = ResolveAssetUrl(siteLogoRaw);
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@(ViewData["Title"] != null ? ViewData["Title"] + " - " : "")TaxHelperToday | Smart Tax Compliance & Planning</title>
+    <title>@(ViewData["Title"] != null ? ViewData["Title"] + " - " : "")@siteName | Smart Tax Compliance & Planning</title>
 
-    <link rel="icon" type="image/png" href="~/img/logo.png" asp-append-version="true" />
-    <link rel="shortcut icon" type="image/png" href="~/img/logo.png" asp-append-version="true" />
+    @if (siteLogoIsExternal)
+    {
+        <link rel="icon" type="image/png" href="@siteLogoUrl" />
+        <link rel="shortcut icon" type="image/png" href="@siteLogoUrl" />
+    }
+    else
+    {
+        <link rel="icon" type="image/png" href="@siteLogoUrl" asp-append-version="true" />
+        <link rel="shortcut icon" type="image/png" href="@siteLogoUrl" asp-append-version="true" />
+    }
 
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
 </head>

@@ -30,7 +30,7 @@
                     <div class="card-header">
                         <h3 class="card-title">New Service</h3>
                     </div>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <div class="card-body">
                             @if (!ViewData.ModelState.IsValid)
                             {
@@ -97,10 +97,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label asp-for="Service.IconUrl">Icon URL</label>
-                                <input type="url" class="form-control" asp-for="Service.IconUrl" placeholder="https://example.com/icon.png">
-                                <span asp-validation-for="Service.IconUrl" class="text-danger"></span>
-                                <small class="form-text text-muted">URL to an icon image for this service</small>
+                                <label asp-for="IconFile">Icon Image</label>
+                                <input type="file" class="form-control" asp-for="IconFile" accept="image/*">
+                                <div id="iconPreviewContainer" class="mt-2" style="display:none;">
+                                    <img id="iconPreview" src="#" alt="Icon preview" style="max-height: 80px; border: 1px solid #ddd; padding: 4px; border-radius: 4px;" />
+                                </div>
+                                <span asp-validation-for="IconFile" class="text-danger"></span>
+                                <small class="form-text text-muted">Upload an icon image for this service (JPG/PNG/WebP/GIF). Optional.</small>
                             </div>
 
                             <div class="row">
@@ -170,6 +173,29 @@
                 var content = document.querySelector('#serviceContent .ql-editor').innerHTML;
                 $('textarea[name="Service.Content"]').val(content);
             });
+
+            // Icon image preview
+            const iconInput = document.querySelector('input[name="IconFile"]');
+            const iconPreviewContainer = document.getElementById('iconPreviewContainer');
+            const iconPreview = document.getElementById('iconPreview');
+
+            if (iconInput && iconPreviewContainer && iconPreview) {
+                iconInput.addEventListener('change', function (event) {
+                    const file = event.target.files && event.target.files[0];
+                    if (!file) {
+                        iconPreviewContainer.style.display = 'none';
+                        iconPreview.src = '#';
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        iconPreview.src = e.target.result;
+                        iconPreviewContainer.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
         });
     </script>
 }

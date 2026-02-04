@@ -1,0 +1,281 @@
+@page
+@model TaxHelperToday.Pages.Admin.SystemSettingsModel
+@{
+    ViewData["Title"] = "System Settings";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>System Settings</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Settings">Settings</a></li>
+                    <li class="breadcrumb-item active">System Settings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["ErrorMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-cog"></i> System Settings</h3>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="card-body">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+                            @if (Model.Settings.Any())
+                            {
+                                var headerKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+                                {
+                                    "site_name",
+                                    "site_logo_url",
+                                    "header_logo_subtitle"
+                                };
+
+                                var footerKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+                                {
+                                    "footer_logo_subtitle",
+                                    "footer_description"
+                                };
+
+                                var headerSettings = Model.Settings.Where(s => headerKeys.Contains(s.Key)).ToList();
+                                var footerSettings = Model.Settings.Where(s => footerKeys.Contains(s.Key)).ToList();
+                                var otherSettings = Model.Settings
+                                    .Where(s => !headerKeys.Contains(s.Key) && !footerKeys.Contains(s.Key))
+                                    .ToList();
+
+                                <h5 class="mb-2"><i class="fas fa-heading"></i> Header</h5>
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30%;">Setting</th>
+                                                <th style="width: 70%;">Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var setting in headerSettings)
+                                            {
+                                                <tr>
+                                                    <td><strong>@(setting.Description ?? setting.Key)</strong></td>
+                                                    <td>
+                                                        @if (setting.Key == "site_logo_url")
+                                                        {
+                                                            var currentLogoValue = Model.SettingValues.ContainsKey(setting.Key)
+                                                                ? Model.SettingValues[setting.Key]
+                                                                : setting.Value ?? "";
+
+                                                            var isExternal = currentLogoValue.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                                                                             currentLogoValue.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+
+                                                            var previewUrl = string.IsNullOrWhiteSpace(currentLogoValue)
+                                                                ? Url.Content("~/img/logo.png")
+                                                                : (isExternal ? currentLogoValue : Url.Content(currentLogoValue));
+
+                                                            var fallbackUrl = Url.Content("~/img/logo.png");
+
+                                                            <!-- keep the value but hide it -->
+                                                            <input type="hidden"
+                                                                   id="siteLogoUrlValue"
+                                                                   name="SettingValues[@setting.Key]"
+                                                                   value="@currentLogoValue" />
+
+                                                            <div class="d-flex align-items-start" style="gap: 12px;">
+                                                                <div class="border rounded bg-white d-flex align-items-center justify-content-center"
+                                                                     style="width: 78px; height: 78px; overflow: hidden;">
+                                                                    <img id="siteLogoPreview"
+                                                                         src="@previewUrl"
+                                                                         alt="Site logo preview"
+                                                                         style="width: 100%; height: 100%; object-fit: contain;"
+                                                                         onerror="this.src='@fallbackUrl';" />
+                                                                </div>
+
+                                                                <div class="flex-grow-1">
+                                                                    <input type="file"
+                                                                           class="form-control"
+                                                                           id="siteLogoFileInput"
+                                                                           name="SiteLogoFile"
+                                                                           accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp">
+                                                                    <small class="text-muted d-block mt-1">
+                                                                        Uploading a file will save it to <code>wwwroot/uploads/branding</code> and automatically update the logo.
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   name="SettingValues[@setting.Key]"
+                                                                   value="@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "")"
+                                                                   placeholder="Enter value">
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <h5 class="mb-2"><i class="fas fa-shoe-prints"></i> Footer</h5>
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30%;">Setting</th>
+                                                <th style="width: 70%;">Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var setting in footerSettings)
+                                            {
+                                                <tr>
+                                                    <td><strong>@(setting.Description ?? setting.Key)</strong></td>
+                                                    <td>
+                                                        @if (setting.Key == "footer_description")
+                                                        {
+                                                            <textarea class="form-control"
+                                                                      name="SettingValues[@setting.Key]"
+                                                                      rows="3"
+                                                                      placeholder="Enter footer description">@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "")</textarea>
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   name="SettingValues[@setting.Key]"
+                                                                   value="@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "")"
+                                                                   placeholder="Enter value">
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <h5 class="mb-2"><i class="fas fa-sliders-h"></i> Other Settings</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30%;">Setting</th>
+                                                <th style="width: 70%;">Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var setting in otherSettings)
+                                            {
+                                                <tr>
+                                                    <td><strong>@(setting.Description ?? setting.Key)</strong></td>
+                                                    <td>
+                                                        @if (setting.Key == "it_deadline_countdown")
+                                                        {
+                                                            <div class="form-check">
+                                                                <input type="checkbox"
+                                                                       class="form-check-input"
+                                                                       name="SettingValues[@setting.Key]"
+                                                                       value="true"
+                                                                       @(Model.SettingValues.ContainsKey(setting.Key) && Model.SettingValues[setting.Key] == "true" || (!Model.SettingValues.ContainsKey(setting.Key) && setting.Value == "true") ? "checked" : "")>
+                                                                <input type="hidden" name="SettingValues[@setting.Key]" value="false">
+                                                                <label class="form-check-label">Enabled</label>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   name="SettingValues[@setting.Key]"
+                                                                   value="@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "")"
+                                                                   placeholder="Enter value">
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> No system settings found. Default settings will be created on first run.
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Settings
+                            </button>
+                            <a href="/Admin/Dashboard" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+  (function () {
+    var fileInput = document.getElementById('siteLogoFileInput');
+    var previewImg = document.getElementById('siteLogoPreview');
+
+    if (fileInput && previewImg) {
+      fileInput.addEventListener('change', function () {
+        var file = fileInput.files && fileInput.files[0];
+        if (!file) return;
+
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+          if (evt && evt.target && evt.target.result) {
+            previewImg.src = evt.target.result;
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  })();
+</script>

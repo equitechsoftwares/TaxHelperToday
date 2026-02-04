@@ -7,6 +7,17 @@
 
 @section Styles {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
+    <style>
+        .btn-icon-square {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+    </style>
 }
 
 <section class="content-header">
@@ -96,8 +107,8 @@
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form method="post" asp-page-handler="ToggleActive" asp-route-id="@faq.Id" class="d-inline">
-                                                <button type="submit" class="btn btn-sm @(faq.IsActive ? "btn-warning" : "btn-success")" title="@(faq.IsActive ? "Deactivate" : "Activate")">
-                                                    <i class="fas fa-@(faq.IsActive ? "eye-slash" : "eye")"></i>
+                                                <button type="submit" class="btn btn-sm btn-icon-square @(faq.IsActive ? "btn-warning" : "btn-success")" title="@(faq.IsActive ? "Deactivate" : "Activate")">
+                                                    <i class="fas fa-@(faq.IsActive ? "toggle-off" : "toggle-on")"></i>
                                                 </button>
                                             </form>
                                             <form method="post" asp-page-handler="Delete" asp-route-id="@faq.Id" class="d-inline">

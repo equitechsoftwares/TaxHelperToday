@@ -27,6 +27,24 @@
 
 <section class="content">
     <div class="container-fluid">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["ErrorMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -70,11 +88,16 @@
                                             }
                                         </td>
                                         <td>
-                                            <a href="/Admin/Content/Services/Edit/@service.Id" class="btn btn-sm btn-info">
+                                            <a href="/Admin/Content/Services/Edit/@service.Id" class="btn btn-sm btn-info" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
+                                            <form method="post" asp-page-handler="ToggleActive" asp-route-id="@service.Id" class="d-inline">
+                                                <button type="submit" class="btn btn-sm @(service.IsActive ? "btn-warning" : "btn-success")" title="@(service.IsActive ? "Deactivate" : "Activate")">
+                                                    <i class="fas fa-@(service.IsActive ? "toggle-off" : "toggle-on")"></i>
+                                                </button>
+                                            </form>
                                             <form method="post" asp-page-handler="Delete" asp-route-id="@service.Id" class="d-inline">
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">
+                                                <button type="submit" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this service?');">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

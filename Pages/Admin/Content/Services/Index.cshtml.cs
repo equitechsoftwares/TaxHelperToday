@@ -27,11 +27,28 @@ namespace TaxHelperToday.Pages.Admin.Content.Services
             try
             {
                 await _serviceService.DeleteAsync(id);
+                TempData["SuccessMessage"] = "Service deleted successfully!";
                 return RedirectToPage();
             }
             catch
             {
-                return Page();
+                TempData["ErrorMessage"] = "Error deleting service.";
+                return RedirectToPage();
+            }
+        }
+
+        public async Task<IActionResult> OnPostToggleActiveAsync(long id)
+        {
+            try
+            {
+                await _serviceService.ToggleActiveAsync(id);
+                TempData["SuccessMessage"] = "Service status updated successfully!";
+                return RedirectToPage();
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Error updating service status.";
+                return RedirectToPage();
             }
         }
     }

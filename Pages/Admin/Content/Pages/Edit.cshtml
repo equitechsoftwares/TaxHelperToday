@@ -6,6 +6,7 @@
 
 @section Styles {
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.18.0/index.css" />
     <style>
         #statsEditor, #checklistEditor, #missionCardsEditor, #categoriesEditor, #valuesEditor, #teamMembersEditor {
             background-color: #f8f9fa;
@@ -29,6 +30,75 @@
         }
         .checklist-item input {
             font-size: 0.9rem;
+        }
+        .icon-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .icon-input-wrapper input {
+            flex: 1;
+        }
+        .emoji-picker-btn {
+            padding: 6px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .emoji-picker-btn:hover {
+            background-color: #0056b3;
+        }
+        .emoji-picker-container {
+            position: absolute;
+            z-index: 1000;
+            display: none;
+            top: 100%;
+            left: 0;
+            margin-top: 5px;
+        }
+        .emoji-picker-container.show {
+            display: block;
+        }
+        emoji-picker {
+            --emoji-size: 1.5rem;
+            --num-columns: 8;
+            --category-emoji-size: 1.2rem;
+            width: 300px;
+            max-height: 350px;
+        }
+        .gender-select-btn {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+        }
+        .gender-select-btn.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .gender-emoji-grid {
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 8px;
+            background-color: #f8f9fa;
+        }
+        .gender-emoji-option {
+            font-size: 24px;
+            padding: 4px 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .gender-emoji-option:hover {
+            background-color: #e9ecef;
+            border-color: #007bff;
+            transform: scale(1.1);
         }
     </style>
 }
@@ -72,12 +142,9 @@
                                 </div>
                             }
 
-                            <div class="form-group">
-                                <label asp-for="UpdatePage.Slug">Slug <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" asp-for="UpdatePage.Slug" placeholder="e.g., about-us" value="@(Model.UpdatePage.Slug ?? Model.CurrentPage?.Slug)" required>
-                                <span asp-validation-for="UpdatePage.Slug" class="text-danger"></span>
-                                <small class="form-text text-muted">URL-friendly identifier (lowercase, hyphens only)</small>
-                            </div>
+                            @* Slug is system-defined for predefined pages and should not be editable by admins.
+                               Keep it as a hidden field so the value is posted back without exposing the input. *@
+                            <input type="hidden" asp-for="UpdatePage.Slug" value="@(Model.UpdatePage.Slug ?? Model.CurrentPage?.Slug)" />
 
                             <div class="form-group">
                                 <label asp-for="UpdatePage.Title">Title <span class="text-danger">*</span></label>
@@ -564,16 +631,8 @@
                                 <small class="form-text text-muted">Display text for when the page was last updated</small>
                             </div>
 
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="isActive" id="isActive" value="true" @(Model.CurrentPage?.IsActive == true ? "checked" : "")>
-                                    <input type="hidden" name="isActive" value="false">
-                                    <label class="form-check-label" for="isActive">
-                                        Active
-                                    </label>
-                                </div>
-                                <small class="form-text text-muted">Check to make the page active, uncheck to make it inactive</small>
-                            </div>
+                            @* Keep the current active state, but don't allow toggling from the Edit Page UI. *@
+                            <input type="hidden" name="isActive" value="@(Model.CurrentPage?.IsActive == true ? "true" : "false")" />
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">
@@ -594,8 +653,138 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.18.0/index.js"></script>
     <script>
         $(document).ready(function() {
+            // Initialize emoji pickers using event delegation for dynamically added elements
+            $(document).on('click', '.emoji-picker-btn', function(e) {
+                e.stopPropagation();
+                var $btn = $(this);
+                var $container = $btn.siblings('.emoji-picker-container');
+                var $picker = $container.find('emoji-picker');
+                var targetClass = $btn.data('target');
+                
+                // Close all other pickers
+                $('.emoji-picker-container').not($container).removeClass('show');
+                
+                // Toggle current picker
+                $container.toggleClass('show');
+                
+                // Initialize picker if not already initialized
+                if ($picker.length && $picker[0] && !$picker.data('initialized')) {
+                    $picker[0].addEventListener('emoji-click', function(event) {
+                        var emoji = event.detail.unicode;
+                        var $targetInput = $btn.closest('.icon-input-wrapper').find('.' + targetClass);
+                        if ($targetInput.length) {
+                            $targetInput.val(emoji).trigger('input');
+                            $container.removeClass('show');
+                        }
+                    });
+                    $picker.data('initialized', true);
+                }
+            });
+            
+            // Close picker when clicking outside
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.icon-input-wrapper').length && 
+                    !$(e.target).closest('emoji-picker').length) {
+                    $('.emoji-picker-container').removeClass('show');
+                }
+            });
+            
+            // Initialize pickers for existing elements on page load
+            setTimeout(function() {
+                $('.emoji-picker-container emoji-picker').each(function() {
+                    if (!$(this).data('initialized')) {
+                        var $picker = $(this);
+                        var $container = $picker.closest('.emoji-picker-container');
+                        var $btn = $container.siblings('.emoji-picker-btn');
+                        var targetClass = $btn.data('target');
+                        
+                        this.addEventListener('emoji-click', function(event) {
+                            var emoji = event.detail.unicode;
+                            var $targetInput = $btn.closest('.icon-input-wrapper').find('.' + targetClass);
+                            if ($targetInput.length) {
+                                $targetInput.val(emoji).trigger('input');
+                                $container.removeClass('show');
+                            }
+                        });
+                        $picker.data('initialized', true);
+                    }
+                });
+            }, 500);
+            
+            // Gender selection handler
+            $(document).on('click', '.gender-select-btn', function(e) {
+                e.preventDefault();
+                var $btn = $(this);
+                var gender = $btn.data('gender');
+                var targetClass = $btn.data('target');
+                var $avatarField = $btn.closest('.col-md-2');
+                var $targetInput = $avatarField.find('.' + targetClass);
+                var $emojiGrid = $avatarField.find('.gender-emoji-grid');
+                var $emojiContainer = $emojiGrid.find('.d-flex');
+                
+                // Define emoji options for male and female
+                var emojiOptions = {
+                    male: [
+                        { emoji: '👨', label: 'Man' },
+                        { emoji: '👨‍💼', label: 'Businessman' },
+                        { emoji: '👨‍💻', label: 'Technologist' },
+                        { emoji: '👨‍🔬', label: 'Scientist' },
+                        { emoji: '👨‍🏫', label: 'Teacher' },
+                        { emoji: '👨‍⚕️', label: 'Doctor' },
+                        { emoji: '👨‍🎓', label: 'Student' },
+                        { emoji: '👨‍🏭', label: 'Factory Worker' },
+                        { emoji: '👨‍🚀', label: 'Astronaut' },
+                        { emoji: '👨‍✈️', label: 'Pilot' }
+                    ],
+                    female: [
+                        { emoji: '👩', label: 'Woman' },
+                        { emoji: '👩‍💼', label: 'Businesswoman' },
+                        { emoji: '👩‍💻', label: 'Technologist' },
+                        { emoji: '👩‍🔬', label: 'Scientist' },
+                        { emoji: '👩‍🏫', label: 'Teacher' },
+                        { emoji: '👩‍⚕️', label: 'Doctor' },
+                        { emoji: '👩‍🎓', label: 'Student' },
+                        { emoji: '👩‍🏭', label: 'Factory Worker' },
+                        { emoji: '👩‍🚀', label: 'Astronaut' },
+                        { emoji: '👩‍✈️', label: 'Pilot' }
+                    ]
+                };
+                
+                // Update active state
+                $btn.closest('.btn-group').find('.gender-select-btn').removeClass('active');
+                $btn.addClass('active');
+                
+                // Close other gender grids
+                $('.gender-emoji-grid').not($emojiGrid).hide();
+                
+                // Populate and show emoji grid
+                if (emojiOptions[gender] && emojiOptions[gender].length > 0) {
+                    $emojiContainer.empty();
+                    emojiOptions[gender].forEach(function(item) {
+                        var $emojiBtn = $('<span>')
+                            .addClass('gender-emoji-option')
+                            .attr('title', item.label)
+                            .text(item.emoji)
+                            .on('click', function() {
+                                $targetInput.val(item.emoji).trigger('input');
+                                $emojiGrid.hide();
+                            });
+                        $emojiContainer.append($emojiBtn);
+                    });
+                    $emojiGrid.toggle();
+                }
+            });
+            
+            // Close emoji grid when clicking outside
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.gender-select-btn').length && 
+                    !$(e.target).closest('.gender-emoji-grid').length) {
+                    $('.gender-emoji-grid').hide();
+                }
+            });
             // Initialize Quill editor with existing content
             var quill = new Quill('#pageContent', {
                 theme: 'snow',
@@ -686,7 +875,13 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <label class="form-label">Icon (Emoji)</label>
-                                    <input type="text" class="form-control stat-icon" placeholder="👥" value="${stat.icon || ''}" maxlength="10">
+                                    <div class="icon-input-wrapper">
+                                        <input type="text" class="form-control stat-icon" placeholder="👥" value="${stat.icon || ''}" maxlength="10">
+                                        <button type="button" class="emoji-picker-btn" data-target="stat-icon">😀</button>
+                                        <div class="emoji-picker-container">
+                                            <emoji-picker></emoji-picker>
+                                        </div>
+                                    </div>
                                     <small class="text-muted">e.g., 👥, 🎓, ✅</small>
                                 </div>
                                 <div class="col-md-2">
@@ -878,7 +1073,13 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <label class="form-label">Icon (Emoji)</label>
-                                    <input type="text" class="form-control mission-card-icon" placeholder="🎯" value="${card.icon || ''}" maxlength="10">
+                                    <div class="icon-input-wrapper">
+                                        <input type="text" class="form-control mission-card-icon" placeholder="🎯" value="${card.icon || ''}" maxlength="10">
+                                        <button type="button" class="emoji-picker-btn" data-target="mission-card-icon">😀</button>
+                                        <div class="emoji-picker-container">
+                                            <emoji-picker></emoji-picker>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Title</label>
@@ -970,7 +1171,13 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <label class="form-label">Icon (Emoji)</label>
-                                    <input type="text" class="form-control category-icon" placeholder="💼" value="${category.icon || ''}" maxlength="10">
+                                    <div class="icon-input-wrapper">
+                                        <input type="text" class="form-control category-icon" placeholder="💼" value="${category.icon || ''}" maxlength="10">
+                                        <button type="button" class="emoji-picker-btn" data-target="category-icon">😀</button>
+                                        <div class="emoji-picker-container">
+                                            <emoji-picker></emoji-picker>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-10">
                                     <label class="form-label">Label</label>
@@ -1057,7 +1264,13 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <label class="form-label">Icon (Emoji)</label>
-                                    <input type="text" class="form-control value-icon" placeholder="💡" value="${value.icon || ''}" maxlength="10">
+                                    <div class="icon-input-wrapper">
+                                        <input type="text" class="form-control value-icon" placeholder="💡" value="${value.icon || ''}" maxlength="10">
+                                        <button type="button" class="emoji-picker-btn" data-target="value-icon">😀</button>
+                                        <div class="emoji-picker-container">
+                                            <emoji-picker></emoji-picker>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Title</label>
@@ -1149,7 +1362,29 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <label class="form-label">Avatar (Emoji)</label>
-                                    <input type="text" class="form-control team-member-avatar" placeholder="👨‍💼" value="${member.avatar || ''}" maxlength="10">
+                                    <div class="icon-input-wrapper">
+                                        <input type="text" class="form-control team-member-avatar" placeholder="👨‍💼" value="${member.avatar || ''}" maxlength="10">
+                                        <button type="button" class="emoji-picker-btn" data-target="team-member-avatar">😀</button>
+                                        <div class="emoji-picker-container">
+                                            <emoji-picker></emoji-picker>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <label class="form-label small">Quick Select:</label>
+                                        <div class="btn-group btn-group-sm w-100" role="group">
+                                            <button type="button" class="btn btn-outline-primary gender-select-btn" data-gender="male" data-target="team-member-avatar">
+                                                <span style="font-size: 16px;">👨</span> Male
+                                            </button>
+                                            <button type="button" class="btn btn-outline-primary gender-select-btn" data-gender="female" data-target="team-member-avatar">
+                                                <span style="font-size: 16px;">👩</span> Female
+                                            </button>
+                                        </div>
+                                        <div class="gender-emoji-grid mt-2" style="display: none;">
+                                            <div class="d-flex flex-wrap gap-1" style="max-width: 100%;">
+                                                <!-- Emoji options will be populated here -->
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Name</label>
@@ -1242,7 +1477,13 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <label class="form-label">Icon</label>
-                                    <input type="text" class="form-control trust-badge-icon" placeholder="⭐" value="${badge.icon || ''}">
+                                    <div class="icon-input-wrapper">
+                                        <input type="text" class="form-control trust-badge-icon" placeholder="⭐" value="${badge.icon || ''}">
+                                        <button type="button" class="emoji-picker-btn" data-target="trust-badge-icon">😀</button>
+                                        <div class="emoji-picker-container">
+                                            <emoji-picker></emoji-picker>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Value</label>
@@ -1517,7 +1758,13 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">Icon</label>
-                                    <input type="text" class="form-control step-icon" placeholder="📝" value="${step.icon || ''}">
+                                    <div class="icon-input-wrapper">
+                                        <input type="text" class="form-control step-icon" placeholder="📝" value="${step.icon || ''}">
+                                        <button type="button" class="emoji-picker-btn" data-target="step-icon">😀</button>
+                                        <div class="emoji-picker-container">
+                                            <emoji-picker></emoji-picker>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Title</label>
@@ -1617,7 +1864,13 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <label class="form-label">Icon</label>
-                                    <input type="text" class="form-control feature-icon" placeholder="👨‍💼" value="${feature.icon || ''}">
+                                    <div class="icon-input-wrapper">
+                                        <input type="text" class="form-control feature-icon" placeholder="👨‍💼" value="${feature.icon || ''}">
+                                        <button type="button" class="emoji-picker-btn" data-target="feature-icon">😀</button>
+                                        <div class="emoji-picker-container">
+                                            <emoji-picker></emoji-picker>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Title</label>
@@ -2041,7 +2294,13 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <label class="form-label">Icon</label>
-                                    <input type="text" class="form-control value-prop-icon" placeholder="✅" value="${item.icon || ''}">
+                                    <div class="icon-input-wrapper">
+                                        <input type="text" class="form-control value-prop-icon" placeholder="✅" value="${item.icon || ''}">
+                                        <button type="button" class="emoji-picker-btn" data-target="value-prop-icon">😀</button>
+                                        <div class="emoji-picker-container">
+                                            <emoji-picker></emoji-picker>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Title</label>

@@ -30,6 +30,12 @@
       <div class="service-detail-container">
         <div class="service-detail-header">
           <div class="service-detail-meta">
+            @if (!string.IsNullOrEmpty(Model.Service.IconUrl))
+            {
+              <span class="service-detail-icon">
+                <img src="@Model.Service.IconUrl" alt="@Model.Service.Name icon" />
+              </span>
+            }
             @if (!string.IsNullOrEmpty(Model.Service.Type))
             {
               <span class="service-detail-type">@Model.Service.Type</span>
@@ -120,11 +126,17 @@
             </div>
             @if (!string.IsNullOrEmpty(Model.Service?.EnquiryButtonText))
             {
-              <button type="submit" class="btn btn-primary btn-block">@Model.Service.EnquiryButtonText</button>
+              <button type="submit" class="btn btn-primary btn-block" id="service-contact-submit">
+                <span class="btn-spinner"></span>
+                <span class="btn-text">@Model.Service.EnquiryButtonText</span>
+              </button>
             }
             else
             {
-              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+              <button type="submit" class="btn btn-primary btn-block" id="service-contact-submit">
+                <span class="btn-spinner"></span>
+                <span class="btn-text">Submit</span>
+              </button>
             }
             @if (!string.IsNullOrEmpty(Model.Service?.EnquiryNote))
             {

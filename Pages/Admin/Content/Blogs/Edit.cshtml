@@ -30,7 +30,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Edit Blog Post: @Model.CurrentBlogPost?.Title</h3>
                     </div>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <div class="card-body">
                             @if (!ViewData.ModelState.IsValid)
                             {
@@ -92,10 +92,20 @@
                             </div>
 
                             <div class="form-group">
-                                <label asp-for="BlogPost.FeaturedImageUrl">Featured Image URL</label>
-                                <input type="url" class="form-control" asp-for="BlogPost.FeaturedImageUrl" placeholder="https://example.com/image.jpg" value="@(Model.BlogPost.FeaturedImageUrl ?? Model.CurrentBlogPost?.FeaturedImageUrl)">
-                                <span asp-validation-for="BlogPost.FeaturedImageUrl" class="text-danger"></span>
-                                <small class="form-text text-muted">URL to the featured image for this blog post</small>
+                                <label asp-for="FeaturedImageFile">Featured Image</label>
+                                @if (!string.IsNullOrWhiteSpace(Model.CurrentBlogPost?.FeaturedImageUrl))
+                                {
+                                    <div class="mb-2">
+                                        <img src="@Model.CurrentBlogPost.FeaturedImageUrl" alt="Current featured image" style="max-height: 120px; border: 1px solid #ddd; padding: 4px; border-radius: 4px;" />
+                                    </div>
+                                    <small class="form-text text-muted mb-2">Current: @Model.CurrentBlogPost.FeaturedImageUrl</small>
+                                }
+                                <input type="file" class="form-control" asp-for="FeaturedImageFile" accept="image/*">
+                                <div id="featuredImagePreviewContainer" class="mt-2" style="display:none;">
+                                    <img id="featuredImagePreview" src="#" alt="New featured image preview" style="max-height: 120px; border: 1px solid #ddd; padding: 4px; border-radius: 4px;" />
+                                </div>
+                                <span asp-validation-for="FeaturedImageFile" class="text-danger"></span>
+                                <small class="form-text text-muted">Upload a new featured image to replace the current one (optional).</small>
                             </div>
 
                             <div class="form-group">
@@ -178,6 +188,29 @@
                 var content = document.querySelector('#blogContent .ql-editor').innerHTML;
                 $('textarea[name="BlogPost.Content"]').val(content);
             });
+
+            // Featured image preview for newly selected file
+            const fileInput = document.querySelector('input[name="FeaturedImageFile"]');
+            const previewContainer = document.getElementById('featuredImagePreviewContainer');
+            const previewImage = document.getElementById('featuredImagePreview');
+
+            if (fileInput && previewContainer && previewImage) {
+                fileInput.addEventListener('change', function (event) {
+                    const file = event.target.files && event.target.files[0];
+                    if (!file) {
+                        previewContainer.style.display = 'none';
+                        previewImage.src = '#';
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewImage.src = e.target.result;
+                        previewContainer.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
         });
     </script>
 }

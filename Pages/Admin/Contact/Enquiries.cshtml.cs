@@ -16,12 +16,24 @@ namespace TaxHelperToday.Pages.Admin.Contact
         }
 
         public List<EnquiryViewModel> Enquiries { get; set; } = new();
+        public string? SelectedStatus { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string status = null)
         {
-            var enquiries = await _context.ContactEnquiries
+            SelectedStatus = status;
+
+            var query = _context.ContactEnquiries
                 .Include(e => e.Service)
                 .Include(e => e.AssignedUser)
+                .AsQueryable();
+
+            // Apply status filter if provided
+            if (!string.IsNullOrEmpty(status) && status != "All")
+            {
+                query = query.Where(e => e.Status != null && e.Status.ToLower() == status.ToLower());
+            }
+
+            var enquiries = await query
                 .OrderByDescending(e => e.CreatedAt)
                 .ToListAsync();
 

@@ -1,16 +1,36 @@
+@using TaxHelperToday.Infrastructure.Data
+@inject ApplicationDbContext DbContext
+@{
+    var settings = DbContext.AdminSettings.ToList();
+    var siteName = settings.FirstOrDefault(s => s.Key == "site_name")?.Value ?? "TaxHelperToday";
+    var siteLogoRaw = settings.FirstOrDefault(s => s.Key == "site_logo_url")?.Value ?? "~/img/logo.png";
+    var footerLogoSubtitle = settings.FirstOrDefault(s => s.Key == "footer_logo_subtitle")?.Value ?? "CA-Led Tax Compliance";
+    var footerDescriptionTemplate = settings.FirstOrDefault(s => s.Key == "footer_description")?.Value
+        ?? "{{site_name}} is an independent tax and compliance advisory platform. We help individuals and businesses understand and meet their obligations under Indian tax laws.";
+
+    string ResolveAssetUrl(string raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw)) return Url.Content("~/img/logo.png");
+        return raw.StartsWith("http://", StringComparison.OrdinalIgnoreCase) || raw.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+            ? raw
+            : Url.Content(raw);
+    }
+
+    var siteLogoUrl = ResolveAssetUrl(siteLogoRaw);
+    var footerDescriptionHtml = footerDescriptionTemplate.Replace("{{site_name}}", siteName ?? "TaxHelperToday");
+}
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
       <a href="/" class="logo">
-        <img src="~/img/logo.png" alt="TaxHelperToday Logo">
+        <img src="@siteLogoUrl" alt="@siteName Logo">
         <span class="logo-text">
-          <span class="logo-title">TaxHelperToday</span>
-          <span class="logo-subtitle">CA-Led Tax Compliance</span>
+          <span class="logo-title">@siteName</span>
+          <span class="logo-subtitle">@footerLogoSubtitle</span>
         </span>
       </a>
       <p class="footer-copy">
-        TaxHelperToday is an independent tax and compliance advisory platform. We help individuals
-        and businesses understand and meet their obligations under Indian tax laws.
+        @Html.Raw(footerDescriptionHtml)
       </p>
     </div>
     <div class="footer-links">
@@ -38,7 +58,7 @@
   </div>
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
-      <p>© <span id="current-year">@DateTime.Now.Year</span> TaxHelperToday. All rights reserved.</p>
+      <p>© <span id="current-year">@DateTime.Now.Year</span> @siteName. All rights reserved.</p>
       <p class="footer-note">
         Designed and Developed by <a href="https://equitechsoftwares.com/" target="_blank" rel="noopener noreferrer">Equitech Softwares</a>
       </p>

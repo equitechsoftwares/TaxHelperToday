@@ -1,0 +1,191 @@
+@page
+@model TaxHelperToday.Pages.Admin.EmailSettingsModel
+@{
+    ViewData["Title"] = "Email Settings";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Email Settings</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Settings">Settings</a></li>
+                    <li class="breadcrumb-item active">Email Settings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["ErrorMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-envelope"></i> SMTP Email Settings</h3>
+                    </div>
+                    <form method="post">
+                        <div class="card-body">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+                            <div class="alert alert-info mb-3">
+                                <i class="fas fa-info-circle"></i> 
+                                <strong>Note:</strong> For Gmail, you need to use an App Password instead of your regular password. 
+                                Enable 2-Step Verification and generate an App Password from your Google Account settings.
+                            </div>
+
+                            @if (Model.Settings.Any())
+                            {
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30%;">Setting</th>
+                                                <th style="width: 70%;">Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var setting in Model.Settings)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <strong>@(setting.Description ?? setting.Key)</strong>
+                                                    </td>
+                                                    <td>
+                                                        @if (setting.Key == "smtp_enabled" || setting.Key == "smtp_enable_ssl")
+                                                        {
+                                                            <div class="form-check">
+                                                                <input type="checkbox" 
+                                                                       class="form-check-input" 
+                                                                       name="SettingValues[@setting.Key]" 
+                                                                       value="true"
+                                                                       @(Model.SettingValues.ContainsKey(setting.Key) && Model.SettingValues[setting.Key] == "true" || (!Model.SettingValues.ContainsKey(setting.Key) && setting.Value == "true") ? "checked" : "")>
+                                                                <input type="hidden" name="SettingValues[@setting.Key]" value="false">
+                                                                <label class="form-check-label">Enabled</label>
+                                                            </div>
+                                                        }
+                                                        else if (setting.Key == "smtp_password")
+                                                        {
+                                                            <input type="password" 
+                                                                   class="form-control" 
+                                                                   name="SettingValues[@setting.Key]" 
+                                                                   value=""
+                                                                   placeholder="Enter SMTP password (App Password for Gmail). Leave blank to keep current password."
+                                                                   autocomplete="new-password">
+                                                            <small class="form-text text-muted">Leave blank to keep current password. For Gmail, use an App Password (not your regular password).</small>
+                                                        }
+                                                        else if (setting.Key == "smtp_port")
+                                                        {
+                                                            <input type="number" 
+                                                                   class="form-control" 
+                                                                   name="SettingValues[@setting.Key]" 
+                                                                   value="@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "587")"
+                                                                   placeholder="587 (TLS) or 465 (SSL)"
+                                                                   min="1"
+                                                                   max="65535">
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text" 
+                                                                   class="form-control" 
+                                                                   name="SettingValues[@setting.Key]" 
+                                                                   value="@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "")"
+                                                                   placeholder="Enter value">
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> No email settings found. Default settings will be created on first run.
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Settings
+                            </button>
+                            <a href="/Admin/Dashboard" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.Settings.Any())
+        {
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0"><i class="fas fa-paper-plane"></i> Test Email Configuration</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">Send a test email to verify your SMTP settings are configured correctly.</p>
+                            <form method="post" asp-page-handler="TestEmail" class="form-inline">
+                                <div class="form-group mr-2">
+                                    <label for="testEmailAddress" class="sr-only">Email Address</label>
+                                    <input type="email" 
+                                           class="form-control" 
+                                           id="testEmailAddress" 
+                                           name="testEmailAddress" 
+                                           placeholder="Enter email address (optional - uses Admin Notification Email if empty)"
+                                           style="min-width: 300px;">
+                                </div>
+                                <button type="submit" class="btn btn-info">
+                                    <i class="fas fa-paper-plane"></i> Send Test Email
+                                </button>
+                            </form>
+                            <small class="form-text text-muted mt-2">
+                                <i class="fas fa-info-circle"></i> 
+                                If no email is provided, the test email will be sent to the "Admin Notification Email" address configured above.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

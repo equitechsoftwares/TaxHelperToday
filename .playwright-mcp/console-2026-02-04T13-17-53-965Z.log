@@ -1,0 +1,27 @@
+[    1470ms] [ERROR] WebSocket connection to 'wss://localhost:55807/' failed: Error in connection establishment: net::ERR_CERT_AUTHORITY_INVALID @ http://localhost:5000/_framework/aspnetcore-browser-refresh.js:354
+[   55900ms] [ERROR] WebSocket connection to 'wss://localhost:55807/' failed: Error in connection establishment: net::ERR_CERT_AUTHORITY_INVALID @ http://localhost:5000/_framework/aspnetcore-browser-refresh.js:354
+[   87022ms] [ERROR] WebSocket connection to 'wss://localhost:55807/' failed: Error in connection establishment: net::ERR_CERT_AUTHORITY_INVALID @ http://localhost:5000/_framework/aspnetcore-browser-refresh.js:354
+[  101017ms] Uncaught TypeError: Cannot set properties of undefined (setting 'unobtrusive')
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:2612)
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:229)
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:239)
+[  101046ms] missing ) after argument list
+[  101872ms] [ERROR] WebSocket connection to 'wss://localhost:55807/' failed: Error in connection establishment: net::ERR_CERT_AUTHORITY_INVALID @ http://localhost:5000/_framework/aspnetcore-browser-refresh.js:354
+[  316942ms] Uncaught TypeError: Cannot set properties of undefined (setting 'unobtrusive')
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:2612)
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:229)
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:239)
+[  316966ms] missing ) after argument list
+[  317796ms] [ERROR] WebSocket connection to 'wss://localhost:55807/' failed: Error in connection establishment: net::ERR_CERT_AUTHORITY_INVALID @ http://localhost:5000/_framework/aspnetcore-browser-refresh.js:354
+[  333775ms] Uncaught TypeError: Cannot set properties of undefined (setting 'unobtrusive')
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:2612)
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:229)
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:239)
+[  333779ms] missing ) after argument list
+[  334549ms] [ERROR] WebSocket connection to 'wss://localhost:55807/' failed: Error in connection establishment: net::ERR_CERT_AUTHORITY_INVALID @ http://localhost:5000/_framework/aspnetcore-browser-refresh.js:354
+[  398622ms] Uncaught TypeError: Cannot set properties of undefined (setting 'unobtrusive')
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:2612)
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:229)
+    at <anonymous> (https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js:4:239)
+[  398624ms] missing ) after argument list
+[  398746ms] [ERROR] WebSocket connection to 'wss://localhost:55807/' failed: Error in connection establishment: net::ERR_CERT_AUTHORITY_INVALID @ http://localhost:5000/_framework/aspnetcore-browser-refresh.js:354

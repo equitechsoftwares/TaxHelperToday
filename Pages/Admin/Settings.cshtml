@@ -22,296 +22,71 @@
 
 <section class="content">
     <div class="container-fluid">
-        @if (TempData["SuccessMessage"] != null)
-        {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                @TempData["SuccessMessage"]
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
-
-        @if (TempData["ErrorMessage"] != null)
-        {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                @TempData["ErrorMessage"]
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
-
         <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">System Settings</h3>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-primary">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <i class="fas fa-address-book fa-3x mb-3 text-primary"></i>
+                            <h4>Contact Settings</h4>
+                            <p class="text-muted">Manage contact information, phone numbers, addresses, and map settings.</p>
+                        </div>
                     </div>
-                    <form method="post">
-                        <div class="card-body">
-                            @if (!ViewData.ModelState.IsValid)
-                            {
-                                <div class="alert alert-danger">
-                                    <ul class="mb-0">
-                                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                                        {
-                                            <li>@error.ErrorMessage</li>
-                                        }
-                                    </ul>
-                                </div>
-                            }
-
-                            @if (Model.Settings.Any())
-                            {
-                                var contactSettings = Model.Settings.Where(s => s.Key.StartsWith("contact_")).ToList();
-                                var smtpSettings = Model.Settings.Where(s => s.Key.StartsWith("smtp_")).ToList();
-                                var otherSettings = Model.Settings.Where(s => !s.Key.StartsWith("contact_") && !s.Key.StartsWith("smtp_")).ToList();
-
-                                @if (contactSettings.Any())
-                                {
-                                    <h5 class="mb-3"><i class="fas fa-address-book"></i> Contact Information</h5>
-                                    <div class="table-responsive mb-4">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 30%;">Setting</th>
-                                                    <th style="width: 55%;">Value</th>
-                                                    <th style="width: 15%;">Last Updated</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var setting in contactSettings)
-                                                {
-                                                    <tr>
-                                                        <td>
-                                                            <strong>@(setting.Description ?? setting.Key)</strong>
-                                                        </td>
-                                                        <td>
-                                                            @if (setting.Key == "contact_office_address")
-                                                            {
-                                                                <textarea class="form-control" 
-                                                                          name="SettingValues[@setting.Key]" 
-                                                                          rows="4"
-                                                                          placeholder="Enter address (use new lines for formatting)">@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "")</textarea>
-                                                            }
-                                                            else
-                                                            {
-                                                                <input type="text" 
-                                                                       class="form-control" 
-                                                                       name="SettingValues[@setting.Key]" 
-                                                                       value="@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "")"
-                                                                       placeholder="Enter value">
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            <small>@setting.UpdatedAt.ToString("MMM dd, yyyy HH:mm")</small>
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                }
-
-                                @if (smtpSettings.Any())
-                                {
-                                    <h5 class="mb-3"><i class="fas fa-envelope"></i> SMTP Email Settings</h5>
-                                    <div class="alert alert-info mb-3">
-                                        <i class="fas fa-info-circle"></i> 
-                                        <strong>Note:</strong> For Gmail, you need to use an App Password instead of your regular password. 
-                                        Enable 2-Step Verification and generate an App Password from your Google Account settings.
-                                    </div>
-                                    <div class="table-responsive mb-4">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 30%;">Setting</th>
-                                                    <th style="width: 55%;">Value</th>
-                                                    <th style="width: 15%;">Last Updated</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var setting in smtpSettings)
-                                                {
-                                                    <tr>
-                                                        <td>
-                                                            <strong>@(setting.Description ?? setting.Key)</strong>
-                                                        </td>
-                                                        <td>
-                                                            @if (setting.Key == "smtp_enabled" || setting.Key == "smtp_enable_ssl")
-                                                            {
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" 
-                                                                           class="form-check-input" 
-                                                                           name="SettingValues[@setting.Key]" 
-                                                                           value="true"
-                                                                           @(Model.SettingValues.ContainsKey(setting.Key) && Model.SettingValues[setting.Key] == "true" || (!Model.SettingValues.ContainsKey(setting.Key) && setting.Value == "true") ? "checked" : "")>
-                                                                    <input type="hidden" name="SettingValues[@setting.Key]" value="false">
-                                                                    <label class="form-check-label">Enabled</label>
-                                                                </div>
-                                                            }
-                                                            else if (setting.Key == "smtp_password")
-                                                            {
-                                                                <input type="password" 
-                                                                       class="form-control" 
-                                                                       name="SettingValues[@setting.Key]" 
-                                                                       value=""
-                                                                       placeholder="Enter SMTP password (App Password for Gmail). Leave blank to keep current password."
-                                                                       autocomplete="new-password">
-                                                                <small class="form-text text-muted">Leave blank to keep current password. For Gmail, use an App Password (not your regular password).</small>
-                                                            }
-                                                            else if (setting.Key == "smtp_port")
-                                                            {
-                                                                <input type="number" 
-                                                                       class="form-control" 
-                                                                       name="SettingValues[@setting.Key]" 
-                                                                       value="@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "587")"
-                                                                       placeholder="587 (TLS) or 465 (SSL)"
-                                                                       min="1"
-                                                                       max="65535">
-                                                            }
-                                                            else
-                                                            {
-                                                                <input type="text" 
-                                                                       class="form-control" 
-                                                                       name="SettingValues[@setting.Key]" 
-                                                                       value="@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "")"
-                                                                       placeholder="Enter value">
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            <small>@setting.UpdatedAt.ToString("MMM dd, yyyy HH:mm")</small>
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    
-                                    <!-- Test Email Section -->
-                                    <div class="card card-info mb-4">
-                                        <div class="card-header">
-                                            <h5 class="card-title mb-0"><i class="fas fa-paper-plane"></i> Test Email Configuration</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <p class="text-muted">Send a test email to verify your SMTP settings are configured correctly.</p>
-                                            <form method="post" asp-page-handler="TestEmail" class="form-inline">
-                                                <div class="form-group mr-2">
-                                                    <label for="testEmailAddress" class="sr-only">Email Address</label>
-                                                    <input type="email" 
-                                                           class="form-control" 
-                                                           id="testEmailAddress" 
-                                                           name="testEmailAddress" 
-                                                           placeholder="Enter email address (optional - uses Admin Notification Email if empty)"
-                                                           style="min-width: 300px;">
-                                                </div>
-                                                <button type="submit" class="btn btn-info">
-                                                    <i class="fas fa-paper-plane"></i> Send Test Email
-                                                </button>
-                                            </form>
-                                            <small class="form-text text-muted mt-2">
-                                                <i class="fas fa-info-circle"></i> 
-                                                If no email is provided, the test email will be sent to the "Admin Notification Email" address configured above.
-                                            </small>
-                                        </div>
-                                    </div>
-                                }
-
-                                @if (otherSettings.Any())
-                                {
-                                    <h5 class="mb-3"><i class="fas fa-cog"></i> System Settings</h5>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 30%;">Setting</th>
-                                                    <th style="width: 55%;">Value</th>
-                                                    <th style="width: 15%;">Last Updated</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var setting in otherSettings)
-                                                {
-                                                    <tr>
-                                                        <td>
-                                                            <strong>@(setting.Description ?? setting.Key)</strong>
-                                                        </td>
-                                                        <td>
-                                                            @if (setting.Key == "it_deadline_countdown")
-                                                            {
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" 
-                                                                           class="form-check-input" 
-                                                                           name="SettingValues[@setting.Key]" 
-                                                                           value="true"
-                                                                           @(Model.SettingValues.ContainsKey(setting.Key) && Model.SettingValues[setting.Key] == "true" || (!Model.SettingValues.ContainsKey(setting.Key) && setting.Value == "true") ? "checked" : "")>
-                                                                    <input type="hidden" name="SettingValues[@setting.Key]" value="false">
-                                                                    <label class="form-check-label">Enabled</label>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <input type="text" 
-                                                                       class="form-control" 
-                                                                       name="SettingValues[@setting.Key]" 
-                                                                       value="@(Model.SettingValues.ContainsKey(setting.Key) ? Model.SettingValues[setting.Key] : setting.Value ?? "")"
-                                                                       placeholder="Enter value">
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            <small>@setting.UpdatedAt.ToString("MMM dd, yyyy HH:mm")</small>
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                }
-                            }
-                            else
-                            {
-                                <div class="alert alert-info">
-                                    <i class="fas fa-info-circle"></i> No settings found. Default settings will be created on first run.
-                                </div>
-                            }
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Save Settings
-                            </button>
-                            <a href="/Admin/Dashboard" class="btn btn-secondary">
-                                <i class="fas fa-times"></i> Cancel
-                            </a>
-                        </div>
-                    </form>
+                    <div class="card-footer text-center">
+                        <a href="/Admin/ContactSettings" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i> Manage Contact Settings
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card card-danger">
-                    <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-shield-alt"></i> Security Settings</h3>
-                    </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-info">
                     <div class="card-body">
-                        <h5>Active Sessions</h5>
-                        <p class="text-muted">
-                            If you suspect unauthorized access to your account or want to log out from all devices, 
-                            you can revoke all active sessions. This will log you out from all devices including this one.
-                        </p>
-                        <p class="text-warning">
-                            <i class="fas fa-exclamation-triangle"></i> 
-                            <strong>Warning:</strong> This action cannot be undone. You will need to log in again on all devices.
-                        </p>
+                        <div class="text-center">
+                            <i class="fas fa-envelope fa-3x mb-3 text-info"></i>
+                            <h4>Email Settings</h4>
+                            <p class="text-muted">Configure SMTP settings for sending emails and test email functionality.</p>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <form method="post" asp-page-handler="LogoutAllSessions" onsubmit="return confirm('Are you sure you want to log out from all devices? This will end all active sessions including this one.');">
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fas fa-sign-out-alt"></i> Logout All Sessions
-                            </button>
-                        </form>
+                    <div class="card-footer text-center">
+                        <a href="/Admin/EmailSettings" class="btn btn-info">
+                            <i class="fas fa-arrow-right"></i> Manage Email Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-success">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <i class="fas fa-cog fa-3x mb-3 text-success"></i>
+                            <h4>System Settings</h4>
+                            <p class="text-muted">Configure site name, ITR deadline settings, and other system preferences.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="/Admin/SystemSettings" class="btn btn-success">
+                            <i class="fas fa-arrow-right"></i> Manage System Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-danger">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <i class="fas fa-shield-alt fa-3x mb-3 text-danger"></i>
+                            <h4>Security Settings</h4>
+                            <p class="text-muted">Manage active sessions and security-related settings.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="/Admin/SecuritySettings" class="btn btn-danger">
+                            <i class="fas fa-arrow-right"></i> Manage Security Settings
+                        </a>
                     </div>
                 </div>
             </div>

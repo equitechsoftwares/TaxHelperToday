@@ -58,5 +58,26 @@ namespace TaxHelperToday.Pages.Admin.Content.Blogs
                 return RedirectToPage();
             }
         }
+
+        public async Task<IActionResult> OnPostUnpublishAsync(long id)
+        {
+            try
+            {
+                var result = await _blogService.UnpublishAsync(id);
+                if (!result)
+                {
+                    TempData["ErrorMessage"] = "Error unpublishing blog post.";
+                    return RedirectToPage();
+                }
+
+                TempData["SuccessMessage"] = "Blog post unpublished successfully!";
+                return RedirectToPage();
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Error unpublishing blog post.";
+                return RedirectToPage();
+            }
+        }
     }
 }

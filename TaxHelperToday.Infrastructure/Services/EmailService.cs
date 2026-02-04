@@ -47,7 +47,8 @@ public class EmailService : IEmailService
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.Timeout = 30000; // 30 seconds
 
-            var fromAddress = new MailAddress(smtpSettings.FromEmail, fromName ?? smtpSettings.FromName ?? "TaxHelperToday");
+            var siteName = await GetSiteNameAsync();
+            var fromAddress = new MailAddress(smtpSettings.FromEmail, fromName ?? smtpSettings.FromName ?? siteName);
             var toAddress = new MailAddress(to);
 
             using var message = new MailMessage(fromAddress, toAddress)
@@ -86,6 +87,7 @@ public class EmailService : IEmailService
                 .FirstOrDefaultAsync(s => s.Key == "smtp_admin_notification_email");
             
             var notificationEmail = adminEmail?.Value ?? smtpSettings.FromEmail;
+            var siteName = await GetSiteNameAsync();
 
             var emailBody = $@"
 <html>
@@ -135,7 +137,7 @@ public class EmailService : IEmailService
             </div>
         </div>
         <div class=""footer"">
-            <p>This is an automated notification from TaxHelperToday.</p>
+            <p>This is an automated notification from {siteName}.</p>
             <p>Please respond to the customer at <a href=""mailto:{email}"">{email}</a></p>
         </div>
     </div>
@@ -168,6 +170,8 @@ public class EmailService : IEmailService
                 return false;
             }
 
+            var siteName = await GetSiteNameAsync();
+
             var emailBody = $@"
 <html>
 <head>
@@ -187,9 +191,9 @@ public class EmailService : IEmailService
         <div class=""content"">
             <p>Dear {name},</p>
             <p>Thank you for your {enquiryType.ToLower()}. We have received your message and our team will get back to you within one business day.</p>
-            <p>We appreciate your interest in TaxHelperToday and look forward to assisting you with your tax and compliance needs.</p>
+            <p>We appreciate your interest in {siteName} and look forward to assisting you with your tax and compliance needs.</p>
             <p>If you have any urgent questions, please feel free to contact us directly.</p>
-            <p>Best regards,<br>The TaxHelperToday Team</p>
+            <p>Best regards,<br>The {siteName} Team</p>
         </div>
         <div class=""footer"">
             <p>This is an automated confirmation email. Please do not reply to this message.</p>
@@ -200,7 +204,7 @@ public class EmailService : IEmailService
 
             return await SendEmailAsync(
                 to,
-                $"Thank you for your {enquiryType} - TaxHelperToday",
+                $"Thank you for your {enquiryType} - {siteName}",
                 emailBody,
                 isHtml: true
             );
@@ -219,6 +223,7 @@ public class EmailService : IEmailService
             .ToListAsync();
 
         var settingsDict = settings.ToDictionary(s => s.Key, s => s.Value ?? string.Empty);
+        var siteName = await GetSiteNameAsync();
 
         return new SmtpSettings
         {
@@ -228,9 +233,16 @@ public class EmailService : IEmailService
             Username = settingsDict.GetValueOrDefault("smtp_username", string.Empty),
             Password = settingsDict.GetValueOrDefault("smtp_password", string.Empty),
             FromEmail = settingsDict.GetValueOrDefault("smtp_from_email", string.Empty),
-            FromName = settingsDict.GetValueOrDefault("smtp_from_name", "TaxHelperToday"),
+            FromName = settingsDict.GetValueOrDefault("smtp_from_name", siteName),
             EnableSsl = settingsDict.GetValueOrDefault("smtp_enable_ssl", "true").Equals("true", StringComparison.OrdinalIgnoreCase)
         };
+    }
+
+    private async Task<string> GetSiteNameAsync()
+    {
+        var siteNameSetting = await _context.AdminSettings
+            .FirstOrDefaultAsync(s => s.Key == "site_name");
+        return siteNameSetting?.Value ?? "TaxHelperToday";
     }
 
     private class SmtpSettings

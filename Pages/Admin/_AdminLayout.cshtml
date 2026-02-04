@@ -1,12 +1,81 @@
+@using TaxHelperToday.Infrastructure.Data
+@inject ApplicationDbContext DbContext
+@{
+    var settings = DbContext.AdminSettings.ToList();
+    var siteName = settings.FirstOrDefault(s => s.Key == "site_name")?.Value ?? "TaxHelperToday";
+    var siteLogoRaw = settings.FirstOrDefault(s => s.Key == "site_logo_url")?.Value ?? "~/img/logo.png";
+    var siteLogoIsExternal = siteLogoRaw.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                             siteLogoRaw.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+
+    string ResolveAssetUrl(string raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw)) return Url.Content("~/img/logo.png");
+        return raw.StartsWith("http://", StringComparison.OrdinalIgnoreCase) || raw.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+            ? raw
+            : Url.Content(raw);
+    }
+
+    var siteLogoUrl = ResolveAssetUrl(siteLogoRaw);
+
+    var currentPath = (Context?.Request?.Path.Value ?? string.Empty).ToLowerInvariant().TrimEnd('/');
+
+    bool IsActiveExact(string path)
+    {
+        var p = (path ?? string.Empty).ToLowerInvariant().TrimEnd('/');
+        return !string.IsNullOrEmpty(p) && currentPath == p;
+    }
+
+    // Segment-aware match: "/admin/contact" matches "/admin/contact" and "/admin/contact/..." but NOT "/admin/contactsettings"
+    bool IsActivePrefix(string prefix)
+    {
+        var p = (prefix ?? string.Empty).ToLowerInvariant().TrimEnd('/');
+        return !string.IsNullOrEmpty(p) && (currentPath == p || currentPath.StartsWith(p + "/"));
+    }
+
+    var isDashboard = IsActiveExact("/admin/dashboard") || IsActiveExact("/admin");
+
+    var isContent = IsActivePrefix("/admin/content");
+    var isContentBlogs = IsActivePrefix("/admin/content/blogs");
+    var isContentServices = IsActivePrefix("/admin/content/services");
+    var isContentFaqs = IsActivePrefix("/admin/content/faqs");
+    var isContentPages = IsActivePrefix("/admin/content/pages");
+
+    var isContact = IsActivePrefix("/admin/contact");
+    var isContactEnquiries = IsActivePrefix("/admin/contact/enquiries");
+    var isContactMiniEnquiries = IsActivePrefix("/admin/contact/minienquiries");
+
+    var isSettings = IsActivePrefix("/admin/settings") ||
+                     IsActivePrefix("/admin/systemsettings") ||
+                     IsActivePrefix("/admin/contactsettings") ||
+                     IsActivePrefix("/admin/emailsettings") ||
+                     IsActivePrefix("/admin/securitysettings");
+    var isSettingsHome = IsActivePrefix("/admin/settings");
+    var isSystemSettings = IsActivePrefix("/admin/systemsettings");
+    var isContactSettings = IsActivePrefix("/admin/contactsettings");
+    var isEmailSettings = IsActivePrefix("/admin/emailsettings");
+    var isSecuritySettings = IsActivePrefix("/admin/securitysettings");
+
+    var isProfile = IsActiveExact("/admin/profile");
+    var isChangePassword = IsActiveExact("/admin/changepassword");
+    var isLogout = IsActiveExact("/admin/logout");
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@ViewData["Title"] - TaxHelperToday Admin</title>
+    <title>@ViewData["Title"] - @siteName Admin</title>
 
-    <link rel="icon" type="image/png" href="~/img/logo.png" asp-append-version="true" />
-    <link rel="shortcut icon" type="image/png" href="~/img/logo.png" asp-append-version="true" />
+    @if (siteLogoIsExternal)
+    {
+        <link rel="icon" type="image/png" href="@siteLogoUrl" />
+        <link rel="shortcut icon" type="image/png" href="@siteLogoUrl" />
+    }
+    else
+    {
+        <link rel="icon" type="image/png" href="@siteLogoUrl" asp-append-version="true" />
+        <link rel="shortcut icon" type="image/png" href="@siteLogoUrl" asp-append-version="true" />
+    }
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -55,7 +124,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/Admin/Dashboard" class="brand-link">
-                <span class="brand-text font-weight-light">TaxHelperToday</span>
+                <img src="@siteLogoUrl" alt="@siteName Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">@siteName</span>
             </a>
 
             <!-- Sidebar -->
@@ -71,13 +141,13 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="/Admin/Dashboard" class="nav-link">
+                            <a href="/Admin/Dashboard" class="nav-link @(isDashboard ? "active" : "")">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item has-treeview @(isContent ? "menu-open" : "")">
+                            <a href="#" class="nav-link @(isContent ? "active" : "")">
                                 <i class="nav-icon fas fa-file-alt"></i>
                                 <p>
                                     Content
@@ -86,33 +156,33 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/Admin/Content/Blogs" class="nav-link">
+                                    <a href="/Admin/Content/Blogs" class="nav-link @(isContentBlogs ? "active" : "")">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Blogs</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Admin/Content/Services" class="nav-link">
+                                    <a href="/Admin/Content/Services" class="nav-link @(isContentServices ? "active" : "")">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Services</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Admin/Content/FAQs" class="nav-link">
+                                    <a href="/Admin/Content/FAQs" class="nav-link @(isContentFaqs ? "active" : "")">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>FAQs</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Admin/Content/Pages" class="nav-link">
+                                    <a href="/Admin/Content/Pages" class="nav-link @(isContentPages ? "active" : "")">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Pages</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item has-treeview @(isContact ? "menu-open" : "")">
+                            <a href="#" class="nav-link @(isContact ? "active" : "")">
                                 <i class="nav-icon fas fa-envelope"></i>
                                 <p>
                                     Contact
@@ -121,13 +191,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/Admin/Contact/Enquiries" class="nav-link">
+                                    <a href="/Admin/Contact/Enquiries" class="nav-link @(isContactEnquiries ? "active" : "")">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Enquiries</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Admin/Contact/MiniEnquiries" class="nav-link">
+                                    <a href="/Admin/Contact/MiniEnquiries" class="nav-link @(isContactMiniEnquiries ? "active" : "")">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Mini Enquiries</p>
                                     </a>
@@ -140,10 +210,57 @@
                                 <p>Users</p>
                             </a>
                         </li> *@
-                        <li class="nav-item">
-                            <a href="/Admin/Settings" class="nav-link">
+                        <li class="nav-item has-treeview @(isSettings ? "menu-open" : "")">
+                            <a href="#" class="nav-link @(isSettings ? "active" : "")">
                                 <i class="nav-icon fas fa-cog"></i>
-                                <p>Settings</p>
+                                <p>
+                                    Settings
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/SystemSettings" class="nav-link @(isSystemSettings ? "active" : "")">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>System Settings</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/ContactSettings" class="nav-link @(isContactSettings ? "active" : "")">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Contact Settings</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/EmailSettings" class="nav-link @(isEmailSettings ? "active" : "")">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Email Settings</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/SecuritySettings" class="nav-link @(isSecuritySettings ? "active" : "")">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Security Settings</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Admin/Profile" class="nav-link @(isProfile ? "active" : "")">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Admin/ChangePassword" class="nav-link @(isChangePassword ? "active" : "")">
+                                <i class="nav-icon fas fa-key"></i>
+                                <p>Change Password</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Admin/Logout" class="nav-link @(isLogout ? "active" : "")">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>Logout</p>
                             </a>
                         </li>
                     </ul>
@@ -159,7 +276,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; @DateTime.Now.Year TaxHelperToday.</strong>
+            <strong>Copyright &copy; @DateTime.Now.Year @siteName.</strong>
             All rights reserved.
         </footer>
     </div>

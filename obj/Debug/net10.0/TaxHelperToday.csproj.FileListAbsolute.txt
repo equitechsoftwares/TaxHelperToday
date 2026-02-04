@@ -269,5 +269,7 @@ F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\obj\Debug\net10.0\refint\T
 F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\obj\Debug\net10.0\TaxHelperToday.pdb
 F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\obj\Debug\net10.0\TaxHelperToday.genruntimeconfig.cache
 F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\obj\Debug\net10.0\ref\TaxHelperToday.dll
-F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\obj\Debug\net10.0\compressed\02bjpu8nty-{0}-645oq6x6r8-645oq6x6r8.gz
-F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\obj\Debug\net10.0\compressed\50l779os46-{0}-1wtjtwygg8-1wtjtwygg8.gz
+F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\obj\Debug\net10.0\TaxHelperToday.sourcelink.json
+F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\obj\Debug\net10.0\compressed\50l779os46-{0}-fmi0qg8qz0-fmi0qg8qz0.gz
+F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\obj\Debug\net10.0\compressed\02bjpu8nty-{0}-y3ymbas4z6-y3ymbas4z6.gz
+F:\Equitech Softwares\Projects\Rafijul\TaxHelperToday\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

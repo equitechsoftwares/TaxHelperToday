@@ -42,6 +42,62 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">All Mini Enquiries</h3>
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 200px;">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="statusFilter">Status:</label>
+                                </div>
+                                <select id="statusFilter" class="form-control">
+                                    @{
+                                        var isAllSelected = string.IsNullOrEmpty(Model.SelectedStatus) || Model.SelectedStatus == "All";
+                                        var isNewSelected = Model.SelectedStatus == "New";
+                                        var isContactedSelected = Model.SelectedStatus == "Contacted";
+                                        var isConvertedSelected = Model.SelectedStatus == "Converted";
+                                        var isClosedSelected = Model.SelectedStatus == "Closed";
+                                    }
+                                    @if (isAllSelected)
+                                    {
+                                        <option value="All" selected>All</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="All">All</option>
+                                    }
+                                    @if (isNewSelected)
+                                    {
+                                        <option value="New" selected>New</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="New">New</option>
+                                    }
+                                    @if (isContactedSelected)
+                                    {
+                                        <option value="Contacted" selected>Contacted</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Contacted">Contacted</option>
+                                    }
+                                    @if (isConvertedSelected)
+                                    {
+                                        <option value="Converted" selected>Converted</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Converted">Converted</option>
+                                    }
+                                    @if (isClosedSelected)
+                                    {
+                                        <option value="Closed" selected>Closed</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Closed">Closed</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table id="miniEnquiriesTable" class="table table-bordered table-striped">
@@ -52,7 +108,6 @@
                                     <th>Email</th>
                                     <th>User Type</th>
                                     <th>Status</th>
-                                    <th>Assigned To</th>
                                     <th>Created</th>
                                     <th>Actions</th>
                                 </tr>
@@ -95,7 +150,6 @@
                                                     break;
                                             }
                                         </td>
-                                        <td>@(enquiry.AssignedToName ?? "Unassigned")</td>
                                         <td>@enquiry.CreatedAt.ToString("MMM dd, yyyy HH:mm")</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#enquiryModal@(enquiry.Id)" title="View Details">
@@ -224,14 +278,28 @@
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(function () {
-            $("#miniEnquiriesTable").DataTable({
+            var table = $("#miniEnquiriesTable").DataTable({
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false,
-                "order": [[6, "desc"]], // Sort by Created date descending (column index updated due to Sln column)
+                "order": [[5, "desc"]], // Sort by Created date descending (column index updated due to Sln column)
                 "columnDefs": [
-                    { "orderable": false, "targets": [7] } // Disable sorting on Actions column
+                    { "orderable": false, "targets": [6] } // Disable sorting on Actions column
                 ]
+            });
+
+            // Handle status filter change
+            $("#statusFilter").on("change", function () {
+                var selectedStatus = $(this).val();
+                var url = new URL(window.location.href);
+                
+                if (selectedStatus === "All" || selectedStatus === "") {
+                    url.searchParams.delete("status");
+                } else {
+                    url.searchParams.set("status", selectedStatus);
+                }
+                
+                window.location.href = url.toString();
             });
         });
     </script>

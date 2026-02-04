@@ -45,6 +45,12 @@
         @foreach (var blog in Model.BlogPosts)
         {
           <article class="card">
+            @if (!string.IsNullOrEmpty(blog.FeaturedImageUrl))
+            {
+              <div class="card-image-wrapper">
+                <img src="@blog.FeaturedImageUrl" alt="@blog.Title" class="card-image" loading="lazy" />
+              </div>
+            }
             <div class="card-meta">
               @if (!string.IsNullOrEmpty(blog.Category))
               {

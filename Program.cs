@@ -6,6 +6,7 @@ using Serilog;
 using TaxHelperToday.Infrastructure.Data;
 using TaxHelperToday.Infrastructure.Middleware;
 using TaxHelperToday.Infrastructure.Services;
+using TaxHelperToday.Modules.Admin.Domain.Entities;
 using TaxHelperToday.Modules.Content.Application.Services;
 using TaxHelperToday.Modules.Content.Infrastructure.Services;
 using TaxHelperToday.Modules.Identity.Application.Services;
@@ -131,9 +132,7 @@ try
     // Admin Authorization Middleware - protects admin routes
     app.UseMiddleware<AdminAuthorizationMiddleware>();
 
-    app.MapStaticAssets();
-    app.MapRazorPages()
-       .WithStaticAssets();
+    app.MapRazorPages();
 
     // Map API controllers
     app.MapControllers();
@@ -197,6 +196,36 @@ try
             {
                 var seedingService = scope.ServiceProvider.GetRequiredService<DataSeedingService>();
                     await seedingService.SeedDataAsync(adminUser.Id);
+            }
+
+            // Seed default SMTP/email settings (runs on first app start)
+            var existingSettings = await dbContext.AdminSettings
+                .Where(s => s.Key.StartsWith("smtp_"))
+                .ToListAsync();
+            var existingKeys = new HashSet<string>(existingSettings.Select(s => s.Key));
+
+            var defaultSmtpSettings = new[]
+            {
+                new AdminSetting { Key = "smtp_enabled", Value = "false", Description = "Enable Email Sending" },
+                new AdminSetting { Key = "smtp_host", Value = "smtpout.secureserver.net", Description = "SMTP Server Host" },
+                new AdminSetting { Key = "smtp_port", Value = "25", Description = "SMTP Port" },
+                new AdminSetting { Key = "smtp_username", Value = "support@taxhelpertoday.com", Description = "SMTP Username/Email" },
+                new AdminSetting { Key = "smtp_password", Value = "Falc0n!Gold3n$", Description = "SMTP Password" },
+                new AdminSetting { Key = "smtp_from_email", Value = "support@taxhelpertoday.com", Description = "From Email Address" },
+                new AdminSetting { Key = "smtp_from_name", Value = "TaxHelperToday", Description = "From Name" },
+                new AdminSetting { Key = "smtp_enable_ssl", Value = "false", Description = "Enable SSL/TLS" },
+                new AdminSetting { Key = "smtp_admin_notification_email", Value = "support@taxhelpertoday.com", Description = "Admin Notification Email (where enquiry notifications are sent)" }
+            };
+
+            var newSmtpSettings = defaultSmtpSettings
+                .Where(s => !existingKeys.Contains(s.Key))
+                .ToList();
+
+            if (newSmtpSettings.Any())
+            {
+                dbContext.AdminSettings.AddRange(newSmtpSettings);
+                await dbContext.SaveChangesAsync();
+                Log.Information("Seeded default SMTP/email settings");
             }
         }
         catch (Exception ex)

@@ -28,6 +28,13 @@
           </div>
           
           <h1>@Model.BlogPost.Title</h1>
+
+          @if (!string.IsNullOrEmpty(Model.BlogPost.FeaturedImageUrl))
+          {
+            <div class="blog-detail-featured-image">
+              <img src="@Model.BlogPost.FeaturedImageUrl" alt="@Model.BlogPost.Title" loading="lazy" />
+            </div>
+          }
           
           @if (Model.BlogPost.Tags.Any())
           {

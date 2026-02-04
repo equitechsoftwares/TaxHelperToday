@@ -1,0 +1,1 @@
+[     943ms] [ERROR] WebSocket connection to 'wss://localhost:51595/' failed: Error in connection establishment: net::ERR_CERT_AUTHORITY_INVALID @ http://localhost:5000/_framework/aspnetcore-browser-refresh.js:354

@@ -23,6 +23,9 @@
     // Load banner and contact settings
     var settings = DbContext.AdminSettings.ToList();
 
+    string siteName = settings.FirstOrDefault(s => s.Key == "site_name")?.Value ?? "TaxHelperToday";
+    string siteLogoRaw = settings.FirstOrDefault(s => s.Key == "site_logo_url")?.Value ?? "~/img/logo.png";
+    string headerLogoSubtitle = settings.FirstOrDefault(s => s.Key == "header_logo_subtitle")?.Value ?? "Compliance. Clarity. Confidence.";
     string contactEmail = settings.FirstOrDefault(s => s.Key == "contact_email")?.Value ?? "mrhoque64@gmail.com";
     string contactPhone = settings.FirstOrDefault(s => s.Key == "contact_phone")?.Value ?? "+91-89103-97497";
     string contactPhoneDigits = new string(contactPhone.Where(char.IsDigit).ToArray());
@@ -48,6 +51,16 @@
 
     bool showDeadlineBanner = (settings.FirstOrDefault(s => s.Key == "it_deadline_countdown")?.Value ?? "true")
         .Equals("true", StringComparison.OrdinalIgnoreCase);
+
+    string ResolveAssetUrl(string raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw)) return Url.Content("~/img/logo.png");
+        return raw.StartsWith("http://", StringComparison.OrdinalIgnoreCase) || raw.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+            ? raw
+            : Url.Content(raw);
+    }
+
+    var siteLogoUrl = ResolveAssetUrl(siteLogoRaw);
 }
 
 @if (showDeadlineBanner)
@@ -75,10 +88,10 @@
 <header class="site-header">
   <div class="container header-inner">
     <a href="/" class="logo">
-      <img src="~/img/logo.png" alt="TaxHelperToday Logo">
+      <img src="@siteLogoUrl" alt="@siteName Logo">
       <span class="logo-text">
-        <span class="logo-title">TaxHelperToday</span>
-        <span class="logo-subtitle">Compliance. Clarity. Confidence.</span>
+        <span class="logo-title">@siteName</span>
+        <span class="logo-subtitle">@headerLogoSubtitle</span>
       </span>
     </a>
     <nav class="main-nav">

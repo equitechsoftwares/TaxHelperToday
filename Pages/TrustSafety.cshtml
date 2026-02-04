@@ -26,7 +26,13 @@
 
 @if (!string.IsNullOrEmpty(Model.Content))
 {
-  @Html.Raw(Model.Content)
+  <section class="section">
+    <div class="container">
+      <div class="trust-content-wrapper">
+        @Html.Raw(Model.Content)
+      </div>
+    </div>
+  </section>
 }
 else
 {
