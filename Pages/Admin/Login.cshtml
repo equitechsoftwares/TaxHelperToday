@@ -70,7 +70,10 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block" id="loginBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="loginSpinner"></span>
+                                <i class="fas fa-sign-in-alt" id="loginIcon"></i> Sign In
+                            </button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -87,5 +90,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('loginForm');
+            const loginBtn = document.getElementById('loginBtn');
+            const spinner = document.getElementById('loginSpinner');
+            const icon = document.getElementById('loginIcon');
+
+            if (form && loginBtn) {
+                form.addEventListener('submit', function() {
+                    // Show spinner and hide icon
+                    spinner.classList.remove('d-none');
+                    icon.classList.add('d-none');
+                    
+                    // Disable button to prevent double submission
+                    loginBtn.disabled = true;
+                });
+            }
+        });
+    </script>
 </body>
 </html>

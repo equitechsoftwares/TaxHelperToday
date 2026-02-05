@@ -160,22 +160,35 @@
                                                     Status
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="Pending" class="d-inline">
-                                                        <button type="submit" class="dropdown-item">Pending</button>
+                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="Pending" class="d-inline update-status-form">
+                                                        <button type="submit" class="dropdown-item">
+                                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                                            <span class="status-text">Pending</span>
+                                                        </button>
                                                     </form>
-                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="In Progress" class="d-inline">
-                                                        <button type="submit" class="dropdown-item">In Progress</button>
+                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="In Progress" class="d-inline update-status-form">
+                                                        <button type="submit" class="dropdown-item">
+                                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                                            <span class="status-text">In Progress</span>
+                                                        </button>
                                                     </form>
-                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="Resolved" class="d-inline">
-                                                        <button type="submit" class="dropdown-item">Resolved</button>
+                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="Resolved" class="d-inline update-status-form">
+                                                        <button type="submit" class="dropdown-item">
+                                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                                            <span class="status-text">Resolved</span>
+                                                        </button>
                                                     </form>
-                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="Closed" class="d-inline">
-                                                        <button type="submit" class="dropdown-item">Closed</button>
+                                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@enquiry.Id" asp-route-status="Closed" class="d-inline update-status-form">
+                                                        <button type="submit" class="dropdown-item">
+                                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                                            <span class="status-text">Closed</span>
+                                                        </button>
                                                     </form>
                                                 </div>
                                             </div>
-                                            <form method="post" asp-page-handler="Delete" asp-route-id="@enquiry.Id" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this enquiry?');">
+                                            <form method="post" asp-page-handler="Delete" asp-route-id="@enquiry.Id" class="d-inline delete-enquiry-form" onsubmit="return confirm('Are you sure you want to delete this enquiry?');">
                                                 <button type="submit" class="btn btn-sm btn-danger" title="Delete">
+                                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -304,6 +317,28 @@
                 }
                 
                 window.location.href = url.toString();
+            });
+
+            // Spinner for Delete and UpdateStatus buttons
+            $(document).on('submit', '.delete-enquiry-form, .update-status-form', function() {
+                const $form = $(this);
+                const $button = $form.find('button[type="submit"]');
+                const $spinner = $button.find('.spinner-border');
+                
+                $spinner.removeClass('d-none');
+                $button.prop('disabled', true);
+                
+                // For dropdown items, hide the text
+                const $statusText = $button.find('.status-text');
+                if ($statusText.length) {
+                    $statusText.addClass('d-none');
+                } else {
+                    // For delete button, hide the icon
+                    const $icon = $button.find('i');
+                    if ($icon.length) {
+                        $icon.addClass('d-none');
+                    }
+                }
             });
         });
     </script>

@@ -290,8 +290,9 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Create Page
+                            <button type="submit" class="btn btn-primary" id="createPageBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="createPageSpinner"></span>
+                                <i class="fas fa-save" id="createPageIcon"></i> Create Page
                             </button>
                             <a href="/Admin/Content/Pages" class="btn btn-secondary">
                                 <i class="fas fa-times"></i> Cancel
@@ -936,6 +937,17 @@
             $('form').on('submit', function() {
                 var content = document.querySelector('#pageContent .ql-editor').innerHTML;
                 $('textarea[name="CreatePage.Content"]').val(content);
+                
+                // Show spinner and hide icon
+                const createBtn = document.getElementById('createPageBtn');
+                const spinner = document.getElementById('createPageSpinner');
+                const icon = document.getElementById('createPageIcon');
+                
+                if (createBtn && spinner && icon) {
+                    spinner.classList.remove('d-none');
+                    icon.classList.add('d-none');
+                    createBtn.disabled = true;
+                }
 
                 if (ourStoryQuill) {
                     var ourStoryContent = document.querySelector('#ourStoryContent .ql-editor').innerHTML;

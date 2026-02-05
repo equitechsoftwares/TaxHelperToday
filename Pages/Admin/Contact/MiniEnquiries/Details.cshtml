@@ -125,24 +125,28 @@
                             <div class="mb-3">
                                 <label class="form-label">Update Status</label>
                                 <div class="btn-group-vertical w-100" role="group">
-                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="New" class="mb-2">
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="New" class="mb-2 update-status-form">
                                         <button type="submit" class="btn btn-primary btn-block @(Model.MiniEnquiry.Status == "New" ? "active" : "")">
-                                            New
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                            <span class="status-text">New</span>
                                         </button>
                                     </form>
-                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="Contacted" class="mb-2">
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="Contacted" class="mb-2 update-status-form">
                                         <button type="submit" class="btn btn-info btn-block @(Model.MiniEnquiry.Status == "Contacted" ? "active" : "")">
-                                            Contacted
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                            <span class="status-text">Contacted</span>
                                         </button>
                                     </form>
-                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="Converted" class="mb-2">
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="Converted" class="mb-2 update-status-form">
                                         <button type="submit" class="btn btn-success btn-block @(Model.MiniEnquiry.Status == "Converted" ? "active" : "")">
-                                            Converted
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                            <span class="status-text">Converted</span>
                                         </button>
                                     </form>
-                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="Closed" class="mb-2">
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.MiniEnquiry.Id" asp-route-status="Closed" class="mb-2 update-status-form">
                                         <button type="submit" class="btn btn-secondary btn-block @(Model.MiniEnquiry.Status == "Closed" ? "active" : "")">
-                                            Closed
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                            <span class="status-text">Closed</span>
                                         </button>
                                     </form>
                                 </div>
@@ -150,9 +154,12 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Notes</label>
-                                <form method="post" asp-page-handler="UpdateNotes" asp-route-id="@Model.MiniEnquiry.Id">
+                                <form method="post" asp-page-handler="UpdateNotes" asp-route-id="@Model.MiniEnquiry.Id" id="updateNotesForm">
                                     <textarea name="notes" class="form-control" rows="5" placeholder="Add notes about this mini enquiry...">@Model.MiniEnquiry.Notes</textarea>
-                                    <button type="submit" class="btn btn-primary btn-sm mt-2">Save Notes</button>
+                                    <button type="submit" class="btn btn-primary btn-sm mt-2" id="saveNotesBtn">
+                                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="saveNotesSpinner"></span>
+                                        <i class="fas fa-save" id="saveNotesIcon"></i> Save Notes
+                                    </button>
                                 </form>
                             </div>
 
@@ -168,3 +175,35 @@
         }
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Spinner for UpdateStatus buttons
+            $(document).on('submit', '.update-status-form', function() {
+                const $form = $(this);
+                const $button = $form.find('button[type="submit"]');
+                const $spinner = $button.find('.spinner-border');
+                const $statusText = $button.find('.status-text');
+                
+                $spinner.removeClass('d-none');
+                $statusText.addClass('d-none');
+                $button.prop('disabled', true);
+            });
+
+            // Spinner for Save Notes button
+            const updateNotesForm = document.getElementById('updateNotesForm');
+            const saveNotesBtn = document.getElementById('saveNotesBtn');
+            const saveNotesSpinner = document.getElementById('saveNotesSpinner');
+            const saveNotesIcon = document.getElementById('saveNotesIcon');
+
+            if (updateNotesForm && saveNotesBtn) {
+                updateNotesForm.addEventListener('submit', function() {
+                    saveNotesSpinner.classList.remove('d-none');
+                    saveNotesIcon.classList.add('d-none');
+                    saveNotesBtn.disabled = true;
+                });
+            }
+        });
+    </script>
+}

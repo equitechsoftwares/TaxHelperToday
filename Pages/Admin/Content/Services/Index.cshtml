@@ -91,13 +91,15 @@
                                             <a href="/Admin/Content/Services/Edit/@service.Id" class="btn btn-sm btn-info" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form method="post" asp-page-handler="ToggleActive" asp-route-id="@service.Id" class="d-inline">
+                                            <form method="post" asp-page-handler="ToggleActive" asp-route-id="@service.Id" class="d-inline toggle-service-form">
                                                 <button type="submit" class="btn btn-sm @(service.IsActive ? "btn-warning" : "btn-success")" title="@(service.IsActive ? "Deactivate" : "Activate")">
+                                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                                     <i class="fas fa-@(service.IsActive ? "toggle-off" : "toggle-on")"></i>
                                                 </button>
                                             </form>
-                                            <form method="post" asp-page-handler="Delete" asp-route-id="@service.Id" class="d-inline">
+                                            <form method="post" asp-page-handler="Delete" asp-route-id="@service.Id" class="d-inline delete-service-form">
                                                 <button type="submit" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this service?');">
+                                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -126,6 +128,18 @@
                 "columnDefs": [
                     { "orderable": false, "targets": [5] } // Disable sorting on Actions column
                 ]
+            });
+
+            // Spinner for Delete and ToggleActive buttons
+            $(document).on('submit', '.delete-service-form, .toggle-service-form', function() {
+                const $form = $(this);
+                const $button = $form.find('button[type="submit"]');
+                const $spinner = $button.find('.spinner-border');
+                const $icon = $button.find('i');
+                
+                $spinner.removeClass('d-none');
+                $icon.addClass('d-none');
+                $button.prop('disabled', true);
             });
         });
     </script>

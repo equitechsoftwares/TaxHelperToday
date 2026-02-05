@@ -127,8 +127,9 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Create Service
+                            <button type="submit" class="btn btn-primary" id="createServiceBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="createServiceSpinner"></span>
+                                <i class="fas fa-save" id="createServiceIcon"></i> Create Service
                             </button>
                             <a href="/Admin/Content/Services" class="btn btn-secondary">
                                 <i class="fas fa-times"></i> Cancel
@@ -172,6 +173,17 @@
             $('form').on('submit', function() {
                 var content = document.querySelector('#serviceContent .ql-editor').innerHTML;
                 $('textarea[name="Service.Content"]').val(content);
+                
+                // Show spinner and hide icon
+                const createBtn = document.getElementById('createServiceBtn');
+                const spinner = document.getElementById('createServiceSpinner');
+                const icon = document.getElementById('createServiceIcon');
+                
+                if (createBtn && spinner && icon) {
+                    spinner.classList.remove('d-none');
+                    icon.classList.add('d-none');
+                    createBtn.disabled = true;
+                }
             });
 
             // Icon image preview

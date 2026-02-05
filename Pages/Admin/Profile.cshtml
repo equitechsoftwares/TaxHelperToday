@@ -72,8 +72,9 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Update Profile
+                            <button type="submit" class="btn btn-primary" id="updateProfileBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="updateProfileSpinner"></span>
+                                <i class="fas fa-save" id="updateProfileIcon"></i> Update Profile
                             </button>
                             <a href="/Admin/Dashboard" class="btn btn-secondary">
                                 <i class="fas fa-times"></i> Cancel
@@ -129,4 +130,23 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form[method="post"]');
+            const updateBtn = document.getElementById('updateProfileBtn');
+            const spinner = document.getElementById('updateProfileSpinner');
+            const icon = document.getElementById('updateProfileIcon');
+
+            if (form && updateBtn) {
+                form.addEventListener('submit', function() {
+                    // Show spinner and hide icon
+                    spinner.classList.remove('d-none');
+                    icon.classList.add('d-none');
+                    
+                    // Disable button to prevent double submission
+                    updateBtn.disabled = true;
+                });
+            }
+        });
+    </script>
 }

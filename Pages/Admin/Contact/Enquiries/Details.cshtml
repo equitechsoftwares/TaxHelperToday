@@ -131,24 +131,28 @@
                             <div class="mb-3">
                                 <label class="form-label">Update Status</label>
                                 <div class="btn-group-vertical w-100" role="group">
-                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="Pending" class="mb-2">
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="Pending" class="mb-2 update-status-form">
                                         <button type="submit" class="btn btn-warning btn-block @(Model.Enquiry.Status == "Pending" ? "active" : "")">
-                                            Pending
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                            <span class="status-text">Pending</span>
                                         </button>
                                     </form>
-                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="In Progress" class="mb-2">
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="In Progress" class="mb-2 update-status-form">
                                         <button type="submit" class="btn btn-info btn-block @(Model.Enquiry.Status == "In Progress" ? "active" : "")">
-                                            In Progress
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                            <span class="status-text">In Progress</span>
                                         </button>
                                     </form>
-                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="Resolved" class="mb-2">
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="Resolved" class="mb-2 update-status-form">
                                         <button type="submit" class="btn btn-success btn-block @(Model.Enquiry.Status == "Resolved" ? "active" : "")">
-                                            Resolved
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                            <span class="status-text">Resolved</span>
                                         </button>
                                     </form>
-                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="Closed" class="mb-2">
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@Model.Enquiry.Id" asp-route-status="Closed" class="mb-2 update-status-form">
                                         <button type="submit" class="btn btn-secondary btn-block @(Model.Enquiry.Status == "Closed" ? "active" : "")">
-                                            Closed
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                            <span class="status-text">Closed</span>
                                         </button>
                                     </form>
                                 </div>
@@ -156,9 +160,12 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Notes</label>
-                                <form method="post" asp-page-handler="UpdateNotes" asp-route-id="@Model.Enquiry.Id">
+                                <form method="post" asp-page-handler="UpdateNotes" asp-route-id="@Model.Enquiry.Id" id="updateNotesForm">
                                     <textarea name="notes" class="form-control" rows="5" placeholder="Add notes about this enquiry...">@Model.Enquiry.Notes</textarea>
-                                    <button type="submit" class="btn btn-primary btn-sm mt-2">Save Notes</button>
+                                    <button type="submit" class="btn btn-primary btn-sm mt-2" id="saveNotesBtn">
+                                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="saveNotesSpinner"></span>
+                                        <i class="fas fa-save" id="saveNotesIcon"></i> Save Notes
+                                    </button>
                                 </form>
                             </div>
 
@@ -174,3 +181,35 @@
         }
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Spinner for UpdateStatus buttons
+            $(document).on('submit', '.update-status-form', function() {
+                const $form = $(this);
+                const $button = $form.find('button[type="submit"]');
+                const $spinner = $button.find('.spinner-border');
+                const $statusText = $button.find('.status-text');
+                
+                $spinner.removeClass('d-none');
+                $statusText.addClass('d-none');
+                $button.prop('disabled', true);
+            });
+
+            // Spinner for Save Notes button
+            const updateNotesForm = document.getElementById('updateNotesForm');
+            const saveNotesBtn = document.getElementById('saveNotesBtn');
+            const saveNotesSpinner = document.getElementById('saveNotesSpinner');
+            const saveNotesIcon = document.getElementById('saveNotesIcon');
+
+            if (updateNotesForm && saveNotesBtn) {
+                updateNotesForm.addEventListener('submit', function() {
+                    saveNotesSpinner.classList.remove('d-none');
+                    saveNotesIcon.classList.add('d-none');
+                    saveNotesBtn.disabled = true;
+                });
+            }
+        });
+    </script>
+}

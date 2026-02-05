@@ -141,8 +141,9 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Update Blog Post
+                            <button type="submit" class="btn btn-primary" id="updateBlogBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="updateBlogSpinner"></span>
+                                <i class="fas fa-save" id="updateBlogIcon"></i> Update Blog Post
                             </button>
                             <a href="/Admin/Content/Blogs" class="btn btn-secondary">
                                 <i class="fas fa-times"></i> Cancel
@@ -187,6 +188,17 @@
             $('form').on('submit', function() {
                 var content = document.querySelector('#blogContent .ql-editor').innerHTML;
                 $('textarea[name="BlogPost.Content"]').val(content);
+                
+                // Show spinner and hide icon
+                const updateBtn = document.getElementById('updateBlogBtn');
+                const spinner = document.getElementById('updateBlogSpinner');
+                const icon = document.getElementById('updateBlogIcon');
+                
+                if (updateBtn && spinner && icon) {
+                    spinner.classList.remove('d-none');
+                    icon.classList.add('d-none');
+                    updateBtn.disabled = true;
+                }
             });
 
             // Featured image preview for newly selected file

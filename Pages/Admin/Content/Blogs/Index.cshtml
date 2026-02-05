@@ -108,23 +108,26 @@
                                             <a href="/Admin/Content/Blogs/Edit/@blog.Id" class="btn btn-sm btn-info btn-icon-square" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form method="post" asp-page-handler="Delete" asp-route-id="@blog.Id" class="d-inline">
+                                            <form method="post" asp-page-handler="Delete" asp-route-id="@blog.Id" class="d-inline delete-blog-form">
                                                 <button type="submit" class="btn btn-sm btn-danger btn-icon-square" title="Delete" onclick="return confirm('Are you sure you want to delete this blog post?');">
+                                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                             @if (blog.IsPublished)
                                             {
-                                                <form method="post" asp-page-handler="Unpublish" asp-route-id="@blog.Id" class="d-inline">
+                                                <form method="post" asp-page-handler="Unpublish" asp-route-id="@blog.Id" class="d-inline publish-blog-form">
                                                     <button type="submit" class="btn btn-sm btn-warning btn-icon-square" title="Unpublish" onclick="return confirm('Unpublish this blog post? It will no longer be visible on the website.');">
+                                                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                                         <i class="fas fa-toggle-off"></i>
                                                     </button>
                                                 </form>
                                             }
                                             else
                                             {
-                                                <form method="post" asp-page-handler="Publish" asp-route-id="@blog.Id" class="d-inline">
+                                                <form method="post" asp-page-handler="Publish" asp-route-id="@blog.Id" class="d-inline publish-blog-form">
                                                     <button type="submit" class="btn btn-sm btn-success btn-icon-square" title="Publish" onclick="return confirm('Publish this blog post? It will become visible on the website.');">
+                                                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                                         <i class="fas fa-toggle-on"></i>
                                                     </button>
                                                 </form>
@@ -157,6 +160,18 @@
                 "columnDefs": [
                     { "orderable": false, "targets": [6] } // Disable sorting on Actions column
                 ]
+            });
+
+            // Spinner for Delete, Publish, and Unpublish buttons
+            $(document).on('submit', '.delete-blog-form, .publish-blog-form', function() {
+                const $form = $(this);
+                const $button = $form.find('button[type="submit"]');
+                const $spinner = $button.find('.spinner-border');
+                const $icon = $button.find('i');
+                
+                $spinner.removeClass('d-none');
+                $icon.addClass('d-none');
+                $button.prop('disabled', true);
             });
         });
     </script>

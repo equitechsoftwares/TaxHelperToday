@@ -85,7 +85,10 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Create FAQ</button>
+                            <button type="submit" class="btn btn-primary" id="createFaqBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="createFaqSpinner"></span>
+                                <i class="fas fa-save" id="createFaqIcon"></i> Create FAQ
+                            </button>
                             <a href="/Admin/Content/FAQs" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
@@ -94,3 +97,22 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form[method="post"]');
+            const createBtn = document.getElementById('createFaqBtn');
+            const spinner = document.getElementById('createFaqSpinner');
+            const icon = document.getElementById('createFaqIcon');
+
+            if (form && createBtn) {
+                form.addEventListener('submit', function() {
+                    spinner.classList.remove('d-none');
+                    icon.classList.add('d-none');
+                    createBtn.disabled = true;
+                });
+            }
+        });
+    </script>
+}

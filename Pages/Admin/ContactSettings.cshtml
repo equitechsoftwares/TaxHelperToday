@@ -111,8 +111,9 @@
                             }
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Save Settings
+                            <button type="submit" class="btn btn-primary" id="saveContactSettingsBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="saveContactSettingsSpinner"></span>
+                                <i class="fas fa-save" id="saveContactSettingsIcon"></i> Save Settings
                             </button>
                             <a href="/Admin/Dashboard" class="btn btn-secondary">
                                 <i class="fas fa-times"></i> Cancel
@@ -124,3 +125,22 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form[method="post"]');
+            const saveBtn = document.getElementById('saveContactSettingsBtn');
+            const spinner = document.getElementById('saveContactSettingsSpinner');
+            const icon = document.getElementById('saveContactSettingsIcon');
+
+            if (form && saveBtn) {
+                form.addEventListener('submit', function() {
+                    spinner.classList.remove('d-none');
+                    icon.classList.add('d-none');
+                    saveBtn.disabled = true;
+                });
+            }
+        });
+    </script>
+}

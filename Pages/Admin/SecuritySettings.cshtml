@@ -62,8 +62,9 @@
                     </div>
                     <div class="card-footer">
                         <form method="post" asp-page-handler="LogoutAllSessions" onsubmit="return confirm('Are you sure you want to log out from all devices? This will end all active sessions including this one.');">
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fas fa-sign-out-alt"></i> Logout All Sessions
+                            <button type="submit" class="btn btn-danger" id="logoutAllSessionsBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="logoutAllSessionsSpinner"></span>
+                                <i class="fas fa-sign-out-alt" id="logoutAllSessionsIcon"></i> Logout All Sessions
                             </button>
                         </form>
                     </div>
@@ -72,3 +73,22 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form[asp-page-handler="LogoutAllSessions"]');
+            const logoutBtn = document.getElementById('logoutAllSessionsBtn');
+            const spinner = document.getElementById('logoutAllSessionsSpinner');
+            const icon = document.getElementById('logoutAllSessionsIcon');
+
+            if (form && logoutBtn) {
+                form.addEventListener('submit', function() {
+                    spinner.classList.remove('d-none');
+                    icon.classList.add('d-none');
+                    logoutBtn.disabled = true;
+                });
+            }
+        });
+    </script>
+}

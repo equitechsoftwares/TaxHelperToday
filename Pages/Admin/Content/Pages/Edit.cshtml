@@ -173,15 +173,26 @@
                                 <small class="form-text text-muted">Description text displayed below the hero title</small>
                             </div>
 
-                            <div class="form-group">
-                                <label asp-for="UpdatePage.Content">Content <span class="text-danger">*</span></label>
-                                <div id="pageContent" style="min-height: 400px;">
-                                    @Html.Raw(Model.CurrentPage?.Content ?? "")
+                            @* Content field - Only show for Privacy Policy, Terms & Conditions, and Trust & Safety *@
+                            @if (Model.CurrentPage?.Slug == "privacy-policy" || 
+                                 Model.CurrentPage?.Slug == "terms-conditions" || 
+                                 Model.CurrentPage?.Slug == "trust-safety")
+                            {
+                                <div class="form-group">
+                                    <label asp-for="UpdatePage.Content">Content <span class="text-danger">*</span></label>
+                                    <div id="pageContent" style="min-height: 400px;">
+                                        @Html.Raw(Model.CurrentPage?.Content ?? "")
+                                    </div>
+                                    <textarea asp-for="UpdatePage.Content" style="display: none;">@(Model.UpdatePage.Content ?? Model.CurrentPage?.Content)</textarea>
+                                    <span asp-validation-for="UpdatePage.Content" class="text-danger"></span>
+                                    <small class="form-text text-muted">Use the rich text editor to format your content</small>
                                 </div>
+                            }
+                            else
+                            {
+                                @* Hidden field to preserve Content value for other pages *@
                                 <textarea asp-for="UpdatePage.Content" style="display: none;">@(Model.UpdatePage.Content ?? Model.CurrentPage?.Content)</textarea>
-                                <span asp-validation-for="UpdatePage.Content" class="text-danger"></span>
-                                <small class="form-text text-muted">Use the rich text editor to format your content</small>
-                            </div>
+                            }
 
                             @* About Page Specific Fields - Only show when editing the About page *@
                             @if (Model.CurrentPage?.Slug == "about")
@@ -635,8 +646,9 @@
                             <input type="hidden" name="isActive" value="@(Model.CurrentPage?.IsActive == true ? "true" : "false")" />
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Update Page
+                            <button type="submit" class="btn btn-primary" id="updatePageBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="updatePageSpinner"></span>
+                                <i class="fas fa-save" id="updatePageIcon"></i> Update Page
                             </button>
                             <a href="/Admin/Content/Pages" class="btn btn-secondary">
                                 <i class="fas fa-times"></i> Cancel
@@ -785,23 +797,26 @@
                     $('.gender-emoji-grid').hide();
                 }
             });
-            // Initialize Quill editor with existing content
-            var quill = new Quill('#pageContent', {
-                theme: 'snow',
-                modules: {
-                    toolbar: [
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ 'color': [] }, { 'background': [] }],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        [{ 'align': [] }],
-                        ['link', 'image'],
-                        ['clean'],
-                        ['code-block']
-                    ]
-                },
-                placeholder: 'Enter page content...'
-            });
+            // Initialize Quill editor with existing content (only if not About page)
+            var quill = null;
+            if (document.getElementById('pageContent')) {
+                quill = new Quill('#pageContent', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                            ['bold', 'italic', 'underline', 'strike'],
+                            [{ 'color': [] }, { 'background': [] }],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            [{ 'align': [] }],
+                            ['link', 'image'],
+                            ['clean'],
+                            ['code-block']
+                        ]
+                    },
+                    placeholder: 'Enter page content...'
+                });
+            }
 
             // Initialize Quill editors for About page content fields (if they exist)
             var ourStoryQuill = null;
@@ -2386,8 +2401,23 @@
 
             // Update the hidden textareas before form submission
             $('form').on('submit', function() {
-                var content = document.querySelector('#pageContent .ql-editor').innerHTML;
-                $('textarea[name="UpdatePage.Content"]').val(content);
+                // Only sync Quill content if the editor exists (not for About page)
+                var pageContentEditor = document.querySelector('#pageContent .ql-editor');
+                if (pageContentEditor) {
+                    var content = pageContentEditor.innerHTML;
+                    $('textarea[name="UpdatePage.Content"]').val(content);
+                }
+                
+                // Show spinner and hide icon
+                const updateBtn = document.getElementById('updatePageBtn');
+                const spinner = document.getElementById('updatePageSpinner');
+                const icon = document.getElementById('updatePageIcon');
+                
+                if (updateBtn && spinner && icon) {
+                    spinner.classList.remove('d-none');
+                    icon.classList.add('d-none');
+                    updateBtn.disabled = true;
+                }
 
                 if (ourStoryQuill) {
                     var ourStoryContent = document.querySelector('#ourStoryContent .ql-editor').innerHTML;
